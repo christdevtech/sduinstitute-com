@@ -1,6 +1,7 @@
 import type { Field, GroupField } from 'payload'
 
 import deepMerge from '@/utilities/deepMerge'
+  import { materialIconOptions, iconPlacementOptions } from '@/utilities/materialIcons'
 
 export type LinkAppearances = 'default' | 'outline'
 
@@ -134,6 +135,34 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
       options: appearanceOptionsToUse,
     })
   }
+
+  // Add icon fields
+  linkResult.fields.push({
+    type: 'row',
+    fields: [
+      {
+        name: 'icon',
+        type: 'select',
+        admin: {
+          description: 'Choose an icon to display with the link.',
+          width: '70%',
+        },
+        defaultValue: '',
+        options: materialIconOptions,
+      },
+      {
+        name: 'iconPlacement',
+        type: 'select',
+        admin: {
+          condition: (_, siblingData) => siblingData?.icon && siblingData.icon !== '',
+          description: 'Choose where to place the icon.',
+          width: '30%',
+        },
+        defaultValue: 'right',
+        options: iconPlacementOptions,
+      },
+    ],
+  })
 
   return deepMerge(linkResult, overrides)
 }

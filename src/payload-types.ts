@@ -185,6 +185,85 @@ export interface Page {
              * Choose how the link should be rendered.
              */
             appearance?: ('default' | 'outline') | null;
+            /**
+             * Choose an icon to display with the link.
+             */
+            icon?:
+              | (
+                  | ''
+                  | 'MdHome'
+                  | 'MdInfo'
+                  | 'MdEmail'
+                  | 'MdPhone'
+                  | 'MdLocationOn'
+                  | 'MdArrowForward'
+                  | 'MdArrowBack'
+                  | 'MdDownload'
+                  | 'MdUpload'
+                  | 'MdShare'
+                  | 'MdFavorite'
+                  | 'MdStar'
+                  | 'MdSearch'
+                  | 'MdMenu'
+                  | 'MdClose'
+                  | 'MdAdd'
+                  | 'MdRemove'
+                  | 'MdEdit'
+                  | 'MdDelete'
+                  | 'MdSave'
+                  | 'MdCancel'
+                  | 'MdCheck'
+                  | 'MdWarning'
+                  | 'MdError'
+                  | 'MdNotifications'
+                  | 'MdSettings'
+                  | 'MdShoppingCart'
+                  | 'MdPayment'
+                  | 'MdSecurity'
+                  | 'MdVisibility'
+                  | 'MdVisibilityOff'
+                  | 'MdHelp'
+                  | 'MdSupport'
+                  | 'MdFeedback'
+                  | 'MdBusiness'
+                  | 'MdWork'
+                  | 'MdSchool'
+                  | 'MdEvent'
+                  | 'MdCalendarToday'
+                  | 'MdAccessTime'
+                  | 'MdLanguage'
+                  | 'MdPublic'
+                  | 'MdLock'
+                  | 'MdLockOpen'
+                  | 'MdRefresh'
+                  | 'MdSync'
+                  | 'MdCloudDownload'
+                  | 'MdCloudUpload'
+                  | 'MdPrint'
+                  | 'MdFileDownload'
+                  | 'MdFileUpload'
+                  | 'MdAttachFile'
+                  | 'MdLink'
+                  | 'MdLaunch'
+                  | 'MdOpenInNew'
+                  | 'MdExpandMore'
+                  | 'MdExpandLess'
+                  | 'MdChevronLeft'
+                  | 'MdChevronRight'
+                  | 'MdKeyboardArrowUp'
+                  | 'MdKeyboardArrowDown'
+                  | 'MdKeyboardArrowLeft'
+                  | 'MdKeyboardArrowRight'
+                  | 'MdPerson'
+                  | 'MdOutlineTv'
+                  | 'MdOutlineTurnedInNot'
+                  | 'MdOutlineTurnedIn'
+                )
+              | null;
+            /**
+             * Choose where to place the icon.
+             */
+            iconPlacement?: ('right' | 'left') | null;
           };
           id?: string | null;
         }[]
@@ -432,6 +511,85 @@ export interface CallToActionBlock {
            * Choose how the link should be rendered.
            */
           appearance?: ('default' | 'outline') | null;
+          /**
+           * Choose an icon to display with the link.
+           */
+          icon?:
+            | (
+                | ''
+                | 'MdHome'
+                | 'MdInfo'
+                | 'MdEmail'
+                | 'MdPhone'
+                | 'MdLocationOn'
+                | 'MdArrowForward'
+                | 'MdArrowBack'
+                | 'MdDownload'
+                | 'MdUpload'
+                | 'MdShare'
+                | 'MdFavorite'
+                | 'MdStar'
+                | 'MdSearch'
+                | 'MdMenu'
+                | 'MdClose'
+                | 'MdAdd'
+                | 'MdRemove'
+                | 'MdEdit'
+                | 'MdDelete'
+                | 'MdSave'
+                | 'MdCancel'
+                | 'MdCheck'
+                | 'MdWarning'
+                | 'MdError'
+                | 'MdNotifications'
+                | 'MdSettings'
+                | 'MdShoppingCart'
+                | 'MdPayment'
+                | 'MdSecurity'
+                | 'MdVisibility'
+                | 'MdVisibilityOff'
+                | 'MdHelp'
+                | 'MdSupport'
+                | 'MdFeedback'
+                | 'MdBusiness'
+                | 'MdWork'
+                | 'MdSchool'
+                | 'MdEvent'
+                | 'MdCalendarToday'
+                | 'MdAccessTime'
+                | 'MdLanguage'
+                | 'MdPublic'
+                | 'MdLock'
+                | 'MdLockOpen'
+                | 'MdRefresh'
+                | 'MdSync'
+                | 'MdCloudDownload'
+                | 'MdCloudUpload'
+                | 'MdPrint'
+                | 'MdFileDownload'
+                | 'MdFileUpload'
+                | 'MdAttachFile'
+                | 'MdLink'
+                | 'MdLaunch'
+                | 'MdOpenInNew'
+                | 'MdExpandMore'
+                | 'MdExpandLess'
+                | 'MdChevronLeft'
+                | 'MdChevronRight'
+                | 'MdKeyboardArrowUp'
+                | 'MdKeyboardArrowDown'
+                | 'MdKeyboardArrowLeft'
+                | 'MdKeyboardArrowRight'
+                | 'MdPerson'
+                | 'MdOutlineTv'
+                | 'MdOutlineTurnedInNot'
+                | 'MdOutlineTurnedIn'
+              )
+            | null;
+          /**
+           * Choose where to place the icon.
+           */
+          iconPlacement?: ('right' | 'left') | null;
         };
         id?: string | null;
       }[]
@@ -482,6 +640,85 @@ export interface ContentBlock {
            * Choose how the link should be rendered.
            */
           appearance?: ('default' | 'outline') | null;
+          /**
+           * Choose an icon to display with the link.
+           */
+          icon?:
+            | (
+                | ''
+                | 'MdHome'
+                | 'MdInfo'
+                | 'MdEmail'
+                | 'MdPhone'
+                | 'MdLocationOn'
+                | 'MdArrowForward'
+                | 'MdArrowBack'
+                | 'MdDownload'
+                | 'MdUpload'
+                | 'MdShare'
+                | 'MdFavorite'
+                | 'MdStar'
+                | 'MdSearch'
+                | 'MdMenu'
+                | 'MdClose'
+                | 'MdAdd'
+                | 'MdRemove'
+                | 'MdEdit'
+                | 'MdDelete'
+                | 'MdSave'
+                | 'MdCancel'
+                | 'MdCheck'
+                | 'MdWarning'
+                | 'MdError'
+                | 'MdNotifications'
+                | 'MdSettings'
+                | 'MdShoppingCart'
+                | 'MdPayment'
+                | 'MdSecurity'
+                | 'MdVisibility'
+                | 'MdVisibilityOff'
+                | 'MdHelp'
+                | 'MdSupport'
+                | 'MdFeedback'
+                | 'MdBusiness'
+                | 'MdWork'
+                | 'MdSchool'
+                | 'MdEvent'
+                | 'MdCalendarToday'
+                | 'MdAccessTime'
+                | 'MdLanguage'
+                | 'MdPublic'
+                | 'MdLock'
+                | 'MdLockOpen'
+                | 'MdRefresh'
+                | 'MdSync'
+                | 'MdCloudDownload'
+                | 'MdCloudUpload'
+                | 'MdPrint'
+                | 'MdFileDownload'
+                | 'MdFileUpload'
+                | 'MdAttachFile'
+                | 'MdLink'
+                | 'MdLaunch'
+                | 'MdOpenInNew'
+                | 'MdExpandMore'
+                | 'MdExpandLess'
+                | 'MdChevronLeft'
+                | 'MdChevronRight'
+                | 'MdKeyboardArrowUp'
+                | 'MdKeyboardArrowDown'
+                | 'MdKeyboardArrowLeft'
+                | 'MdKeyboardArrowRight'
+                | 'MdPerson'
+                | 'MdOutlineTv'
+                | 'MdOutlineTurnedInNot'
+                | 'MdOutlineTurnedIn'
+              )
+            | null;
+          /**
+           * Choose where to place the icon.
+           */
+          iconPlacement?: ('right' | 'left') | null;
         };
         id?: string | null;
       }[]
@@ -1012,6 +1249,8 @@ export interface PagesSelect<T extends boolean = true> {
                     url?: T;
                     label?: T;
                     appearance?: T;
+                    icon?: T;
+                    iconPlacement?: T;
                   };
               id?: T;
             };
@@ -1058,6 +1297,8 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
               url?: T;
               label?: T;
               appearance?: T;
+              icon?: T;
+              iconPlacement?: T;
             };
         id?: T;
       };
@@ -1084,6 +1325,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
               url?: T;
               label?: T;
               appearance?: T;
+              icon?: T;
+              iconPlacement?: T;
             };
         id?: T;
       };
@@ -1568,6 +1811,85 @@ export interface Header {
               } | null);
           url?: string | null;
           label: string;
+          /**
+           * Choose an icon to display with the link.
+           */
+          icon?:
+            | (
+                | ''
+                | 'MdHome'
+                | 'MdInfo'
+                | 'MdEmail'
+                | 'MdPhone'
+                | 'MdLocationOn'
+                | 'MdArrowForward'
+                | 'MdArrowBack'
+                | 'MdDownload'
+                | 'MdUpload'
+                | 'MdShare'
+                | 'MdFavorite'
+                | 'MdStar'
+                | 'MdSearch'
+                | 'MdMenu'
+                | 'MdClose'
+                | 'MdAdd'
+                | 'MdRemove'
+                | 'MdEdit'
+                | 'MdDelete'
+                | 'MdSave'
+                | 'MdCancel'
+                | 'MdCheck'
+                | 'MdWarning'
+                | 'MdError'
+                | 'MdNotifications'
+                | 'MdSettings'
+                | 'MdShoppingCart'
+                | 'MdPayment'
+                | 'MdSecurity'
+                | 'MdVisibility'
+                | 'MdVisibilityOff'
+                | 'MdHelp'
+                | 'MdSupport'
+                | 'MdFeedback'
+                | 'MdBusiness'
+                | 'MdWork'
+                | 'MdSchool'
+                | 'MdEvent'
+                | 'MdCalendarToday'
+                | 'MdAccessTime'
+                | 'MdLanguage'
+                | 'MdPublic'
+                | 'MdLock'
+                | 'MdLockOpen'
+                | 'MdRefresh'
+                | 'MdSync'
+                | 'MdCloudDownload'
+                | 'MdCloudUpload'
+                | 'MdPrint'
+                | 'MdFileDownload'
+                | 'MdFileUpload'
+                | 'MdAttachFile'
+                | 'MdLink'
+                | 'MdLaunch'
+                | 'MdOpenInNew'
+                | 'MdExpandMore'
+                | 'MdExpandLess'
+                | 'MdChevronLeft'
+                | 'MdChevronRight'
+                | 'MdKeyboardArrowUp'
+                | 'MdKeyboardArrowDown'
+                | 'MdKeyboardArrowLeft'
+                | 'MdKeyboardArrowRight'
+                | 'MdPerson'
+                | 'MdOutlineTv'
+                | 'MdOutlineTurnedInNot'
+                | 'MdOutlineTurnedIn'
+              )
+            | null;
+          /**
+           * Choose where to place the icon.
+           */
+          iconPlacement?: ('right' | 'left') | null;
         };
         id?: string | null;
       }[]
@@ -1597,6 +1919,85 @@ export interface Footer {
               } | null);
           url?: string | null;
           label: string;
+          /**
+           * Choose an icon to display with the link.
+           */
+          icon?:
+            | (
+                | ''
+                | 'MdHome'
+                | 'MdInfo'
+                | 'MdEmail'
+                | 'MdPhone'
+                | 'MdLocationOn'
+                | 'MdArrowForward'
+                | 'MdArrowBack'
+                | 'MdDownload'
+                | 'MdUpload'
+                | 'MdShare'
+                | 'MdFavorite'
+                | 'MdStar'
+                | 'MdSearch'
+                | 'MdMenu'
+                | 'MdClose'
+                | 'MdAdd'
+                | 'MdRemove'
+                | 'MdEdit'
+                | 'MdDelete'
+                | 'MdSave'
+                | 'MdCancel'
+                | 'MdCheck'
+                | 'MdWarning'
+                | 'MdError'
+                | 'MdNotifications'
+                | 'MdSettings'
+                | 'MdShoppingCart'
+                | 'MdPayment'
+                | 'MdSecurity'
+                | 'MdVisibility'
+                | 'MdVisibilityOff'
+                | 'MdHelp'
+                | 'MdSupport'
+                | 'MdFeedback'
+                | 'MdBusiness'
+                | 'MdWork'
+                | 'MdSchool'
+                | 'MdEvent'
+                | 'MdCalendarToday'
+                | 'MdAccessTime'
+                | 'MdLanguage'
+                | 'MdPublic'
+                | 'MdLock'
+                | 'MdLockOpen'
+                | 'MdRefresh'
+                | 'MdSync'
+                | 'MdCloudDownload'
+                | 'MdCloudUpload'
+                | 'MdPrint'
+                | 'MdFileDownload'
+                | 'MdFileUpload'
+                | 'MdAttachFile'
+                | 'MdLink'
+                | 'MdLaunch'
+                | 'MdOpenInNew'
+                | 'MdExpandMore'
+                | 'MdExpandLess'
+                | 'MdChevronLeft'
+                | 'MdChevronRight'
+                | 'MdKeyboardArrowUp'
+                | 'MdKeyboardArrowDown'
+                | 'MdKeyboardArrowLeft'
+                | 'MdKeyboardArrowRight'
+                | 'MdPerson'
+                | 'MdOutlineTv'
+                | 'MdOutlineTurnedInNot'
+                | 'MdOutlineTurnedIn'
+              )
+            | null;
+          /**
+           * Choose where to place the icon.
+           */
+          iconPlacement?: ('right' | 'left') | null;
         };
         id?: string | null;
       }[]
@@ -1620,6 +2021,8 @@ export interface HeaderSelect<T extends boolean = true> {
               reference?: T;
               url?: T;
               label?: T;
+              icon?: T;
+              iconPlacement?: T;
             };
         id?: T;
       };
@@ -1643,6 +2046,8 @@ export interface FooterSelect<T extends boolean = true> {
               reference?: T;
               url?: T;
               label?: T;
+              icon?: T;
+              iconPlacement?: T;
             };
         id?: T;
       };

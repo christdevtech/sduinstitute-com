@@ -4,11 +4,14 @@ import Link from 'next/link'
 import React from 'react'
 
 import type { Page, Post } from '@/payload-types'
+import { materialIcons, type MaterialIconName } from '@/utilities/materialIcons'
 
 type CMSLinkType = {
   appearance?: 'inline' | ButtonProps['variant']
   children?: React.ReactNode
   className?: string
+  icon?: MaterialIconName | string | null
+  iconPlacement?: 'left' | 'right' | null
   label?: string | null
   newTab?: boolean | null
   reference?: {
@@ -26,6 +29,8 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
     appearance = 'inline',
     children,
     className,
+    icon,
+    iconPlacement = 'right',
     label,
     newTab,
     reference,
@@ -45,12 +50,42 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
   const size = appearance === 'link' ? 'clear' : sizeFromProps
   const newTabProps = newTab ? { rel: 'noopener noreferrer', target: '_blank' } : {}
 
+  // Render icon if provided
+  const IconComponent = icon && materialIcons[icon as MaterialIconName]
+  const renderIcon = IconComponent ? (
+    <IconComponent className={cn('w-4 h-4', size === 'lg' ? 'w-6 h-6' : '')} />
+  ) : null
+
+  // Create content with icon placement
+  const renderContent = () => {
+    const textContent = label || children
+
+    if (!renderIcon) {
+      return textContent
+    }
+
+    if (iconPlacement === 'left') {
+      return (
+        <span className="flex items-center gap-2">
+          {renderIcon}
+          {textContent}
+        </span>
+      )
+    }
+
+    return (
+      <span className="flex items-center gap-2">
+        {textContent}
+        {renderIcon}
+      </span>
+    )
+  }
+
   /* Ensure we don't break any styles set by richText */
   if (appearance === 'inline') {
     return (
       <Link className={cn(className)} href={href || url || ''} {...newTabProps}>
-        {label && label}
-        {children && children}
+        {renderContent()}
       </Link>
     )
   }
@@ -58,8 +93,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
   return (
     <Button asChild className={className} size={size} variant={appearance}>
       <Link className={cn(className)} href={href || url || ''} {...newTabProps}>
-        {label && label}
-        {children && children}
+        {renderContent()}
       </Link>
     </Button>
   )
