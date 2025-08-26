@@ -1,321 +1,634 @@
-# Payload Website Template
+# SDU Institute Website - University CMS Implementation Plan
 
-This is the official [Payload Website Template](https://github.com/payloadcms/payload/blob/main/templates/website). Use it to power websites, blogs, or portfolios from small to enterprise. This repo includes a fully-working backend, enterprise-grade admin panel, and a beautifully designed, production-ready website.
+## Project Overview
 
-This template is right for you if you are working on:
+This project is a comprehensive Content Management System (CMS) built with Payload CMS and Next.js, specifically designed for SDU Institute - a Cameroon-based university. The system supports the unique academic structure and administrative needs of the institution.
 
-- A personal or enterprise-grade website, blog, or portfolio
-- A content publishing platform with a fully featured publication workflow
-- Exploring the capabilities of Payload
+## University Structure Analysis
 
-Core features:
+### Academic Organization
 
-- [Pre-configured Payload Config](#how-it-works)
-- [Authentication](#users-authentication)
-- [Access Control](#access-control)
-- [Layout Builder](#layout-builder)
-- [Draft Preview](#draft-preview)
-- [Live Preview](#live-preview)
-- [On-demand Revalidation](#on-demand-revalidation)
-- [SEO](#seo)
-- [Search](#search)
-- [Redirects](#redirects)
-- [Jobs and Scheduled Publishing](#jobs-and-scheduled-publish)
-- [Website](#website)
+- **Departments**: The university is organized by departments (not faculties)
+- **Program Types**:
+  - Basic Programs
+  - Higher National Diploma (HND) - 3 years
+  - Degree Programs (supervised by Mentor Universities):
+    - Top-up programs (building on HND)
+    - Direct entry programs
+  - Master's Programs (supervised by Mentor Universities)
+  - PhD Programs (supervised by Mentor Universities)
 
-## Quick Start
+### Mentor University Partnership
 
-To spin up this example locally, follow these steps:
+- Master's and PhD programs are supervised by partner "Mentor Universities"
+- Mentor university names appear on certificates
+- Partnership management is crucial for academic credibility
 
-### Clone
+## Current System Features
 
-If you have not done so already, you need to have standalone copy of this repo on your machine. If you've already cloned this repo, skip to [Development](#development).
+### Existing Collections
 
-#### Method 1 (recommended)
+- **Pages**: Dynamic page builder with layout blocks
+- **Posts**: Blog/news system with categories and rich content
+- **Categories**: Content categorization system
+- **Media**: File and image management
+- **Users**: Admin user management
 
-Go to Payload Cloud and [clone this template](https://payloadcms.com/new/clone/website). This will create a new repository on your GitHub account with this template's code which you can then clone to your own machine.
+### Existing Blocks
 
-#### Method 2
+- **Content**: Multi-column rich text layout (text-only, limited)
+- **Media Block**: Image and media display
+- **Banner**: Styled notification/alert blocks
+- **Archive Block**: Collection display (posts, etc.)
+- **Call to Action**: Interactive elements with link groups
+- **Code**: Code snippet display
+- **Form Block**: Contact and data collection forms
 
-Use the `create-payload-app` CLI to clone this template directly to your machine:
+### Existing UI Components
 
-```bash
-pnpx create-payload-app my-project -t website
+- **Button**: Multiple variants (default, outline, ghost, link) with size options
+- **Card**: Complete card system (header, content, footer, title, description)
+- **Input/Textarea**: Form input components
+- **Select/Checkbox**: Form selection components
+- **Pagination**: Navigation for collections
+- **CMSLink**: Enhanced link component with Material Design icons
+
+### Recent Enhancements
+
+- **Material Design Icons**: Added icon support to link fields with placement options (left/right)
+- **Enhanced Navigation**: Icon-enabled navigation in header and footer
+
+### Current Limitations
+
+- **Content Block**: Only supports rich text, no media integration
+- **Limited Interactive Elements**: No accordions, tabs, or modern UI patterns
+- **Static Layouts**: Limited dynamic content presentation options
+- **No Advanced Components**: Missing testimonials, statistics, feature grids, etc.
+
+## Planned Implementation
+
+### Phase 1: Core Collections (High Priority)
+
+#### 1. Departments Collection
+
+```typescript
+// Fields:
+- name: string (required)
+- slug: string (auto-generated)
+- description: rich text
+- headOfDepartment: relationship to Staff
+- contactInfo: group (email, phone, office)
+- programs: relationship to Academic Programs
+- staffMembers: relationship to Staff
+- featuredImage: media
+- meta: SEO fields
 ```
 
-#### Method 3
+#### 2. Academic Programs Collection
 
-Use the `git` CLI to clone this template directly to your machine:
-
-```bash
-git clone -n --depth=1 --filter=tree:0 https://github.com/payloadcms/payload my-project && cd my-project && git sparse-checkout set --no-cone templates/website && git checkout && rm -rf .git && git init && git add . && git mv -f templates/website/{.,}* . && git add . && git commit -m "Initial commit"
+```typescript
+// Fields:
+- title: string (required)
+- slug: string (auto-generated)
+- programType: select (Basic, HND, Degree-TopUp, Degree-Direct, Masters, PhD)
+- department: relationship to Departments
+- duration: string (e.g., "3 years", "2 years")
+- entryRequirements: rich text
+- curriculumOverview: rich text
+- careerProspects: rich text
+- mentorUniversity: relationship to Mentor Universities (conditional for Masters/PhD)
+- tuitionFees: group (local, international)
+- applicationDeadline: date
+- intakePeriods: array of dates
+- programCoordinator: relationship to Staff
+- featuredImage: media
+- brochure: media (PDF)
+- meta: SEO fields
 ```
 
-### Development
-
-1. First [clone the repo](#clone) if you have not done so already
-1. `cd my-project && cp .env.example .env` to copy the example environment variables
-1. `pnpm install && pnpm dev` to install dependencies and start the dev server
-1. open `http://localhost:3000` to open the app in your browser
-
-That's it! Changes made in `./src` will be reflected in your app. Follow the on-screen instructions to login and create your first admin user. Then check out [Production](#production) once you're ready to build and serve your app, and [Deployment](#deployment) when you're ready to go live.
-
-## How it works
-
-The Payload config is tailored specifically to the needs of most websites. It is pre-configured in the following ways:
-
-### Collections
-
-See the [Collections](https://payloadcms.com/docs/configuration/collections) docs for details on how to extend this functionality.
-
-- #### Users (Authentication)
-
-  Users are auth-enabled collections that have access to the admin panel and unpublished content. See [Access Control](#access-control) for more details.
-
-  For additional help, see the official [Auth Example](https://github.com/payloadcms/payload/tree/main/examples/auth) or the [Authentication](https://payloadcms.com/docs/authentication/overview#authentication-overview) docs.
-
-- #### Posts
-
-  Posts are used to generate blog posts, news articles, or any other type of content that is published over time. All posts are layout builder enabled so you can generate unique layouts for each post using layout-building blocks, see [Layout Builder](#layout-builder) for more details. Posts are also draft-enabled so you can preview them before publishing them to your website, see [Draft Preview](#draft-preview) for more details.
-
-- #### Pages
-
-  All pages are layout builder enabled so you can generate unique layouts for each page using layout-building blocks, see [Layout Builder](#layout-builder) for more details. Pages are also draft-enabled so you can preview them before publishing them to your website, see [Draft Preview](#draft-preview) for more details.
-
-- #### Media
-
-  This is the uploads enabled collection used by pages, posts, and projects to contain media like images, videos, downloads, and other assets. It features pre-configured sizes, focal point and manual resizing to help you manage your pictures.
-
-- #### Categories
-
-  A taxonomy used to group posts together. Categories can be nested inside of one another, for example "News > Technology". See the official [Payload Nested Docs Plugin](https://payloadcms.com/docs/plugins/nested-docs) for more details.
-
-### Globals
-
-See the [Globals](https://payloadcms.com/docs/configuration/globals) docs for details on how to extend this functionality.
-
-- `Header`
-
-  The data required by the header on your front-end like nav links.
-
-- `Footer`
-
-  Same as above but for the footer of your site.
-
-## Access control
-
-Basic access control is setup to limit access to various content based based on publishing status.
-
-- `users`: Users can access the admin panel and create or edit content.
-- `posts`: Everyone can access published posts, but only users can create, update, or delete them.
-- `pages`: Everyone can access published pages, but only users can create, update, or delete them.
-
-For more details on how to extend this functionality, see the [Payload Access Control](https://payloadcms.com/docs/access-control/overview#access-control) docs.
-
-## Layout Builder
-
-Create unique page layouts for any type of content using a powerful layout builder. This template comes pre-configured with the following layout building blocks:
-
-- Hero
-- Content
-- Media
-- Call To Action
-- Archive
-
-Each block is fully designed and built into the front-end website that comes with this template. See [Website](#website) for more details.
-
-## Lexical editor
-
-A deep editorial experience that allows complete freedom to focus just on writing content without breaking out of the flow with support for Payload blocks, media, links and other features provided out of the box. See [Lexical](https://payloadcms.com/docs/rich-text/overview) docs.
-
-## Draft Preview
-
-All posts and pages are draft-enabled so you can preview them before publishing them to your website. To do this, these collections use [Versions](https://payloadcms.com/docs/configuration/collections#versions) with `drafts` set to `true`. This means that when you create a new post, project, or page, it will be saved as a draft and will not be visible on your website until you publish it. This also means that you can preview your draft before publishing it to your website. To do this, we automatically format a custom URL which redirects to your front-end to securely fetch the draft version of your content.
-
-Since the front-end of this template is statically generated, this also means that pages, posts, and projects will need to be regenerated as changes are made to published documents. To do this, we use an `afterChange` hook to regenerate the front-end when a document has changed and its `_status` is `published`.
-
-For more details on how to extend this functionality, see the official [Draft Preview Example](https://github.com/payloadcms/payload/tree/examples/draft-preview).
-
-## Live preview
-
-In addition to draft previews you can also enable live preview to view your end resulting page as you're editing content with full support for SSR rendering. See [Live preview docs](https://payloadcms.com/docs/live-preview/overview) for more details.
-
-## On-demand Revalidation
-
-We've added hooks to collections and globals so that all of your pages, posts, footer, or header changes will automatically be updated in the frontend via on-demand revalidation supported by Nextjs.
-
-> Note: if an image has been changed, for example it's been cropped, you will need to republish the page it's used on in order to be able to revalidate the Nextjs image cache.
-
-## SEO
-
-This template comes pre-configured with the official [Payload SEO Plugin](https://payloadcms.com/docs/plugins/seo) for complete SEO control from the admin panel. All SEO data is fully integrated into the front-end website that comes with this template. See [Website](#website) for more details.
-
-## Search
-
-This template also pre-configured with the official [Payload Search Plugin](https://payloadcms.com/docs/plugins/search) to showcase how SSR search features can easily be implemented into Next.js with Payload. See [Website](#website) for more details.
-
-## Redirects
-
-If you are migrating an existing site or moving content to a new URL, you can use the `redirects` collection to create a proper redirect from old URLs to new ones. This will ensure that proper request status codes are returned to search engines and that your users are not left with a broken link. This template comes pre-configured with the official [Payload Redirects Plugin](https://payloadcms.com/docs/plugins/redirects) for complete redirect control from the admin panel. All redirects are fully integrated into the front-end website that comes with this template. See [Website](#website) for more details.
-
-## Jobs and Scheduled Publish
-
-We have configured [Scheduled Publish](https://payloadcms.com/docs/versions/drafts#scheduled-publish) which uses the [jobs queue](https://payloadcms.com/docs/jobs-queue/jobs) in order to publish or unpublish your content on a scheduled time. The tasks are run on a cron schedule and can also be run as a separate instance if needed.
-
-> Note: When deployed on Vercel, depending on the plan tier, you may be limited to daily cron only.
-
-## Website
-
-This template includes a beautifully designed, production-ready front-end built with the [Next.js App Router](https://nextjs.org), served right alongside your Payload app in a instance. This makes it so that you can deploy both your backend and website where you need it.
-
-Core features:
-
-- [Next.js App Router](https://nextjs.org)
-- [TypeScript](https://www.typescriptlang.org)
-- [React Hook Form](https://react-hook-form.com)
-- [Payload Admin Bar](https://github.com/payloadcms/payload/tree/main/packages/admin-bar)
-- [TailwindCSS styling](https://tailwindcss.com/)
-- [shadcn/ui components](https://ui.shadcn.com/)
-- User Accounts and Authentication
-- Fully featured blog
-- Publication workflow
-- Dark mode
-- Pre-made layout building blocks
-- SEO
-- Search
-- Redirects
-- Live preview
-
-### Cache
-
-Although Next.js includes a robust set of caching strategies out of the box, Payload Cloud proxies and caches all files through Cloudflare using the [Official Cloud Plugin](https://www.npmjs.com/package/@payloadcms/payload-cloud). This means that Next.js caching is not needed and is disabled by default. If you are hosting your app outside of Payload Cloud, you can easily reenable the Next.js caching mechanisms by removing the `no-store` directive from all fetch requests in `./src/app/_api` and then removing all instances of `export const dynamic = 'force-dynamic'` from pages files, such as `./src/app/(pages)/[slug]/page.tsx`. For more details, see the official [Next.js Caching Docs](https://nextjs.org/docs/app/building-your-application/caching).
-
-## Development
-
-To spin up this example locally, follow the [Quick Start](#quick-start). Then [Seed](#seed) the database with a few pages, posts, and projects.
-
-### Working with Postgres
-
-Postgres and other SQL-based databases follow a strict schema for managing your data. In comparison to our MongoDB adapter, this means that there's a few extra steps to working with Postgres.
-
-Note that often times when making big schema changes you can run the risk of losing data if you're not manually migrating it.
-
-#### Local development
-
-Ideally we recommend running a local copy of your database so that schema updates are as fast as possible. By default the Postgres adapter has `push: true` for development environments. This will let you add, modify and remove fields and collections without needing to run any data migrations.
-
-If your database is pointed to production you will want to set `push: false` otherwise you will risk losing data or having your migrations out of sync.
-
-#### Migrations
-
-[Migrations](https://payloadcms.com/docs/database/migrations) are essentially SQL code versions that keeps track of your schema. When deploy with Postgres you will need to make sure you create and then run your migrations.
-
-Locally create a migration
-
-```bash
-pnpm payload migrate:create
+#### 3. Mentor Universities Collection
+
+```typescript
+// Fields:
+- name: string (required)
+- slug: string (auto-generated)
+- country: string
+- website: url
+- logo: media
+- partnershipStartDate: date
+- partnershipType: select (Masters, PhD, Both)
+- accreditationInfo: rich text
+- contactPerson: group (name, email, phone)
+- programsOffered: relationship to Academic Programs
+- description: rich text
+- meta: SEO fields
 ```
 
-This creates the migration files you will need to push alongside with your new configuration.
+#### 4. Staff Collection (Separate from Users)
 
-On the server after building and before running `pnpm start` you will want to run your migrations
-
-```bash
-pnpm payload migrate
+```typescript
+// Fields:
+- fullName: string (required)
+- slug: string ('staff')
+- employeeId: string (unique)
+- position: string (e.g., "Professor", "Lecturer", "Assistant Lecturer")
+- department: relationship to Departments
+- hierarchyLevel: select (Vice-Chancellor, Deputy VC, Registrar, Dean, HOD, Senior Lecturer, Lecturer, Assistant Lecturer, Admin Staff)
+- qualifications: array of text
+- specializations: array of text
+- bio: rich text
+- contactInfo: group (email, phone, office)
+- profileImage: media
+- cv: media (PDF)
+- researchInterests: array of text
+- publications: rich text
+- officeHours: rich text
+- socialLinks: array of links
+- isActive: boolean
+- meta: SEO fields
 ```
 
-This command will check for any migrations that have not yet been run and try to run them and it will keep a record of migrations that have been run in the database.
+#### 5. Events Collection
 
-### Docker
-
-Alternatively, you can use [Docker](https://www.docker.com) to spin up this template locally. To do so, follow these steps:
-
-1. Follow [steps 1 and 2 from above](#development), the docker-compose file will automatically use the `.env` file in your project root
-1. Next run `docker-compose up`
-1. Follow [steps 4 and 5 from above](#development) to login and create your first admin user
-
-That's it! The Docker instance will help you get up and running quickly while also standardizing the development environment across your teams.
-
-### Seed
-
-To seed the database with a few pages, posts, and projects you can click the 'seed database' link from the admin panel.
-
-The seed script will also create a demo user for demonstration purposes only:
-
-- Demo Author
-  - Email: `demo-author@payloadcms.com`
-  - Password: `password`
-
-> NOTICE: seeding the database is destructive because it drops your current database to populate a fresh one from the seed template. Only run this command if you are starting a new project or can afford to lose your current data.
-
-## Production
-
-To run Payload in production, you need to build and start the Admin panel. To do so, follow these steps:
-
-1. Invoke the `next build` script by running `pnpm build` or `npm run build` in your project root. This creates a `.next` directory with a production-ready admin bundle.
-1. Finally run `pnpm start` or `npm run start` to run Node in production and serve Payload from the `.build` directory.
-1. When you're ready to go live, see Deployment below for more details.
-
-### Deploying to Payload Cloud
-
-The easiest way to deploy your project is to use [Payload Cloud](https://payloadcms.com/new/import), a one-click hosting solution to deploy production-ready instances of your Payload apps directly from your GitHub repo.
-
-### Deploying to Vercel
-
-This template can also be deployed to Vercel for free. You can get started by choosing the Vercel DB adapter during the setup of the template or by manually installing and configuring it:
-
-```bash
-pnpm add @payloadcms/db-vercel-postgres
+```typescript
+// Fields:
+- title: string (required)
+- slug: string ('events')
+- eventType: select (Academic, Administrative, Social, Conference, Workshop, Graduation, Orientation)
+- description: rich text
+- startDate: date (required)
+- endDate: date
+- startTime: string
+- endTime: string
+- location: string
+- isAllDay: boolean
+- department: relationship to Departments (optional)
+- organizer: relationship to Staff (optional)
+- targetAudience: select (Students, Staff, Public, Alumni, Prospective Students)
+- registrationRequired: boolean
+- registrationDeadline: date (conditional)
+- maxAttendees: number (optional)
+- eventImage: media
+- attachments: array of media
+- contactInfo: group (email, phone)
+- isRecurring: boolean
+- recurrencePattern: select (Daily, Weekly, Monthly, Yearly) (conditional)
+- isFeatured: boolean
+- meta: SEO fields
 ```
 
-```ts
-// payload.config.ts
-import { vercelPostgresAdapter } from '@payloadcms/db-vercel-postgres'
+#### 6. School Calendar Collection
 
-export default buildConfig({
-  // ...
-  db: vercelPostgresAdapter({
-    pool: {
-      connectionString: process.env.POSTGRES_URL || '',
-    },
-  }),
-  // ...
+```typescript
+// Fields:
+- academicYear: string (required) (e.g., "2024-2025")
+- semester: select (First Semester, Second Semester, Summer Session)
+- calendarType: select (Academic, Administrative, Examination, Holiday)
+- title: string (required)
+- description: rich text
+- startDate: date (required)
+- endDate: date (required)
+- isPublic: boolean
+- affectedPrograms: relationship to Academic Programs (optional)
+- departments: relationship to Departments (optional)
+- priority: select (High, Medium, Low)
+- color: string (hex color for calendar display)
+- meta: SEO fields
 ```
 
-We also support Vercel's blob storage:
+### Phase 2: Specialized Blocks (Medium Priority)
 
-```bash
-pnpm add @payloadcms/storage-vercel-blob
+#### 1. academicPrograms Block
+
+- Display programs by department or type
+- Filter and search functionality
+- Card-based layout with key information
+- Call-to-action for applications
+
+#### 2. departmentOverview Block
+
+- Department information display
+- Staff listing
+- Program offerings
+- Contact information
+
+#### 3. programPathway Block
+
+- Visual representation of academic progression
+- From Basic → HND → Degree → Masters → PhD
+- Interactive pathway visualization
+
+#### 4. mentorUniversities Block
+
+- Partnership showcase
+- University logos and information
+- Programs offered through partnerships
+
+#### 5. universityOrganigram Block
+
+- Hierarchical staff structure visualization
+- Interactive organizational chart
+- Department-based grouping
+- Contact information integration
+
+#### 6. admissionsInfo Block
+
+- Application deadlines
+- Entry requirements by program
+- Fee structure
+- Application process steps
+
+#### 7. eventsCalendar Block
+
+- Display upcoming events
+- Filter by event type and department
+- Calendar view (month, week, day)
+- Event registration integration
+- Search and filter functionality
+
+#### 8. academicCalendar Block
+
+- Academic year overview
+- Semester dates and deadlines
+- Examination schedules
+- Holiday periods
+- Important academic milestones
+
+## Modern UI Blocks & Components
+
+### Enhanced Content Blocks
+
+#### 1. enhancedContent Block
+
+```typescript
+// Enhanced version of current Content block
+- columns: array with enhanced options
+  - richText: rich text editor
+  - media: relationship to Media (images, videos)
+  - mediaPosition: select (top, bottom, left, right, background)
+  - backgroundColor: color picker
+  - textAlignment: select (left, center, right)
+  - enableAnimation: checkbox
+  - animationType: select (fadeIn, slideUp, slideLeft, etc.)
+- containerStyle: select (default, fullWidth, contained)
+- spacing: select (compact, normal, spacious)
 ```
 
-```ts
-// payload.config.ts
-import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
+#### 2. accordion Block
 
-export default buildConfig({
-  // ...
-  plugins: [
-    vercelBlobStorage({
-      collections: {
-        [Media.slug]: true,
-      },
-      token: process.env.BLOB_READ_WRITE_TOKEN || '',
-    }),
-  ],
-  // ...
+```typescript
+// Collapsible content sections
+- items: array
+  - title: string
+  - content: rich text
+  - icon: Material Design icon (optional)
+  - defaultOpen: checkbox
+- allowMultiple: checkbox (multiple sections open)
+- style: select (default, bordered, minimal)
+- iconPosition: select (left, right)
 ```
 
-There is also a simplified [one click deploy](https://github.com/payloadcms/payload/tree/templates/with-vercel-postgres) to Vercel should you need it.
+#### 3. tabs Block
 
-### Self-hosting
+```typescript
+// Tabbed content interface
+- tabs: array
+  - label: string
+  - content: rich text
+  - icon: Material Design icon (optional)
+  - media: relationship to Media (optional)
+- orientation: select (horizontal, vertical)
+- style: select (default, pills, underline)
+- defaultTab: number (index of default active tab)
+```
 
-Before deploying your app, you need to:
+#### 4. testimonials Block
 
-1. Ensure your app builds and serves in production. See [Production](#production) for more details.
-2. You can then deploy Payload as you would any other Node.js or Next.js application either directly on a VPS, DigitalOcean's Apps Platform, via Coolify or more. More guides coming soon.
+```typescript
+// Customer/student testimonials
+- testimonials: array
+  - quote: textarea
+  - author: string
+  - position: string
+  - company: string (or department for students)
+  - avatar: relationship to Media
+  - rating: number (1-5 stars, optional)
+- layout: select (carousel, grid, single)
+- showRatings: checkbox
+- autoplay: checkbox (for carousel)
+```
 
-You can also deploy your app manually, check out the [deployment documentation](https://payloadcms.com/docs/production/deployment) for full details.
+#### 5. statistics Block
 
-## Questions
+```typescript
+// Numerical data display
+- stats: array
+  - number: string
+  - label: string
+  - description: textarea (optional)
+  - icon: Material Design icon (optional)
+  - color: color picker
+- layout: select (horizontal, grid2x2, grid3x3)
+- animateNumbers: checkbox
+- backgroundColor: color picker
+```
 
-If you have any issues or questions, reach out to us on [Discord](https://discord.com/invite/payload) or start a [GitHub discussion](https://github.com/payloadcms/payload/discussions).
+#### 6. featureGrid Block
+
+```typescript
+// Feature/service showcase
+- features: array
+  - title: string
+  - description: textarea
+  - icon: Material Design icon
+  - link: link field (optional)
+  - media: relationship to Media (optional)
+- columns: select (2, 3, 4)
+- style: select (cards, minimal, bordered)
+- iconSize: select (small, medium, large)
+```
+
+#### 7. imageGallery Block
+
+```typescript
+// Image gallery with lightbox
+- images: relationship to Media (hasMany)
+- layout: select (grid, masonry, carousel)
+- columns: select (2, 3, 4, 5)
+- enableLightbox: checkbox
+- showCaptions: checkbox
+- aspectRatio: select (square, landscape, portrait, original)
+```
+
+#### 8. videoEmbed Block
+
+```typescript
+// Video embedding with multiple sources
+- videoSource: select (youtube, vimeo, upload, url)
+- videoId: string (for YouTube/Vimeo)
+- videoFile: relationship to Media (for uploads)
+- videoUrl: url (for external links)
+- thumbnail: relationship to Media (custom thumbnail)
+- autoplay: checkbox
+- controls: checkbox
+- aspectRatio: select (16:9, 4:3, 1:1)
+- caption: textarea
+```
+
+#### 9. socialProof Block
+
+```typescript
+// Social media and trust indicators
+- proofType: select (socialMedia, certifications, partnerships, awards)
+- items: array
+  - title: string
+  - description: textarea (optional)
+  - logo: relationship to Media
+  - link: link field (optional)
+- layout: select (horizontal, grid, carousel)
+- showLogosOnly: checkbox
+```
+
+#### 10. pricingTable Block
+
+```typescript
+// Pricing plans (useful for course fees)
+- plans: array
+  - name: string
+  - price: string
+  - period: string (e.g., "per semester")
+  - description: textarea
+  - features: array of strings
+  - highlighted: checkbox
+  - ctaText: string
+  - ctaLink: link field
+- currency: string
+- layout: select (cards, table)
+- showComparison: checkbox
+```
+
+### Component Reusability Strategy
+
+#### Leveraging Existing Components
+
+**1. Button Component Integration**
+
+- All CTA elements in new blocks will use existing `Button` component
+- Consistent styling across `testimonials`, `featureGrid`, `pricingTable` blocks
+- Support for all existing variants (default, outline, ghost, link)
+
+**2. Card Component Usage**
+
+- `featureGrid`, `testimonials`, `pricingTable` blocks built on existing `Card` system
+- Consistent card layouts using `CardHeader`, `CardContent`, `CardFooter`
+- Maintains design system coherence
+
+**3. CMSLink Enhancement**
+
+- All link fields in new blocks leverage existing link or linkGroup fields and `CMSLink` component
+- Material Design icons already integrated
+- Consistent link behavior across all blocks
+
+**4. Media Component Integration**
+
+- `enhancedContent`, `imageGallery`, `videoEmbed` blocks use existing `Media` component
+- Consistent image/video handling and optimization
+- Built-in responsive behavior
+
+**5. Form Components**
+
+- Contact forms in blocks use existing `Input`, `Textarea`, `Select` components
+- Consistent form styling and validation
+
+#### New UI Components Needed
+
+**1. Accordion Component**
+
+```typescript
+// src/components/ui/accordion.tsx
+- AccordionRoot, AccordionItem, AccordionTrigger, AccordionContent
+- Built with Radix UI primitives
+- Integrates with existing design tokens
+```
+
+**2. Tabs Component**
+
+```typescript
+// src/components/ui/tabs.tsx
+- TabsRoot, TabsList, TabsTrigger, TabsContent
+- Horizontal and vertical orientations
+- Icon support integration
+```
+
+**3. Badge Component**
+
+```typescript
+// src/components/ui/badge.tsx
+- For statistics, pricing highlights, testimonial ratings
+- Multiple variants (default, secondary, destructive, outline)
+```
+
+**4. Avatar Component**
+
+```typescript
+// src/components/ui/avatar.tsx
+- For testimonials and staff profiles
+- Fallback support for initials
+- Image optimization integration
+```
+
+**5. Dialog/Modal Component**
+
+```typescript
+// src/components/ui/dialog.tsx
+- For image gallery lightbox
+- Video modal playback
+- Contact form overlays
+```
+
+### Implementation Benefits
+
+#### Design Consistency
+
+- All new blocks follow existing design system
+- Consistent spacing, typography, and color usage
+- Unified component behavior across the site
+
+#### Development Efficiency
+
+- Reuse existing components reduces development time
+- Consistent API patterns for easier maintenance
+- Built-in accessibility features from existing components
+
+#### Content Management
+
+- Familiar interface patterns for content editors
+- Consistent field types and validation
+- Streamlined content creation workflow
+
+#### Performance Optimization
+
+- Shared component bundles reduce JavaScript payload
+- Consistent image optimization across all media blocks
+- Efficient re-rendering with shared component logic
+
+### Phase 3: Enhanced Features (Low Priority)
+
+#### Navigation Enhancements
+
+- Academic Programs dropdown with department grouping
+- Staff directory with search and filter
+- Quick access to admissions information
+- Mentor university partnerships showcase
+
+#### Content Organization
+
+- Comprehensive event management system
+- Academic calendar with semester planning
+- News and announcements categorization
+- Student resources section
+- Event registration and attendance tracking
+- Calendar synchronization with external systems
+
+## Technical Implementation Strategy
+
+### Collection Relationships
+
+```
+Departments ←→ Staff (many-to-many)
+Departments ←→ Academic Programs (one-to-many)
+Departments ←→ Events (one-to-many, optional)
+Academic Programs ←→ Mentor Universities (many-to-many, conditional)
+Academic Programs ←→ School Calendar (many-to-many, optional)
+Staff ←→ Academic Programs (program coordinators)
+Staff ←→ Events (organizers, optional)
+Events ←→ Departments (optional)
+School Calendar ←→ Academic Programs (affected programs, optional)
+School Calendar ←→ Departments (affected departments, optional)
+```
+
+### Block Integration
+
+- All new blocks will integrate with existing RenderBlocks system
+- Responsive design following current UI patterns
+- Material Design icons for enhanced UX
+- TypeScript support throughout
+
+### Data Migration
+
+- Seed data creation for initial content
+- Import utilities for bulk staff and program data
+- Validation and error handling
+
+## Development Phases
+
+### Phase 1: Foundation (Weeks 1-2)
+
+**Collections & Core Infrastructure**
+
+1. Create Departments collection
+2. Create Academic Programs collection
+3. Create Mentor Universities collection
+4. Create Staff collection
+5. Create Events collection
+6. Create School Calendar collection
+7. Set up relationships and validation
+
+**New UI Components** 8. Create Accordion component (`src/components/ui/accordion.tsx`) 9. Create Tabs component (`src/components/ui/tabs.tsx`) 10. Create Badge component (`src/components/ui/badge.tsx`) 11. Create Avatar component (`src/components/ui/avatar.tsx`) 12. Create Dialog/Modal component (`src/components/ui/dialog.tsx`)
+
+### Phase 2: Content Blocks (Weeks 3-5)
+
+**Week 3: Academic-Specific Blocks**
+
+1. academicPrograms Block
+2. departmentOverview Block
+3. universityOrganigram Block
+4. mentorUniversities Block
+5. eventsCalendar Block
+6. academicCalendar Block
+
+**Week 4: Essential Modern UI Blocks** 7. enhancedContent Block (enhanced version of current Content block) 8. accordion Block 9. tabs Block 10. testimonials Block 11. statistics Block 12. featureGrid Block
+
+**Week 5: Advanced UI Blocks** 13. imageGallery Block 14. videoEmbed Block 15. socialProof Block 16. pricingTable Block
+
+### Phase 3: Integration & Enhancement (Week 6)
+
+**Content Management Improvements**
+
+1. Update RenderBlocks component to include all new blocks
+2. Create comprehensive seed data for all new blocks
+3. Update TypeScript types and payload-types
+
+**User Experience Enhancements** 4. Navigation updates with new content capabilities 5. Admin interface improvements for new blocks 6. Mobile responsiveness testing and optimization
+
+**Quality Assurance** 7. Cross-browser testing for all new components 8. Accessibility audit and improvements 9. Performance optimization and bundle analysis 10. Documentation updates and usage examples
+
+## Key Design Decisions
+
+1. **Staff as Separate Collection**: Staff will be completely independent from Users collection to allow for public profiles and detailed academic information
+
+2. **Conditional Mentor Universities**: Only Masters and PhD programs will have mentor university relationships
+
+3. **Flexible Program Types**: Support for all program types with type-specific fields and validation
+
+4. **Hierarchical Staff Structure**: Clear organizational hierarchy for organigram visualization
+
+5. **Department-Centric Organization**: All academic content organized around departments
+
+## Success Metrics
+
+- Complete university structure representation
+- Intuitive content management for administrators
+- Public-facing staff directory and organigram
+- Comprehensive program information display
+- Partnership transparency through mentor university showcase
+- Mobile-responsive design
+- SEO optimization for all content types
+
+## Next Steps
+
+Once this documentation is approved, development will begin with Phase 1 collections, starting with the Departments collection as the foundation for the entire academic structure.
+
+---
+
+_This document serves as the comprehensive guide for implementing the SDU Institute website CMS. All stakeholders should review and approve before development begins._
