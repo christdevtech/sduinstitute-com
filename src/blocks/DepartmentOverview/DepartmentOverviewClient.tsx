@@ -163,7 +163,7 @@ export const DepartmentOverviewClient: React.FC<DepartmentOverviewClientProps> =
   showContactInfo,
   layout = 'default',
 }) => {
-  const { name, description, featuredImage, contactInfo, headOfDepartment } = department
+  const { title, description, featuredImage, contactInfo, headOfDepartment } = department
   const headOfDept = typeof headOfDepartment === 'object' ? headOfDepartment : null
 
   return (
@@ -176,7 +176,7 @@ export const DepartmentOverviewClient: React.FC<DepartmentOverviewClientProps> =
           <div
             className={cn('space-y-4', layout === 'detailed' ? 'lg:col-span-2' : 'lg:col-span-1')}
           >
-            <h2 className="text-3xl font-bold">{name}</h2>
+            <h2 className="text-3xl font-bold">{title}</h2>
 
             {headOfDept && (
               <div className="flex items-center gap-3 p-4 bg-muted/50 rounded-lg">

@@ -588,7 +588,7 @@ export interface Department {
   /**
    * The official name of the department
    */
-  name: string;
+  title: string;
   slug?: string | null;
   slugLock?: boolean | null;
   /**
@@ -1275,7 +1275,7 @@ export interface MediaBlock {
  */
 export interface MentorUniversitiesBlock {
   displayType: 'all' | 'by-partnership-type' | 'featured';
-  selectedPartnershipType?: ('Masters' | 'PhD' | 'Both') | null;
+  selectedPartnershipType?: ('bachelors' | 'masters' | 'phd') | null;
   showLogos?: boolean | null;
   showPrograms?: boolean | null;
   showContactInfo?: boolean | null;
@@ -1588,7 +1588,7 @@ export interface MentorUniversity {
   /**
    * Full name of the mentor university
    */
-  name: string;
+  title: string;
   slug?: string | null;
   slugLock?: boolean | null;
   /**
@@ -1705,9 +1705,9 @@ export interface MentorUniversity {
    */
   partnershipStartDate?: string | null;
   /**
-   * Type of programs offered through this partnership
+   * Types of certification programs offered through this partnership (can select multiple)
    */
-  partnershipType: 'masters' | 'phd' | 'both';
+  partnershipType: ('bachelors' | 'masters' | 'phd')[];
   /**
    * Information about university accreditation and recognition
    */
@@ -2736,7 +2736,7 @@ export interface UsersSelect<T extends boolean = true> {
  * via the `definition` "departments_select".
  */
 export interface DepartmentsSelect<T extends boolean = true> {
-  name?: T;
+  title?: T;
   slug?: T;
   slugLock?: T;
   description?: T;
@@ -2841,7 +2841,7 @@ export interface StaffSelect<T extends boolean = true> {
  * via the `definition` "mentor-universities_select".
  */
 export interface MentorUniversitiesSelect<T extends boolean = true> {
-  name?: T;
+  title?: T;
   slug?: T;
   slugLock?: T;
   country?: T;

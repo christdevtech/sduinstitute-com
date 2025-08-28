@@ -25,7 +25,7 @@ export const MentorUniversitiesBlockComponent: React.FC<Props> = async ({
 
   if (displayType === 'by-partnership-type' && selectedPartnershipType) {
     whereConditions.partnershipType = {
-      equals: selectedPartnershipType,
+      contains: selectedPartnershipType,
     }
   }
 

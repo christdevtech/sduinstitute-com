@@ -120,7 +120,7 @@ export function ProgramPathwayClient({
                     )}
                     {program.mentorUniversity && typeof program.mentorUniversity === 'object' && (
                       <div className="text-xs text-blue-600 mt-1">
-                        Partner: {program.mentorUniversity.name}
+                        Partner: {program.mentorUniversity.title}
                       </div>
                     )}
                   </div>

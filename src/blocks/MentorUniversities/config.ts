@@ -32,16 +32,16 @@ export const MentorUniversities: Block = {
       },
       options: [
         {
-          label: 'Masters',
-          value: 'Masters',
+          label: "Bachelor's Programs",
+          value: 'bachelors',
         },
         {
-          label: 'PhD',
-          value: 'PhD',
+          label: 'Masters Programs',
+          value: 'masters',
         },
         {
-          label: 'Both',
-          value: 'Both',
+          label: 'PhD Programs',
+          value: 'phd',
         },
       ],
     },

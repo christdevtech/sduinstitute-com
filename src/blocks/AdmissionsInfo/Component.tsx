@@ -1,8 +1,13 @@
 import React from 'react'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import { AcademicProgram, AdmissionsInfoBlock as AdmissionsInfoBlockProps, Department } from '@/payload-types'
+import {
+  AcademicProgram,
+  AdmissionsInfoBlock as AdmissionsInfoBlockProps,
+  Department,
+} from '@/payload-types'
 import { AdmissionsInfoClient } from './AdmissionsInfoClient'
+import { title } from 'process'
 
 export default async function AdmissionsInfoBlock({
   displayType = 'all-programs',
@@ -14,18 +19,18 @@ export default async function AdmissionsInfoBlock({
   showApplicationSteps = true,
   layout = 'cards',
 }: AdmissionsInfoBlockProps) {
-  
   const payload = await getPayload({ config: configPromise })
 
   // Build query conditions
   const where: any = {}
 
   // Handle selectedDepartment - it can be string, Department object, or null
-  const departmentId = typeof selectedDepartment === 'object' && selectedDepartment !== null
-    ? selectedDepartment.id
-    : typeof selectedDepartment === 'string'
-    ? selectedDepartment
-    : null
+  const departmentId =
+    typeof selectedDepartment === 'object' && selectedDepartment !== null
+      ? selectedDepartment.id
+      : typeof selectedDepartment === 'string'
+        ? selectedDepartment
+        : null
 
   if (displayType === 'by-department' && departmentId) {
     where.department = { equals: departmentId }
@@ -43,9 +48,10 @@ export default async function AdmissionsInfoBlock({
   })
 
   // Transform selectedDepartment to the expected format for the client component
-  const transformedDepartment = typeof selectedDepartment === 'object' && selectedDepartment !== null
-    ? { id: selectedDepartment.id, name: selectedDepartment.name || '' }
-    : null
+  const transformedDepartment =
+    typeof selectedDepartment === 'object' && selectedDepartment !== null
+      ? { id: selectedDepartment.id, title: selectedDepartment.title || '' }
+      : null
 
   return (
     <AdmissionsInfoClient

@@ -16,7 +16,7 @@ type ProgramCardProps = {
 const ProgramCard: React.FC<ProgramCardProps> = ({ program, showApplicationCTA }) => {
   const { title, slug, programType, department, duration, featuredImage, entryRequirements } =
     program
-  const departmentName = typeof department === 'object' ? department.name : ''
+  const departmentName = typeof department === 'object' ? department.title : ''
 
   return (
     <article className="border border-border rounded-lg overflow-hidden bg-card hover:cursor-pointer transition-all hover:shadow-md">
@@ -128,7 +128,7 @@ const Filters: React.FC<FilterProps> = ({
             <option value="">All Departments</option>
             {departments.map((dept) => (
               <option key={dept.id} value={dept.id}>
-                {dept.name}
+                {dept.title}
               </option>
             ))}
           </select>

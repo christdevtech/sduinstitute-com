@@ -1,7 +1,10 @@
 import type { CollectionSlug, GlobalSlug, Payload, PayloadRequest, File } from 'payload'
 
 import { contactForm as contactFormData } from './contact-form'
+import { applicationForm as applicationFormData } from './application-form'
+import { campusVisitForm as campusVisitFormData } from './campus-visit-form'
 import { contact as contactPageData } from './contact-page'
+import { admissions } from './admissions-page'
 import { home } from './home'
 import { image1 } from './image-1'
 import { image2 } from './image-2'
@@ -9,6 +12,11 @@ import { imageHero1 } from './image-hero-1'
 import { post1 } from './post-1'
 import { post2 } from './post-2'
 import { post3 } from './post-3'
+import { academicPrograms } from './academic-programs'
+import { departments } from './departments'
+import { mentorUniversities } from './mentor-universities'
+import { staff } from './staff'
+import { campusesPage } from './campuses-page'
 
 const collections: CollectionSlug[] = [
   'categories',
@@ -18,6 +26,10 @@ const collections: CollectionSlug[] = [
   'forms',
   'form-submissions',
   'search',
+  'academic-programs',
+  'departments',
+  'mentor-universities',
+  'staff',
 ]
 const globals: GlobalSlug[] = ['header', 'footer']
 
@@ -257,17 +269,99 @@ export const seed = async ({
     },
   })
 
-  payload.logger.info(`— Seeding contact form...`)
+  payload.logger.info(`— Seeding departments...`)
 
-  const contactForm = await payload.create({
-    collection: 'forms',
-    depth: 0,
-    data: contactFormData,
-  })
+  const departmentDocs = await Promise.all(
+    departments({ featuredImage: image1Doc, metaImage: image2Doc }).map((department) =>
+      payload.create({
+        collection: 'departments',
+        depth: 0,
+        context: {
+          disableRevalidate: true,
+        },
+        data: department,
+      }),
+    ),
+  )
+
+  payload.logger.info(`— Seeding mentor universities...`)
+
+  const mentorUniversityDocs = await Promise.all(
+    mentorUniversities({ featuredImage: image1Doc, metaImage: image2Doc }).map((university) =>
+      payload.create({
+        collection: 'mentor-universities',
+        depth: 0,
+        context: {
+          disableRevalidate: true,
+        },
+        data: university,
+      }),
+    ),
+  )
+
+  payload.logger.info(`— Seeding academic programs...`)
+
+  const academicProgramDocs = await Promise.all(
+    academicPrograms({
+      featuredImage: image1Doc,
+      metaImage: image2Doc,
+      nursingDepartment: departmentDocs[0],
+      biomedicalDepartment: departmentDocs[0],
+    }).map((program) =>
+      payload.create({
+        collection: 'academic-programs',
+        depth: 0,
+        context: {
+          disableRevalidate: true,
+        },
+        data: program,
+      }),
+    ),
+  )
+
+  payload.logger.info(`— Seeding staff...`)
+
+  const staffDocs = await Promise.all(
+    staff({
+      featuredImage: image1Doc,
+      metaImage: image2Doc,
+      nursingDepartment: departmentDocs[0],
+      biomedicalDepartment: departmentDocs[0],
+    }).map((staffMember) =>
+      payload.create({
+        collection: 'staff',
+        depth: 0,
+        context: {
+          disableRevalidate: true,
+        },
+        data: staffMember,
+      }),
+    ),
+  )
+
+  payload.logger.info(`— Seeding forms...`)
+
+  const [contactForm, applicationForm, campusVisitForm] = await Promise.all([
+    payload.create({
+      collection: 'forms',
+      depth: 0,
+      data: contactFormData,
+    }),
+    payload.create({
+      collection: 'forms',
+      depth: 0,
+      data: applicationFormData,
+    }),
+    payload.create({
+      collection: 'forms',
+      depth: 0,
+      data: campusVisitFormData,
+    }),
+  ])
 
   payload.logger.info(`— Seeding pages...`)
 
-  const [_, contactPage] = await Promise.all([
+  const [_, contactPage, campusPage, admissionsPage] = await Promise.all([
     payload.create({
       collection: 'pages',
       depth: 0,
@@ -276,7 +370,17 @@ export const seed = async ({
     payload.create({
       collection: 'pages',
       depth: 0,
-      data: contactPageData({ contactForm: contactForm }),
+      data: contactPageData({ contactForm: contactForm, heroImage: imageHomeDoc, metaImage: image2Doc }),
+    }),
+    payload.create({
+      collection: 'pages',
+      depth: 0,
+      data: campusesPage({ featuredImage: imageHomeDoc, metaImage: image2Doc, campusVisitForm: campusVisitForm }),
+    }),
+    payload.create({
+      collection: 'pages',
+      depth: 0,
+      data: admissions({ heroImage: imageHomeDoc, metaImage: image2Doc, applicationForm: applicationForm }),
     }),
   ])
 
@@ -290,8 +394,32 @@ export const seed = async ({
           {
             link: {
               type: 'custom',
-              label: 'Posts',
-              url: '/posts',
+              label: 'Academic Programs',
+              url: '/academic-programs',
+            },
+          },
+          {
+            link: {
+              type: 'custom',
+              label: 'Admissions',
+              url: '/admissions',
+            },
+          },
+          {
+            link: {
+              type: 'reference',
+              label: 'Campuses',
+              reference: {
+                relationTo: 'pages',
+                value: campusPage.id,
+              },
+            },
+          },
+          {
+            link: {
+              type: 'custom',
+              label: 'About',
+              url: '/about',
             },
           },
           {
@@ -314,24 +442,49 @@ export const seed = async ({
           {
             link: {
               type: 'custom',
+              label: 'Academic Programs',
+              url: '/academic-programs',
+            },
+          },
+          {
+            link: {
+              type: 'custom',
+              label: 'Admissions',
+              url: '/admissions',
+            },
+          },
+          {
+            link: {
+              type: 'reference',
+              label: 'Campuses',
+              reference: {
+                relationTo: 'pages',
+                value: campusPage.id,
+              },
+            },
+          },
+          {
+            link: {
+              type: 'custom',
+              label: 'About',
+              url: '/about',
+            },
+          },
+          {
+            link: {
+              type: 'reference',
+              label: 'Contact',
+              reference: {
+                relationTo: 'pages',
+                value: contactPage.id,
+              },
+            },
+          },
+          {
+            link: {
+              type: 'custom',
               label: 'Admin',
               url: '/admin',
-            },
-          },
-          {
-            link: {
-              type: 'custom',
-              label: 'Source Code',
-              newTab: true,
-              url: 'https://github.com/payloadcms/payload/tree/main/templates/website',
-            },
-          },
-          {
-            link: {
-              type: 'custom',
-              label: 'Payload',
-              newTab: true,
-              url: 'https://payloadcms.com/',
             },
           },
         ],

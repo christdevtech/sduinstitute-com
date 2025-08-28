@@ -126,7 +126,7 @@ export const EventsCalendarClient: React.FC<EventsCalendarClientProps> = ({
                       <SelectItem value="">All Departments</SelectItem>
                       {departments.map((dept) => (
                         <SelectItem key={dept.id} value={dept.id}>
-                          {dept.name}
+                          {dept.title}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -205,7 +205,7 @@ export const EventsCalendarClient: React.FC<EventsCalendarClientProps> = ({
                     {event.department && typeof event.department === 'object' && (
                       <div className="flex items-center gap-2">
                         <Users className="h-4 w-4" />
-                        <span>{event.department.name}</span>
+                        <span>{event.department.title}</span>
                       </div>
                     )}
                   </div>

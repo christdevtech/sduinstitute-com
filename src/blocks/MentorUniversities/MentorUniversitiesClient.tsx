@@ -32,6 +32,32 @@ export const MentorUniversitiesClient: React.FC<Props> = ({
   layout = 'grid',
   itemsPerRow = 3,
 }) => {
+  // Helper function to format certification types
+  const formatCertificationTypes = (partnershipTypes: string[] | string | undefined) => {
+    if (!partnershipTypes) return null
+    
+    const types = Array.isArray(partnershipTypes) ? partnershipTypes : [partnershipTypes]
+    const typeLabels = types.map(type => {
+      switch (type) {
+        case 'bachelors':
+          return "Bachelor's"
+        case 'masters':
+          return "Master's"
+        case 'phd':
+          return 'PhD'
+        default:
+          return type
+      }
+    })
+    
+    if (typeLabels.length === 1) {
+      return `${typeLabels[0]} Programs`
+    } else if (typeLabels.length === 2) {
+      return `${typeLabels.join(' & ')} Programs`
+    } else {
+      return `${typeLabels.slice(0, -1).join(', ')} & ${typeLabels[typeLabels.length - 1]} Programs`
+    }
+  }
   if (universities.length === 0) {
     return (
       <div className="container mx-auto px-4 py-12">
@@ -81,7 +107,7 @@ export const MentorUniversitiesClient: React.FC<Props> = ({
         )}
         <div className="text-center space-y-2">
           <CardTitle className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
-            {university.name}
+            {university.title}
           </CardTitle>
           {university.country && (
             <div className="flex items-center justify-center gap-1 text-gray-600">
@@ -99,7 +125,7 @@ export const MentorUniversitiesClient: React.FC<Props> = ({
               variant="secondary"
               className="bg-blue-50 text-blue-700 hover:bg-blue-100 font-medium px-3 py-1"
             >
-              {university.partnershipType} Partnership
+              {formatCertificationTypes(university.partnershipType)}
             </Badge>
           </div>
         )}
@@ -230,13 +256,13 @@ export const MentorUniversitiesClient: React.FC<Props> = ({
                     <div className="space-y-6">
                       <div className="space-y-3">
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                          <h3 className="text-2xl font-bold text-gray-900">{university.name}</h3>
+                          <h3 className="text-2xl font-bold text-gray-900">{university.title}</h3>
                           {university.partnershipType && (
                             <Badge
                               variant="secondary"
                               className="bg-blue-50 text-blue-700 font-medium px-3 py-1 w-fit"
                             >
-                              {university.partnershipType} Partnership
+                              {formatCertificationTypes(university.partnershipType)}
                             </Badge>
                           )}
                         </div>
@@ -412,7 +438,7 @@ export const MentorUniversitiesClient: React.FC<Props> = ({
             <div className="flex flex-wrap justify-center gap-2 pt-4">
               {selectedPartnershipType && (
                 <Badge variant="outline" className="text-blue-700 border-blue-200">
-                  {selectedPartnershipType} Programs
+                  {formatCertificationTypes([selectedPartnershipType])}
                 </Badge>
               )}
               <Badge variant="secondary" className="bg-gray-100 text-gray-700">

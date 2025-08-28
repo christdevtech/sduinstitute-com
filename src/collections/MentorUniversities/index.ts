@@ -22,19 +22,19 @@ export const MentorUniversities: CollectionConfig<'mentor-universities'> = {
     update: authenticated,
   },
   defaultPopulate: {
-    name: true,
+    title: true,
     slug: true,
     country: true,
     logo: true,
     partnershipType: true,
   },
   admin: {
-    defaultColumns: ['name', 'country', 'partnershipType', 'updatedAt'],
-    useAsTitle: 'name',
+    defaultColumns: ['title', 'country', 'partnershipType', 'updatedAt'],
+    useAsTitle: 'title',
   },
   fields: [
     {
-      name: 'name',
+      name: 'title',
       type: 'text',
       required: true,
       admin: {
@@ -80,7 +80,12 @@ export const MentorUniversities: CollectionConfig<'mentor-universities'> = {
       name: 'partnershipType',
       type: 'select',
       required: true,
+      hasMany: true,
       options: [
+        {
+          label: "Bachelor's Programs",
+          value: 'bachelors',
+        },
         {
           label: 'Masters Programs',
           value: 'masters',
@@ -89,13 +94,10 @@ export const MentorUniversities: CollectionConfig<'mentor-universities'> = {
           label: 'PhD Programs',
           value: 'phd',
         },
-        {
-          label: 'Both Masters and PhD',
-          value: 'both',
-        },
       ],
       admin: {
-        description: 'Type of programs offered through this partnership',
+        description:
+          'Types of certification programs offered through this partnership (can select multiple)',
       },
     },
     {

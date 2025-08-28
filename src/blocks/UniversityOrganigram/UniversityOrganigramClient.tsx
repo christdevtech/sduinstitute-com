@@ -43,14 +43,14 @@ const getHierarchyLabel = (level: string): string => {
   const labelMap: Record<string, string> = {
     'vice-chancellor': 'Vice-Chancellor',
     'deputy-vc': 'Deputy VC',
-    'registrar': 'Registrar',
-    'dean': 'Dean',
-    'hod': 'HOD',
+    registrar: 'Registrar',
+    dean: 'Dean',
+    hod: 'HOD',
     'senior-lecturer': 'Senior Lecturer',
-    'lecturer': 'Lecturer',
+    lecturer: 'Lecturer',
     'assistant-lecturer': 'Assistant Lecturer',
     'admin-staff': 'Admin Staff',
-    'unknown': 'Other Staff',
+    unknown: 'Other Staff',
   }
   return labelMap[level] || level
 }
@@ -81,7 +81,7 @@ const StaffCard: React.FC<{
             </p>
             {staff.department && typeof staff.department === 'object' && (
               <Badge variant="secondary" className={isCompact ? 'text-xs' : 'text-sm'}>
-                {staff.department.name}
+                {staff.department.title}
               </Badge>
             )}
           </div>

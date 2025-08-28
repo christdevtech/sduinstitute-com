@@ -11,7 +11,7 @@ import { AcademicProgram, AdmissionsInfoBlock } from '@/payload-types'
 type AdmissionsInfoClientProps = {
   programs: AcademicProgram[]
   displayType?: 'all-programs' | 'by-department' | 'by-program-type'
-  selectedDepartment?: { id: string; name: string } | null
+  selectedDepartment?: { id: string; title: string } | null
   selectedProgramType?: string | null
   showDeadlines?: boolean
   showFees?: boolean
@@ -89,7 +89,7 @@ export function AdmissionsInfoClient({
                 <Badge variant="secondary">{program.programType}</Badge>
               )}
               {program.department && typeof program.department === 'object' && (
-                <Badge variant="outline">{program.department?.name}</Badge>
+                <Badge variant="outline">{program.department?.title}</Badge>
               )}
             </div>
           </div>
@@ -193,7 +193,7 @@ export function AdmissionsInfoClient({
                 <Badge variant="secondary">{program.programType}</Badge>
               </td>
               <td className="border border-gray-200 px-4 py-2">
-                {typeof program.department === 'object' ? program.department.name : 'N/A'}
+                {typeof program.department === 'object' ? program.department.title : 'N/A'}
               </td>
               <td className="border border-gray-200 px-4 py-2">{program.duration}</td>
               {showDeadlines && (
@@ -231,7 +231,7 @@ export function AdmissionsInfoClient({
               <div className="flex gap-2">
                 <Badge variant="secondary">{program.programType}</Badge>
                 <Badge variant="outline">
-                  {typeof program.department === 'object' ? program.department.name : 'N/A'}
+                  {typeof program.department === 'object' ? program.department.title : 'N/A'}
                 </Badge>
               </div>
             </CardTitle>
@@ -301,7 +301,7 @@ export function AdmissionsInfoClient({
       <div className="mb-8">
         <h2 className="text-3xl font-bold mb-4">Admissions Information</h2>
         {displayType === 'by-department' && selectedDepartment && (
-          <p className="text-lg text-muted-foreground">Programs in {selectedDepartment.name}</p>
+          <p className="text-lg text-muted-foreground">Programs in {selectedDepartment.title}</p>
         )}
         {displayType === 'by-program-type' && selectedProgramType && (
           <p className="text-lg text-muted-foreground">{selectedProgramType} Programs</p>

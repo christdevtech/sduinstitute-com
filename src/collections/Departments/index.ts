@@ -31,7 +31,7 @@ export const Departments: CollectionConfig<'departments'> = {
     update: authenticated,
   },
   defaultPopulate: {
-    name: true,
+    title: true,
     slug: true,
     description: true,
     featuredImage: true,
@@ -63,11 +63,11 @@ export const Departments: CollectionConfig<'departments'> = {
         collection: 'departments',
         req,
       }),
-    useAsTitle: 'name',
+    useAsTitle: 'title',
   },
   fields: [
     {
-      name: 'name',
+      name: 'title',
       type: 'text',
       required: true,
       admin: {
@@ -154,7 +154,8 @@ export const Departments: CollectionConfig<'departments'> = {
               relationTo: 'staff',
               admin: {
                 position: 'sidebar',
-                description: 'Current head of department (will be available when Staff collection is created)',
+                description:
+                  'Current head of department (will be available when Staff collection is created)',
               },
               label: 'Head of Department',
             },
@@ -176,7 +177,8 @@ export const Departments: CollectionConfig<'departments'> = {
               hasMany: true,
               admin: {
                 position: 'sidebar',
-                description: 'Staff members belonging to this department (will be available when Staff collection is created)',
+                description:
+                  'Staff members belonging to this department (will be available when Staff collection is created)',
               },
               label: 'Staff Members',
             },

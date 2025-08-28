@@ -2,27 +2,175 @@
 
 ## Project Overview
 
-This project is a comprehensive Content Management System (CMS) built with Payload CMS and Next.js, specifically designed for SDU Institute - a Cameroon-based university. The system supports the unique academic structure and administrative needs of the institution.
+This project is a comprehensive Content Management System (CMS) built with Payload CMS and Next.js, specifically designed for **St. David's University Institute of Nursing and Biomedical Sciences** - a Cameroon-based university. The system supports the unique academic structure and administrative needs of the institution.
+
+## Current University Information
+
+### Institution Details
+
+- **Full Name**: St. David's University Institute of Nursing and Biomedical Sciences
+- **Location**: Cameroon (Multiple campuses)
+- **Specialization**: Nursing and Biomedical Sciences
+- **Contact**: contact@sduinstitute.com
+- **Website**: https://sduinstitute.com
+
+### Campus Locations
+
+- **Limbé Campus A**: Mile 2
+- **Limbé Campus B**: Mile 4
+- **Buea Campus A**: Street 2, junction opposite Baptist church
+- **Buea Campus B**: Behind OIC, opposite Great Soppo market
+- **Douala Campus**: Texaco Kotto, exchange grand hangar
+- **Mbouida Campus**: Galim park, behind Total petrol station
+
+### Current Academic Programs & Fees
+
+#### English Programs
+
+| Program                                         | Duration | Registration Fee | Tuition Fee | Entry Qualification | Diploma     |
+| ----------------------------------------------- | -------- | ---------------- | ----------- | ------------------- | ----------- |
+| **3 Years All HND Programs**                    | 3 years  | 25,000 XAF       | 325,000 XAF | G.C.E A/L, BAC      | HND         |
+| **2 Years Actual HND and State Enrolled Nurse** | 2 years  | 25,000 XAF       | 300,000 XAF | G.C.E B.E.P.C, O/L  | HND         |
+| **Associate Vocational Nurse (1 year program)** | 1 year   | 25,000 XAF       | 260,000 XAF | F.S.L.C, C.E.P      | Certificate |
+| **Degree St David Students**                    | -        | 30,000 XAF       | 320,000 XAF | HND                 | Degree      |
+| **Medical Delegate Geriatric Nursing**          | -        | 25,000 XAF       | 300,000 XAF | A/L                 | Certificate |
+| **Degree Students from Other Universities**     | -        | 30,000 XAF       | 400,000 XAF | HND                 | Degree      |
+
+#### French Programs (Cursus et Frais)
+
+| Program                                   | Duration | Inscription | Pension     | Diplôme d'Entrée        |
+| ----------------------------------------- | -------- | ----------- | ----------- | ----------------------- |
+| **Cycle d'un an**                         | 1 year   | 25,000 XAF  | 260,000 XAF | CEP/BEPC/PROBATOIRE/BAC |
+| **Cycle de deux ans**                     | 2 years  | 25,000 XAF  | 300,000 XAF | BEPC/PROBATOIRE/BAC     |
+| **BTS**                                   | -        | 25,000 XAF  | 325,000 XAF | BAC                     |
+| **Licence avec BTS Étudiant interne**     | -        | 30,000 XAF  | 320,000 XAF | BTS                     |
+| **Licence avec BTS d'autres universités** | -        | 30,000 XAF  | 400,000 XAF | BTS                     |
+
+### Available Specializations
+
+#### English Programs
+
+- Nursing Science
+- Midwifery
+- Laboratory Technology
+- Pharmacy Technology
+- Medical Sales Representative
+
+#### French Programs
+
+- Science Infirmière
+- Sage Femme
+- Technicien de Laboratoire
+- Secrétariat Médical
+- Technicien en Pharmacie
+- Nutrition et Diététique
+
+### Admission Information
+
+#### Sessions
+
+- **Two sessions annually**: January and September
+- **September admission**: Starts from 1st July
+- **January admission**: Starts 5th December
+
+#### Requirements
+
+- Photocopy of birth certificate
+- General education certificate/slip photocopy
+- 2 passport size photographs
+- Admission letter from the office
+
+#### Uniforms
+
+- **Daily Wear**: White gowns + cap for girls, white tunic and brown trousers for boys
+- **Internship**: Theatre wears, green trousers and shirts
+- **Lab Wear**: White blouse
+- **Pharmacy Wear**: White blouse
+
+### Academic Structure
+
+- **Academic Year**: 2 semesters
+- **Lecture Duration**: 2.5 months per semester
+- **Internship Duration**: 2.5 months per semester
+- **Evening Classes**: Available in Douala and Mbouida
+
+### Partner Universities
+
+- University of BUEA
+- University of BAMENDA
+- HIPDET University of BAMENDA
+- HIAS University BUEA
+- European International University - PARIS
+- University of Dschang
+
+### University Advantages & Facilities
+
+#### Key Benefits
+
+- Experienced and well-trained lecturers from state universities and regional hospitals
+- Befitting campus with collaborating students hostel
+- Cheap and affordable fees
+- Excellent and well-equipped practical halls
+- Excellent canteen/restaurant with all types of food and games for relaxation
+- 100% results, numerous employment opportunities in and out of the country
+- License and visa assistance to all students
+- Additional courses: driving, red cross, braille and sign language
+- Semester excursions to beaches (Kribi Beach/Seme Beach)
+- Comfortable school buses for student transportation
+
+#### Academic Features
+
+- **Bilingual Education**: Programs offered in both English and French
+- **Practical Training**: Well-equipped laboratories and practical halls
+- **Internship Programs**: 2.5 months internship per semester
+- **Evening Classes**: Available in Douala and Mbouida campuses
+- **Flexible Scheduling**: 2.5 months lectures + 2.5 months internship per semester
+
+#### Student Support Services
+
+- Student accommodation facilities
+- Career guidance and job placement assistance
+- International visa and licensing support
+- Recreational facilities and organized excursions
+- Transportation services
+- Additional skill development courses
 
 ## University Structure Analysis
 
 ### Academic Organization
 
-- **Departments**: The university is organized by departments (not faculties)
+- **Specialization**: Institute focused on Nursing and Biomedical Sciences
+- **Language Support**: Bilingual education (English and French programs)
+- **Campus Network**: 6 campuses across Cameroon (Limbé, Buea, Douala, Mbouida)
 - **Program Types**:
-  - Basic Programs
-  - Higher National Diploma (HND) - 3 years
-  - Degree Programs (supervised by Mentor Universities):
-    - Top-up programs (building on HND)
-    - Direct entry programs
-  - Master's Programs (supervised by Mentor Universities)
-  - PhD Programs (supervised by Mentor Universities)
+  - **Certificate Programs**: 1-year vocational nursing programs
+  - **Higher National Diploma (HND)**: 2-3 year programs
+  - **BTS (Brevet de Technicien Supérieur)**: French equivalent of HND
+  - **Degree Programs**: Top-up programs for HND/BTS holders
+  - **Licence Programs**: French degree equivalent
+
+### Current Program Structure
+
+#### Duration-Based Classification
+
+- **1-Year Programs**: Associate Vocational Nurse, Cycle d'un an
+- **2-Year Programs**: HND programs, Cycle de deux ans
+- **3-Year Programs**: All HND programs, BTS
+- **Top-up Programs**: Degree completion for HND/BTS holders
+
+#### Specialization Areas
+
+- **Core Nursing**: General nursing, midwifery, geriatric nursing
+- **Medical Technology**: Laboratory technology, pharmacy technology
+- **Healthcare Support**: Medical sales representative, medical secretary
+- **Nutrition**: Nutrition and dietetics
 
 ### Mentor University Partnership
 
-- Master's and PhD programs are supervised by partner "Mentor Universities"
-- Mentor university names appear on certificates
-- Partnership management is crucial for academic credibility
+- **Local Partners**: University of BUEA, University of BAMENDA, HIPDET University of BAMENDA, HIAS University BUEA, University of Dschang
+- **International Partner**: European International University - PARIS
+- **Partnership Benefits**: Academic supervision, curriculum validation, certificate credibility
+- **Degree Recognition**: Partner university names appear on certificates for enhanced credibility
 
 ## Current System Features
 
@@ -90,14 +238,23 @@ This project is a comprehensive Content Management System (CMS) built with Paylo
 // Fields:
 - title: string (required)
 - slug: string (auto-generated)
-- programType: select (Basic, HND, Degree-TopUp, Degree-Direct, Masters, PhD)
-- department: relationship to Departments
-- duration: string (e.g., "3 years", "2 years")
+- programType: select (Certificate, HND, BTS, Degree-TopUp, Licence)
+- language: select (English, French)
+- duration: string (e.g., "3 years", "2 years", "1 year")
+- specialization: select (Nursing Science, Midwifery, Laboratory Technology, Pharmacy Technology, Medical Sales Representative, Science Infirmière, Sage Femme, Technicien de Laboratoire, Secrétariat Médical, Technicien en Pharmacie, Nutrition et Diététique)
 - entryRequirements: rich text
+- entryQualifications: array (G.C.E A/L, BAC, G.C.E B.E.P.C, O/L, F.S.L.C, C.E.P, HND, BTS, CEP, BEPC, PROBATOIRE)
 - curriculumOverview: rich text
 - careerProspects: rich text
-- mentorUniversity: relationship to Mentor Universities (conditional for Masters/PhD)
-- tuitionFees: group (local, international)
+- mentorUniversity: relationship to Mentor Universities (conditional for Degree/Licence)
+- fees: group {
+  - registrationFee: number (XAF)
+  - tuitionFee: number (XAF)
+  - pensionFee: number (XAF, for French programs)
+}
+- diplomaAwarded: select (Certificate, HND, BTS, Degree, Licence)
+- campusAvailability: array (Limbé A, Limbé B, Buea A, Buea B, Douala, Mbouida)
+- eveningClassesAvailable: boolean
 - applicationDeadline: date
 - intakePeriods: array of dates
 - programCoordinator: relationship to Staff
@@ -116,13 +273,24 @@ This project is a comprehensive Content Management System (CMS) built with Paylo
 - website: url
 - logo: media
 - partnershipStartDate: date
-- partnershipType: select (Masters, PhD, Both)
+- partnershipType: array (HND Programs, BTS Programs, Degree Programs, Licence Programs)
+- universityType: select (Local Partner, International Partner)
 - accreditationInfo: rich text
 - contactPerson: group (name, email, phone)
 - programsOffered: relationship to Academic Programs
 - description: rich text
+- location: string (city/region)
 - meta: SEO fields
 ```
+
+**Current Partner Universities:**
+
+- University of BUEA (Local)
+- University of BAMENDA (Local)
+- HIPDET University of BAMENDA (Local)
+- HIAS University BUEA (Local)
+- University of Dschang (Local)
+- European International University - PARIS (International)
 
 #### 4. Staff Collection (Separate from Users)
 
