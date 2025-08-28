@@ -6,10 +6,16 @@ import path from 'path'
 import { buildConfig, PayloadRequest } from 'payload'
 import { fileURLToPath } from 'url'
 
+import { AcademicPrograms } from './collections/AcademicPrograms'
 import { Categories } from './collections/Categories'
+import { Departments } from './collections/Departments'
+import { Events } from './collections/Events'
 import { Media } from './collections/Media'
+import { MentorUniversities } from './collections/MentorUniversities'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
+import { SchoolCalendar } from './collections/SchoolCalendar'
+import { Staff } from './collections/Staff'
 import { Users } from './collections/Users'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
@@ -62,7 +68,19 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
-  collections: [Pages, Posts, Media, Categories, Users],
+  collections: [
+    Pages,
+    Posts,
+    Media,
+    Categories,
+    Users,
+    Departments,
+    Staff,
+    MentorUniversities,
+    AcademicPrograms,
+    Events,
+    SchoolCalendar,
+  ],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins: [

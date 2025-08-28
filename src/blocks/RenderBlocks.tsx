@@ -2,18 +2,34 @@ import React, { Fragment } from 'react'
 
 import type { Page } from '@/payload-types'
 
+import AcademicCalendarBlock from '@/blocks/AcademicCalendar/Component'
+import { AcademicProgramsBlock } from '@/blocks/AcademicPrograms/Component'
+import  AdmissionsInfoBlock from '@/blocks/AdmissionsInfo/Component'
 import { ArchiveBlock } from '@/blocks/ArchiveBlock/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { ContentBlock } from '@/blocks/Content/Component'
+import { DepartmentOverviewBlock } from '@/blocks/DepartmentOverview/Component'
+import {EventsCalendarBlock} from '@/blocks/EventsCalendar/Component'
 import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
+import { MentorUniversitiesBlockComponent } from '@/blocks/MentorUniversities/Component'
+import ProgramPathwayBlock from '@/blocks/ProgramPathway/Component'
+import { UniversityOrganigramBlock } from '@/blocks/UniversityOrganigram/Component'
 
 const blockComponents = {
+  academicCalendar: AcademicCalendarBlock,
+  academicPrograms: AcademicProgramsBlock,
+  admissionsInfo: AdmissionsInfoBlock,
   archive: ArchiveBlock,
   content: ContentBlock,
   cta: CallToActionBlock,
+  departmentOverview: DepartmentOverviewBlock,
+  eventsCalendar: EventsCalendarBlock,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
+  mentorUniversities: MentorUniversitiesBlockComponent,
+  programPathway: ProgramPathwayBlock,
+  universityOrganigram: UniversityOrganigramBlock,
 }
 
 export const RenderBlocks: React.FC<{

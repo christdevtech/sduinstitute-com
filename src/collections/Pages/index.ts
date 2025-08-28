@@ -2,11 +2,19 @@ import type { CollectionConfig } from 'payload'
 
 import { authenticated } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
+import { AcademicCalendar } from '../../blocks/AcademicCalendar/config'
+import { AcademicPrograms } from '../../blocks/AcademicPrograms/config'
+import { AdmissionsInfo } from '../../blocks/AdmissionsInfo/config'
 import { Archive } from '../../blocks/ArchiveBlock/config'
 import { CallToAction } from '../../blocks/CallToAction/config'
 import { Content } from '../../blocks/Content/config'
+import { DepartmentOverview } from '../../blocks/DepartmentOverview/config'
+import { EventsCalendar } from '../../blocks/EventsCalendar/config'
 import { FormBlock } from '../../blocks/Form/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
+import { MentorUniversities } from '../../blocks/MentorUniversities/config'
+import { ProgramPathway } from '../../blocks/ProgramPathway/config'
+import { UniversityOrganigram } from '../../blocks/UniversityOrganigram/config'
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -75,7 +83,21 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
+              blocks: [
+                AcademicCalendar,
+                AcademicPrograms,
+                AdmissionsInfo,
+                CallToAction,
+                Content,
+                DepartmentOverview,
+                EventsCalendar,
+                MediaBlock,
+                MentorUniversities,
+                ProgramPathway,
+                UniversityOrganigram,
+                Archive,
+                FormBlock,
+              ],
               required: true,
               admin: {
                 initCollapsed: true,

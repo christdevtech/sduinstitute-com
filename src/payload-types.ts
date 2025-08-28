@@ -72,6 +72,12 @@ export interface Config {
     media: Media;
     categories: Category;
     users: User;
+    departments: Department;
+    staff: Staff;
+    'mentor-universities': MentorUniversity;
+    'academic-programs': AcademicProgram;
+    events: Event;
+    'school-calendar': SchoolCalendar;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -88,6 +94,12 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    departments: DepartmentsSelect<false> | DepartmentsSelect<true>;
+    staff: StaffSelect<false> | StaffSelect<true>;
+    'mentor-universities': MentorUniversitiesSelect<false> | MentorUniversitiesSelect<true>;
+    'academic-programs': AcademicProgramsSelect<false> | AcademicProgramsSelect<true>;
+    events: EventsSelect<false> | EventsSelect<true>;
+    'school-calendar': SchoolCalendarSelect<false> | SchoolCalendarSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -270,7 +282,21 @@ export interface Page {
       | null;
     media?: (string | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (
+    | AcademicCalendarBlock
+    | AcademicProgramsBlock
+    | AdmissionsInfoBlock
+    | CallToActionBlock
+    | ContentBlock
+    | DepartmentOverviewBlock
+    | EventsCalendarBlock
+    | MediaBlock
+    | MentorUniversitiesBlock
+    | ProgramPathwayBlock
+    | UniversityOrganigramBlock
+    | ArchiveBlock
+    | FormBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -470,6 +496,436 @@ export interface User {
       }[]
     | null;
   password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AcademicCalendarBlock".
+ */
+export interface AcademicCalendarBlock {
+  /**
+   * Academic year to display (e.g., "2024-2025"). Leave empty to show current year.
+   */
+  academicYear?: string | null;
+  /**
+   * Choose how to display the academic calendar
+   */
+  viewType?: ('overview' | 'calendar' | 'timeline') | null;
+  /**
+   * Filter calendar items by type (optional)
+   */
+  filterByCalendarType?: ('Academic' | 'Administrative' | 'Examination' | 'Holiday') | null;
+  /**
+   * Filter by semester (optional)
+   */
+  filterBySemester?: ('First Semester' | 'Second Semester' | 'Summer Session') | null;
+  /**
+   * Show filter options to users
+   */
+  showFilters?: boolean | null;
+  /**
+   * Show search functionality
+   */
+  showSearch?: boolean | null;
+  /**
+   * Highlight upcoming important dates
+   */
+  highlightUpcoming?: boolean | null;
+  /**
+   * Show priority indicators for calendar items
+   */
+  showPriority?: boolean | null;
+  /**
+   * Maximum number of calendar items to display
+   */
+  itemsToShow?: number | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'academicCalendar';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AcademicProgramsBlock".
+ */
+export interface AcademicProgramsBlock {
+  /**
+   * Choose how to display academic programs
+   */
+  displayType?: ('all' | 'by-department' | 'by-type') | null;
+  /**
+   * Select a specific department to display programs from
+   */
+  selectedDepartment?: (string | null) | Department;
+  /**
+   * Select a specific program type to display
+   */
+  selectedProgramType?: ('Basic' | 'HND' | 'Degree-TopUp' | 'Degree-Direct' | 'Masters' | 'PhD') | null;
+  /**
+   * Allow users to filter programs by department and type
+   */
+  showFilters?: boolean | null;
+  /**
+   * Show search functionality for programs
+   */
+  showSearch?: boolean | null;
+  /**
+   * Number of programs to display per page
+   */
+  itemsPerPage?: number | null;
+  /**
+   * Show application call-to-action buttons on program cards
+   */
+  showApplicationCTA?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'academicPrograms';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "departments".
+ */
+export interface Department {
+  id: string;
+  /**
+   * The official name of the department
+   */
+  name: string;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  /**
+   * Detailed description of the department, its mission, and objectives
+   */
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Main image representing the department
+   */
+  featuredImage?: (string | null) | Media;
+  contactInfo?: {
+    email?: string | null;
+    phone?: string | null;
+    /**
+     * Physical location of the department office
+     */
+    office?: string | null;
+  };
+  /**
+   * Current head of department (will be available when Staff collection is created)
+   */
+  headOfDepartment?: (string | null) | Staff;
+  /**
+   * Staff members belonging to this department (will be available when Staff collection is created)
+   */
+  staffMembers?: (string | Staff)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "staff".
+ */
+export interface Staff {
+  id: string;
+  /**
+   * Full name of the staff member
+   */
+  fullName: string;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  /**
+   * Unique employee identification number
+   */
+  employeeId?: string | null;
+  /**
+   * Job title or position (e.g., Professor, Lecturer, Assistant Lecturer)
+   */
+  position?: string | null;
+  /**
+   * Department this staff member belongs to
+   */
+  department?: (string | null) | Department;
+  /**
+   * Hierarchical level within the university structure
+   */
+  hierarchyLevel?:
+    | (
+        | 'vice-chancellor'
+        | 'deputy-vc'
+        | 'registrar'
+        | 'dean'
+        | 'hod'
+        | 'senior-lecturer'
+        | 'lecturer'
+        | 'assistant-lecturer'
+        | 'admin-staff'
+      )
+    | null;
+  /**
+   * Academic qualifications and degrees
+   */
+  qualifications?:
+    | {
+        qualification: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Areas of specialization and expertise
+   */
+  specializations?:
+    | {
+        specialization: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Professional biography and background
+   */
+  bio?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Research publications and academic works
+   */
+  publications?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Office hours and availability for students
+   */
+  officeHours?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Contact information
+   */
+  contactInfo?: {
+    /**
+     * Official email address
+     */
+    email?: string | null;
+    /**
+     * Phone number
+     */
+    phone?: string | null;
+    /**
+     * Office location or room number
+     */
+    office?: string | null;
+  };
+  /**
+   * Professional profile photo
+   */
+  profileImage?: (string | null) | Media;
+  /**
+   * Curriculum Vitae (PDF format)
+   */
+  cv?: (string | null) | Media;
+  /**
+   * Research interests and focus areas
+   */
+  researchInterests?:
+    | {
+        interest: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Social media and professional links
+   */
+  socialLinks?:
+    | {
+        links?:
+          | {
+              link: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?:
+                  | ({
+                      relationTo: 'pages';
+                      value: string | Page;
+                    } | null)
+                  | ({
+                      relationTo: 'posts';
+                      value: string | Post;
+                    } | null);
+                url?: string | null;
+                label: string;
+                /**
+                 * Choose an icon to display with the link.
+                 */
+                icon?:
+                  | (
+                      | ''
+                      | 'MdHome'
+                      | 'MdInfo'
+                      | 'MdEmail'
+                      | 'MdPhone'
+                      | 'MdLocationOn'
+                      | 'MdArrowForward'
+                      | 'MdArrowBack'
+                      | 'MdDownload'
+                      | 'MdUpload'
+                      | 'MdShare'
+                      | 'MdFavorite'
+                      | 'MdStar'
+                      | 'MdSearch'
+                      | 'MdMenu'
+                      | 'MdClose'
+                      | 'MdAdd'
+                      | 'MdRemove'
+                      | 'MdEdit'
+                      | 'MdDelete'
+                      | 'MdSave'
+                      | 'MdCancel'
+                      | 'MdCheck'
+                      | 'MdWarning'
+                      | 'MdError'
+                      | 'MdNotifications'
+                      | 'MdSettings'
+                      | 'MdShoppingCart'
+                      | 'MdPayment'
+                      | 'MdSecurity'
+                      | 'MdVisibility'
+                      | 'MdVisibilityOff'
+                      | 'MdHelp'
+                      | 'MdSupport'
+                      | 'MdFeedback'
+                      | 'MdBusiness'
+                      | 'MdWork'
+                      | 'MdSchool'
+                      | 'MdEvent'
+                      | 'MdCalendarToday'
+                      | 'MdAccessTime'
+                      | 'MdLanguage'
+                      | 'MdPublic'
+                      | 'MdLock'
+                      | 'MdLockOpen'
+                      | 'MdRefresh'
+                      | 'MdSync'
+                      | 'MdCloudDownload'
+                      | 'MdCloudUpload'
+                      | 'MdPrint'
+                      | 'MdFileDownload'
+                      | 'MdFileUpload'
+                      | 'MdAttachFile'
+                      | 'MdLink'
+                      | 'MdLaunch'
+                      | 'MdOpenInNew'
+                      | 'MdExpandMore'
+                      | 'MdExpandLess'
+                      | 'MdChevronLeft'
+                      | 'MdChevronRight'
+                      | 'MdKeyboardArrowUp'
+                      | 'MdKeyboardArrowDown'
+                      | 'MdKeyboardArrowLeft'
+                      | 'MdKeyboardArrowRight'
+                      | 'MdPerson'
+                      | 'MdOutlineTv'
+                      | 'MdOutlineTurnedInNot'
+                      | 'MdOutlineTurnedIn'
+                    )
+                  | null;
+                /**
+                 * Choose where to place the icon.
+                 */
+                iconPlacement?: ('right' | 'left') | null;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Whether this staff member is currently active
+   */
+  isActive?: boolean | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AdmissionsInfoBlock".
+ */
+export interface AdmissionsInfoBlock {
+  displayType: 'all-programs' | 'by-department' | 'by-program-type';
+  selectedDepartment?: (string | null) | Department;
+  selectedProgramType?: ('Basic' | 'HND' | 'Degree-TopUp' | 'Degree-Direct' | 'Masters' | 'PhD') | null;
+  showDeadlines?: boolean | null;
+  showFees?: boolean | null;
+  showRequirements?: boolean | null;
+  showApplicationSteps?: boolean | null;
+  layout: 'cards' | 'table' | 'accordion';
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'admissionsInfo';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -729,6 +1185,82 @@ export interface ContentBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DepartmentOverviewBlock".
+ */
+export interface DepartmentOverviewBlock {
+  /**
+   * Select the department to display information for
+   */
+  selectedDepartment: string | Department;
+  /**
+   * Display the list of staff members in this department
+   */
+  showStaffList?: boolean | null;
+  /**
+   * Display the academic programs offered by this department
+   */
+  showPrograms?: boolean | null;
+  /**
+   * Display the department contact information
+   */
+  showContactInfo?: boolean | null;
+  /**
+   * Choose the layout style for the department overview
+   */
+  layout?: ('default' | 'compact' | 'detailed') | null;
+  /**
+   * Maximum number of staff members to display (1-20)
+   */
+  maxStaffToShow?: number | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'departmentOverview';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "EventsCalendarBlock".
+ */
+export interface EventsCalendarBlock {
+  /**
+   * Choose how to display the events
+   */
+  viewType?: ('upcoming' | 'calendar' | 'list') | null;
+  /**
+   * Filter events by specific department (optional)
+   */
+  filterByDepartment?: (string | null) | Department;
+  /**
+   * Filter events by type (optional)
+   */
+  filterByEventType?:
+    | ('Academic' | 'Administrative' | 'Social' | 'Conference' | 'Workshop' | 'Graduation' | 'Orientation')
+    | null;
+  /**
+   * Show search functionality
+   */
+  showSearch?: boolean | null;
+  /**
+   * Show filter options to users
+   */
+  showFilters?: boolean | null;
+  /**
+   * Number of events to display
+   */
+  itemsToShow?: number | null;
+  /**
+   * Date range for displaying events
+   */
+  dateRange?: ('week' | 'month' | 'semester' | 'year') | null;
+  /**
+   * Show registration status and deadlines
+   */
+  showRegistrationStatus?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'eventsCalendar';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "MediaBlock".
  */
 export interface MediaBlock {
@@ -736,6 +1268,82 @@ export interface MediaBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'mediaBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MentorUniversitiesBlock".
+ */
+export interface MentorUniversitiesBlock {
+  displayType: 'all' | 'by-partnership-type' | 'featured';
+  selectedPartnershipType?: ('Masters' | 'PhD' | 'Both') | null;
+  showLogos?: boolean | null;
+  showPrograms?: boolean | null;
+  showContactInfo?: boolean | null;
+  layout: 'grid' | 'carousel' | 'list';
+  /**
+   * Number of universities to display per row (only for grid layout)
+   */
+  itemsPerRow?: number | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'mentorUniversities';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProgramPathwayBlock".
+ */
+export interface ProgramPathwayBlock {
+  /**
+   * Select a department to show pathways for specific department programs
+   */
+  selectedDepartment?: (string | null) | Department;
+  /**
+   * Show all available pathways or filter by department
+   */
+  showAllPathways?: boolean | null;
+  /**
+   * Highlight a specific pathway section
+   */
+  highlightedPathway?:
+    | ('basic-to-hnd' | 'hnd-to-degree' | 'degree-to-masters' | 'masters-to-phd' | 'full-pathway')
+    | null;
+  /**
+   * Display program duration for each step
+   */
+  showDuration?: boolean | null;
+  /**
+   * Show entry requirements for each program level
+   */
+  showRequirements?: boolean | null;
+  /**
+   * Choose the layout style for the pathway visualization
+   */
+  layout?: ('horizontal' | 'vertical' | 'flowchart') | null;
+  /**
+   * Enable interactive elements like hover effects and clickable steps
+   */
+  enableInteractivity?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'programPathway';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "UniversityOrganigramBlock".
+ */
+export interface UniversityOrganigramBlock {
+  displayType: 'full-hierarchy' | 'by-department' | 'leadership-only';
+  selectedDepartment?: (string | null) | Department;
+  showContactInfo?: boolean | null;
+  showPhotos?: boolean | null;
+  layout: 'tree' | 'grid' | 'compact';
+  /**
+   * Maximum hierarchy levels to display
+   */
+  maxLevels?: number | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'universityOrganigram';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -973,6 +1581,441 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "mentor-universities".
+ */
+export interface MentorUniversity {
+  id: string;
+  /**
+   * Full name of the mentor university
+   */
+  name: string;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  /**
+   * Country where the university is located
+   */
+  country: string;
+  /**
+   * Official website URL
+   */
+  website: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: string | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: string | Post;
+        } | null);
+    url?: string | null;
+    label: string;
+    /**
+     * Choose how the link should be rendered.
+     */
+    appearance?: ('default' | 'outline') | null;
+    /**
+     * Choose an icon to display with the link.
+     */
+    icon?:
+      | (
+          | ''
+          | 'MdHome'
+          | 'MdInfo'
+          | 'MdEmail'
+          | 'MdPhone'
+          | 'MdLocationOn'
+          | 'MdArrowForward'
+          | 'MdArrowBack'
+          | 'MdDownload'
+          | 'MdUpload'
+          | 'MdShare'
+          | 'MdFavorite'
+          | 'MdStar'
+          | 'MdSearch'
+          | 'MdMenu'
+          | 'MdClose'
+          | 'MdAdd'
+          | 'MdRemove'
+          | 'MdEdit'
+          | 'MdDelete'
+          | 'MdSave'
+          | 'MdCancel'
+          | 'MdCheck'
+          | 'MdWarning'
+          | 'MdError'
+          | 'MdNotifications'
+          | 'MdSettings'
+          | 'MdShoppingCart'
+          | 'MdPayment'
+          | 'MdSecurity'
+          | 'MdVisibility'
+          | 'MdVisibilityOff'
+          | 'MdHelp'
+          | 'MdSupport'
+          | 'MdFeedback'
+          | 'MdBusiness'
+          | 'MdWork'
+          | 'MdSchool'
+          | 'MdEvent'
+          | 'MdCalendarToday'
+          | 'MdAccessTime'
+          | 'MdLanguage'
+          | 'MdPublic'
+          | 'MdLock'
+          | 'MdLockOpen'
+          | 'MdRefresh'
+          | 'MdSync'
+          | 'MdCloudDownload'
+          | 'MdCloudUpload'
+          | 'MdPrint'
+          | 'MdFileDownload'
+          | 'MdFileUpload'
+          | 'MdAttachFile'
+          | 'MdLink'
+          | 'MdLaunch'
+          | 'MdOpenInNew'
+          | 'MdExpandMore'
+          | 'MdExpandLess'
+          | 'MdChevronLeft'
+          | 'MdChevronRight'
+          | 'MdKeyboardArrowUp'
+          | 'MdKeyboardArrowDown'
+          | 'MdKeyboardArrowLeft'
+          | 'MdKeyboardArrowRight'
+          | 'MdPerson'
+          | 'MdOutlineTv'
+          | 'MdOutlineTurnedInNot'
+          | 'MdOutlineTurnedIn'
+        )
+      | null;
+    /**
+     * Choose where to place the icon.
+     */
+    iconPlacement?: ('right' | 'left') | null;
+  };
+  /**
+   * University logo or emblem
+   */
+  logo?: (string | null) | Media;
+  /**
+   * Date when the partnership began
+   */
+  partnershipStartDate?: string | null;
+  /**
+   * Type of programs offered through this partnership
+   */
+  partnershipType: 'masters' | 'phd' | 'both';
+  /**
+   * Information about university accreditation and recognition
+   */
+  accreditationInfo?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Primary contact person for partnership matters
+   */
+  contactPerson?: {
+    /**
+     * Name of the primary contact person
+     */
+    name?: string | null;
+    /**
+     * Email address of the contact person
+     */
+    email?: string | null;
+    /**
+     * Phone number of the contact person
+     */
+    phone?: string | null;
+  };
+  /**
+   * Academic programs offered through this partnership
+   */
+  programsOffered?: (string | AcademicProgram)[] | null;
+  /**
+   * General description of the university and partnership
+   */
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Whether this partnership is currently active
+   */
+  isActive?: boolean | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "academic-programs".
+ */
+export interface AcademicProgram {
+  id: string;
+  title: string;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  programType: 'Basic' | 'HND' | 'Degree-TopUp' | 'Degree-Direct' | 'Masters' | 'PhD';
+  department: string | Department;
+  /**
+   * e.g., "3 years", "2 years", "18 months"
+   */
+  duration: string;
+  /**
+   * Required for Masters and PhD programs
+   */
+  mentorUniversity?: (string | null) | MentorUniversity;
+  programCoordinator?: (string | null) | Staff;
+  featuredImage?: (string | null) | Media;
+  entryRequirements: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  curriculumOverview: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  careerProspects: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  tuitionFees?: {
+    /**
+     * Tuition fees for local students (e.g., "500,000 FCFA per semester")
+     */
+    local?: string | null;
+    /**
+     * Tuition fees for international students (e.g., "$2,000 per semester")
+     */
+    international?: string | null;
+  };
+  applicationDeadline?: string | null;
+  /**
+   * Available intake periods for this program
+   */
+  intakePeriods?:
+    | {
+        intakeDate: string;
+        /**
+         * e.g., "Fall 2024", "Spring 2025"
+         */
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Program brochure (PDF format recommended)
+   */
+  brochure?: (string | null) | Media;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: string;
+  title: string;
+  eventType: 'academic' | 'administrative' | 'social' | 'conference' | 'workshop' | 'graduation' | 'orientation';
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  eventImage?: (string | null) | Media;
+  attachments?:
+    | {
+        file: string | Media;
+        title?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  startDate: string;
+  endDate?: string | null;
+  isAllDay?: boolean | null;
+  /**
+   * Format: HH:MM (e.g., 09:00, 14:30)
+   */
+  startTime?: string | null;
+  /**
+   * Format: HH:MM (e.g., 17:00, 18:30)
+   */
+  endTime?: string | null;
+  location: string;
+  department?: (string | null) | Department;
+  organizer?: (string | null) | Staff;
+  targetAudience: 'students' | 'staff' | 'public' | 'alumni' | 'prospective-students';
+  contactInfo?: {
+    email?: string | null;
+    phone?: string | null;
+  };
+  registrationRequired?: boolean | null;
+  registrationDeadline?: string | null;
+  /**
+   * Leave empty for unlimited attendees
+   */
+  maxAttendees?: number | null;
+  isRecurring?: boolean | null;
+  recurrencePattern?: ('daily' | 'weekly' | 'monthly' | 'yearly') | null;
+  isFeatured?: boolean | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "school-calendar".
+ */
+export interface SchoolCalendar {
+  id: string;
+  title: string;
+  /**
+   * e.g., "2024-2025"
+   */
+  academicYear: string;
+  semester?: ('first-semester' | 'second-semester' | 'summer-session') | null;
+  calendarType: 'academic' | 'administrative' | 'examination' | 'holiday';
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  startDate: string;
+  endDate: string;
+  isPublic?: boolean | null;
+  priority?: ('high' | 'medium' | 'low') | null;
+  color?: ('#FF5733' | '#33FF57' | '#3357FF') | null;
+  /**
+   * Academic programs affected by this calendar entry
+   */
+  affectedPrograms?: (string | AcademicProgram)[] | null;
+  /**
+   * Departments affected by this calendar entry
+   */
+  departments?: (string | Department)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1165,6 +2208,30 @@ export interface PayloadLockedDocument {
         value: string | User;
       } | null)
     | ({
+        relationTo: 'departments';
+        value: string | Department;
+      } | null)
+    | ({
+        relationTo: 'staff';
+        value: string | Staff;
+      } | null)
+    | ({
+        relationTo: 'mentor-universities';
+        value: string | MentorUniversity;
+      } | null)
+    | ({
+        relationTo: 'academic-programs';
+        value: string | AcademicProgram;
+      } | null)
+    | ({
+        relationTo: 'events';
+        value: string | Event;
+      } | null)
+    | ({
+        relationTo: 'school-calendar';
+        value: string | SchoolCalendar;
+      } | null)
+    | ({
         relationTo: 'redirects';
         value: string | Redirect;
       } | null)
@@ -1259,9 +2326,17 @@ export interface PagesSelect<T extends boolean = true> {
   layout?:
     | T
     | {
+        academicCalendar?: T | AcademicCalendarBlockSelect<T>;
+        academicPrograms?: T | AcademicProgramsBlockSelect<T>;
+        admissionsInfo?: T | AdmissionsInfoBlockSelect<T>;
         cta?: T | CallToActionBlockSelect<T>;
         content?: T | ContentBlockSelect<T>;
+        departmentOverview?: T | DepartmentOverviewBlockSelect<T>;
+        eventsCalendar?: T | EventsCalendarBlockSelect<T>;
         mediaBlock?: T | MediaBlockSelect<T>;
+        mentorUniversities?: T | MentorUniversitiesBlockSelect<T>;
+        programPathway?: T | ProgramPathwayBlockSelect<T>;
+        universityOrganigram?: T | UniversityOrganigramBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
       };
@@ -1278,6 +2353,54 @@ export interface PagesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AcademicCalendarBlock_select".
+ */
+export interface AcademicCalendarBlockSelect<T extends boolean = true> {
+  academicYear?: T;
+  viewType?: T;
+  filterByCalendarType?: T;
+  filterBySemester?: T;
+  showFilters?: T;
+  showSearch?: T;
+  highlightUpcoming?: T;
+  showPriority?: T;
+  itemsToShow?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AcademicProgramsBlock_select".
+ */
+export interface AcademicProgramsBlockSelect<T extends boolean = true> {
+  displayType?: T;
+  selectedDepartment?: T;
+  selectedProgramType?: T;
+  showFilters?: T;
+  showSearch?: T;
+  itemsPerPage?: T;
+  showApplicationCTA?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AdmissionsInfoBlock_select".
+ */
+export interface AdmissionsInfoBlockSelect<T extends boolean = true> {
+  displayType?: T;
+  selectedDepartment?: T;
+  selectedProgramType?: T;
+  showDeadlines?: T;
+  showFees?: T;
+  showRequirements?: T;
+  showApplicationSteps?: T;
+  layout?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1335,10 +2458,84 @@ export interface ContentBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DepartmentOverviewBlock_select".
+ */
+export interface DepartmentOverviewBlockSelect<T extends boolean = true> {
+  selectedDepartment?: T;
+  showStaffList?: T;
+  showPrograms?: T;
+  showContactInfo?: T;
+  layout?: T;
+  maxStaffToShow?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "EventsCalendarBlock_select".
+ */
+export interface EventsCalendarBlockSelect<T extends boolean = true> {
+  viewType?: T;
+  filterByDepartment?: T;
+  filterByEventType?: T;
+  showSearch?: T;
+  showFilters?: T;
+  itemsToShow?: T;
+  dateRange?: T;
+  showRegistrationStatus?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "MediaBlock_select".
  */
 export interface MediaBlockSelect<T extends boolean = true> {
   media?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MentorUniversitiesBlock_select".
+ */
+export interface MentorUniversitiesBlockSelect<T extends boolean = true> {
+  displayType?: T;
+  selectedPartnershipType?: T;
+  showLogos?: T;
+  showPrograms?: T;
+  showContactInfo?: T;
+  layout?: T;
+  itemsPerRow?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProgramPathwayBlock_select".
+ */
+export interface ProgramPathwayBlockSelect<T extends boolean = true> {
+  selectedDepartment?: T;
+  showAllPathways?: T;
+  highlightedPathway?: T;
+  showDuration?: T;
+  showRequirements?: T;
+  layout?: T;
+  enableInteractivity?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "UniversityOrganigramBlock_select".
+ */
+export interface UniversityOrganigramBlockSelect<T extends boolean = true> {
+  displayType?: T;
+  selectedDepartment?: T;
+  showContactInfo?: T;
+  showPhotos?: T;
+  layout?: T;
+  maxLevels?: T;
   id?: T;
   blockName?: T;
 }
@@ -1533,6 +2730,279 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "departments_select".
+ */
+export interface DepartmentsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  slugLock?: T;
+  description?: T;
+  featuredImage?: T;
+  contactInfo?:
+    | T
+    | {
+        email?: T;
+        phone?: T;
+        office?: T;
+      };
+  headOfDepartment?: T;
+  staffMembers?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "staff_select".
+ */
+export interface StaffSelect<T extends boolean = true> {
+  fullName?: T;
+  slug?: T;
+  slugLock?: T;
+  employeeId?: T;
+  position?: T;
+  department?: T;
+  hierarchyLevel?: T;
+  qualifications?:
+    | T
+    | {
+        qualification?: T;
+        id?: T;
+      };
+  specializations?:
+    | T
+    | {
+        specialization?: T;
+        id?: T;
+      };
+  bio?: T;
+  publications?: T;
+  officeHours?: T;
+  contactInfo?:
+    | T
+    | {
+        email?: T;
+        phone?: T;
+        office?: T;
+      };
+  profileImage?: T;
+  cv?: T;
+  researchInterests?:
+    | T
+    | {
+        interest?: T;
+        id?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    icon?: T;
+                    iconPlacement?: T;
+                  };
+              id?: T;
+            };
+        id?: T;
+      };
+  isActive?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "mentor-universities_select".
+ */
+export interface MentorUniversitiesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  slugLock?: T;
+  country?: T;
+  website?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+        appearance?: T;
+        icon?: T;
+        iconPlacement?: T;
+      };
+  logo?: T;
+  partnershipStartDate?: T;
+  partnershipType?: T;
+  accreditationInfo?: T;
+  contactPerson?:
+    | T
+    | {
+        name?: T;
+        email?: T;
+        phone?: T;
+      };
+  programsOffered?: T;
+  description?: T;
+  isActive?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "academic-programs_select".
+ */
+export interface AcademicProgramsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  slugLock?: T;
+  programType?: T;
+  department?: T;
+  duration?: T;
+  mentorUniversity?: T;
+  programCoordinator?: T;
+  featuredImage?: T;
+  entryRequirements?: T;
+  curriculumOverview?: T;
+  careerProspects?: T;
+  tuitionFees?:
+    | T
+    | {
+        local?: T;
+        international?: T;
+      };
+  applicationDeadline?: T;
+  intakePeriods?:
+    | T
+    | {
+        intakeDate?: T;
+        label?: T;
+        id?: T;
+      };
+  brochure?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events_select".
+ */
+export interface EventsSelect<T extends boolean = true> {
+  title?: T;
+  eventType?: T;
+  description?: T;
+  eventImage?: T;
+  attachments?:
+    | T
+    | {
+        file?: T;
+        title?: T;
+        id?: T;
+      };
+  startDate?: T;
+  endDate?: T;
+  isAllDay?: T;
+  startTime?: T;
+  endTime?: T;
+  location?: T;
+  department?: T;
+  organizer?: T;
+  targetAudience?: T;
+  contactInfo?:
+    | T
+    | {
+        email?: T;
+        phone?: T;
+      };
+  registrationRequired?: T;
+  registrationDeadline?: T;
+  maxAttendees?: T;
+  isRecurring?: T;
+  recurrencePattern?: T;
+  isFeatured?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "school-calendar_select".
+ */
+export interface SchoolCalendarSelect<T extends boolean = true> {
+  title?: T;
+  academicYear?: T;
+  semester?: T;
+  calendarType?: T;
+  description?: T;
+  startDate?: T;
+  endDate?: T;
+  isPublic?: T;
+  priority?: T;
+  color?: T;
+  affectedPrograms?: T;
+  departments?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
