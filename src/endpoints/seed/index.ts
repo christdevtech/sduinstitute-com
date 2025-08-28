@@ -18,6 +18,7 @@ import { departments } from './departments'
 import { mentorUniversities } from './mentor-universities'
 import { staff } from './staff'
 import { campusesPage } from './campuses-page'
+import { programs } from './programs-page'
 
 const collections: CollectionSlug[] = [
   'categories',
@@ -364,7 +365,7 @@ export const seed = async ({
 
   payload.logger.info(`— Seeding pages...`)
 
-  const [_, contactPage, campusPage, admissionsPage, aboutPage] = await Promise.all([
+  const [_, contactPage, campusPage, admissionsPage, aboutPage, programsPage] = await Promise.all([
     payload.create({
       collection: 'pages',
       depth: 0,
@@ -373,22 +374,48 @@ export const seed = async ({
     payload.create({
       collection: 'pages',
       depth: 0,
-      data: contactPageData({ contactForm: contactForm, heroImage: imageHomeDoc, metaImage: image2Doc }),
+      data: contactPageData({
+        contactForm: contactForm,
+        heroImage: imageHomeDoc,
+        metaImage: image2Doc,
+      }),
     }),
     payload.create({
       collection: 'pages',
       depth: 0,
-      data: campusesPage({ featuredImage: imageHomeDoc, metaImage: image2Doc, campusVisitForm: campusVisitForm }),
+      data: campusesPage({
+        featuredImage: imageHomeDoc,
+        metaImage: image2Doc,
+        campusVisitForm: campusVisitForm,
+      }),
     }),
     payload.create({
       collection: 'pages',
       depth: 0,
-      data: admissions({ heroImage: imageHomeDoc, metaImage: image2Doc, applicationForm: applicationForm }),
+      data: admissions({
+        heroImage: imageHomeDoc,
+        metaImage: image2Doc,
+        applicationForm: applicationForm,
+      }),
     }),
     payload.create({
       collection: 'pages',
       depth: 0,
-      data: about({ heroImage: imageHomeDoc, metaImage: image2Doc }),
+      data: about({
+        heroImage: imageHomeDoc,
+        metaImage: image2Doc,
+        nursingDepartment: departmentDocs[0],
+      }),
+    }),
+    payload.create({
+      collection: 'pages',
+      depth: 0,
+      data: programs({
+        heroImage: imageHomeDoc,
+        metaImage: image2Doc,
+        nursingDepartment: departmentDocs[0],
+        biomedicalDepartment: departmentDocs[1],
+      }),
     }),
   ])
 
@@ -401,16 +428,22 @@ export const seed = async ({
         navItems: [
           {
             link: {
-              type: 'custom',
+              type: 'reference',
               label: 'Academic Programs',
-              url: '/academic-programs',
+              reference: {
+                relationTo: 'pages',
+                value: programsPage.id,
+              },
             },
           },
           {
             link: {
-              type: 'custom',
+              type: 'reference',
               label: 'Admissions',
-              url: '/admissions',
+              reference: {
+                relationTo: 'pages',
+                value: admissionsPage.id,
+              },
             },
           },
           {
@@ -425,9 +458,12 @@ export const seed = async ({
           },
           {
             link: {
-              type: 'custom',
+              type: 'reference',
               label: 'About',
-              url: '/about',
+              reference: {
+                relationTo: 'pages',
+                value: aboutPage.id,
+              },
             },
           },
           {

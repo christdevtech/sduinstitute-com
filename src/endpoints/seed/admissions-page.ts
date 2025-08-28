@@ -68,7 +68,7 @@ export const admissions: (args: AdmissionsArgs) => RequiredDataFromCollectionSlu
                   format: 0,
                   mode: 'normal',
                   style: '',
-                  text: 'Join St. David\'s University Institute and start your journey towards a rewarding healthcare career. We offer flexible admission processes and support every step of the way.',
+                  text: "Join St. David's University Institute and start your journey towards a rewarding healthcare career. We offer flexible admission processes and support every step of the way.",
                   version: 1,
                 },
               ],
@@ -934,9 +934,10 @@ export const admissions: (args: AdmissionsArgs) => RequiredDataFromCollectionSlu
       },
     ],
     meta: {
-      description: 'Apply to St. David\'s University Institute - Learn about admission requirements, application process, required documents, and important dates for our comprehensive programs.',
+      description:
+        "Apply to St. David's University Institute - Learn about admission requirements, application process, required documents, and important dates for our comprehensive programs.",
       image: metaImage.id,
-      title: 'Admissions - St. David\'s University Institute',
+      title: "Admissions - St. David's University Institute",
     },
     title: 'Admissions',
   }

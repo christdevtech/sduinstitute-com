@@ -17,7 +17,7 @@ export const campusesPage: (args: CampusesPageArgs) => RequiredDataFromCollectio
     slug: 'campuses',
     _status: 'published',
     hero: {
-    type: 'lowImpact',
+      type: 'lowImpact',
       richText: {
         root: {
           type: 'root',
@@ -50,7 +50,7 @@ export const campusesPage: (args: CampusesPageArgs) => RequiredDataFromCollectio
                   format: 0,
                   mode: 'normal',
                   style: '',
-                  text: 'St. David\'s University Institute operates across strategic locations in Cameroon, bringing quality healthcare education closer to students with modern facilities and 100% employment opportunities.',
+                  text: "St. David's University Institute operates across strategic locations in Cameroon, bringing quality healthcare education closer to students with modern facilities and 100% employment opportunities.",
                   version: 1,
                 },
               ],
@@ -488,12 +488,10 @@ export const campusesPage: (args: CampusesPageArgs) => RequiredDataFromCollectio
         links: [
           {
             link: {
-              type: 'reference',
-              reference: {
-                relationTo: 'pages',
-                value: 'contact',
-              },
+              type: 'custom',
+              url: '/contact',
               label: 'Contact Us',
+              icon: 'MdPhone',
             },
           },
         ],
@@ -775,6 +773,8 @@ export const campusesPage: (args: CampusesPageArgs) => RequiredDataFromCollectio
               appearance: 'default',
               label: 'Call Main Campus',
               url: 'tel:+237233426384',
+              icon: 'MdPhone',
+              iconPlacement: 'right',
             },
           },
           {
@@ -839,7 +839,8 @@ export const campusesPage: (args: CampusesPageArgs) => RequiredDataFromCollectio
     ],
     meta: {
       title: 'Campus Locations - SDU Institute',
-      description: 'Discover SDU Institute campus locations across Cameroon. Find the nearest campus and explore our modern facilities.',
+      description:
+        'Discover SDU Institute campus locations across Cameroon. Find the nearest campus and explore our modern facilities.',
       image: metaImage.id,
     },
     publishedAt: new Date().toISOString(),

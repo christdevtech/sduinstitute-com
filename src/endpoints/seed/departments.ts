@@ -6,10 +6,9 @@ type DepartmentsArgs = {
   metaImage: Media
 }
 
-export const departments: (args: DepartmentsArgs) => RequiredDataFromCollectionSlug<'departments'>[] = ({
-  featuredImage,
-  metaImage,
-}) => {
+export const departments: (
+  args: DepartmentsArgs,
+) => RequiredDataFromCollectionSlug<'departments'>[] = ({ featuredImage, metaImage }) => {
   return [
     {
       title: 'Department of Nursing Sciences',
@@ -27,7 +26,7 @@ export const departments: (args: DepartmentsArgs) => RequiredDataFromCollectionS
                   format: 0,
                   mode: 'normal',
                   style: '',
-                  text: 'The Department of Nursing Sciences at St. David\'s University Institute is dedicated to providing world-class education in nursing and healthcare. Our programs are designed to meet international standards and prepare students for successful careers with 100% employment opportunities.',
+                  text: "The Department of Nursing Sciences at St. David's University Institute is dedicated to providing world-class education in nursing and healthcare. Our programs are designed to meet international standards and prepare students for successful careers with 100% employment opportunities.",
                   version: 1,
                 },
               ],
@@ -66,8 +65,9 @@ export const departments: (args: DepartmentsArgs) => RequiredDataFromCollectionS
       featuredImage: featuredImage.id,
       _status: 'published',
       meta: {
-        title: 'Department of Nursing Sciences - St. David\'s University Institute',
-        description: 'Leading department offering world-class nursing education with 100% employment opportunities at St. David\'s University Institute.',
+        title: "Department of Nursing Sciences - St. David's University Institute",
+        description:
+          "Leading department offering world-class nursing education with 100% employment opportunities at St. David's University Institute.",
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),
@@ -113,8 +113,9 @@ export const departments: (args: DepartmentsArgs) => RequiredDataFromCollectionS
         office: 'Biomedical Sciences Building, Floor 1',
       },
       meta: {
-        title: 'Department of Biomedical Sciences - St. David\'s University Institute',
-        description: 'Comprehensive biomedical sciences education program preparing students for successful careers in laboratory technology and pharmacy.',
+        title: "Department of Biomedical Sciences - St. David's University Institute",
+        description:
+          'Comprehensive biomedical sciences education program preparing students for successful careers in laboratory technology and pharmacy.',
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),
@@ -160,8 +161,9 @@ export const departments: (args: DepartmentsArgs) => RequiredDataFromCollectionS
         office: 'Computer Science Building, Floor 2',
       },
       meta: {
-        title: 'Department of Computer Science - St. David\'s University Institute',
-        description: 'Advanced computer science education preparing students for careers in technology and software development.',
+        title: "Department of Computer Science - St. David's University Institute",
+        description:
+          'Advanced computer science education preparing students for careers in technology and software development.',
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),
@@ -207,8 +209,9 @@ export const departments: (args: DepartmentsArgs) => RequiredDataFromCollectionS
         office: 'Business Administration Building, Floor 1',
       },
       meta: {
-        title: 'Department of Business Administration - St. David\'s University Institute',
-        description: 'Comprehensive business administration education preparing students for leadership roles in business and management.',
+        title: "Department of Business Administration - St. David's University Institute",
+        description:
+          'Comprehensive business administration education preparing students for leadership roles in business and management.',
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),

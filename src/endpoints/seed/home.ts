@@ -47,7 +47,7 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
                   format: 0,
                   mode: 'normal',
                   style: '',
-                  text: 'St. David\'s University Institute',
+                  text: "St. David's University Institute",
                   version: 1,
                 },
               ],
@@ -456,7 +456,7 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
         showLogos: true,
         showDescriptions: true,
         itemsToShow: 6,
-        displayType: 'all'
+        displayType: 'all',
       },
       {
         blockName: 'Upcoming Events',
@@ -611,7 +611,8 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
       },
     ],
     meta: {
-      description: 'St. David\'s University Institute of Nursing and Biomedical Sciences - Excellence in Healthcare Education across Cameroon. Bilingual programs with 100% employment opportunities.',
+      description:
+        "St. David's University Institute of Nursing and Biomedical Sciences - Excellence in Healthcare Education across Cameroon. Bilingual programs with 100% employment opportunities.",
       image: metaImage.id,
       title: 'SDU Institute - Healthcare Education Excellence',
     },

@@ -1,14 +1,18 @@
 import type { RequiredDataFromCollectionSlug } from 'payload'
-import type { Media } from '@/payload-types'
+import type { Media, Department } from '@/payload-types'
 
 type ProgramsArgs = {
   heroImage: Media
   metaImage: Media
+  nursingDepartment: Department
+  biomedicalDepartment: Department
 }
 
 export const programs: (args: ProgramsArgs) => RequiredDataFromCollectionSlug<'pages'> = ({
   heroImage,
   metaImage,
+  nursingDepartment,
+  biomedicalDepartment,
 }) => {
   return {
     slug: 'programs',
@@ -282,7 +286,7 @@ export const programs: (args: ProgramsArgs) => RequiredDataFromCollectionSlug<'p
                         format: 0,
                         mode: 'normal',
                         style: '',
-                        text: 'Bachelor\'s Degree (BTS)',
+                        text: "Bachelor's Degree (BTS)",
                         version: 1,
                       },
                     ],
@@ -761,7 +765,7 @@ export const programs: (args: ProgramsArgs) => RequiredDataFromCollectionSlug<'p
       {
         blockName: 'Department Overview',
         blockType: 'departmentOverview',
-        selectedDepartment: 'laboratory-technology-department',
+        selectedDepartment: biomedicalDepartment.id,
         showStaffList: true,
         showPrograms: true,
         showContactInfo: true,
@@ -772,7 +776,7 @@ export const programs: (args: ProgramsArgs) => RequiredDataFromCollectionSlug<'p
         blockName: 'Admissions Information',
         blockType: 'admissionsInfo',
         displayType: 'by-department',
-        selectedDepartment: 'nursing-department',
+        selectedDepartment: nursingDepartment.id,
         showRequirements: true,
         showDeadlines: true,
         showFees: true,
@@ -852,7 +856,8 @@ export const programs: (args: ProgramsArgs) => RequiredDataFromCollectionSlug<'p
       },
     ],
     meta: {
-      description: 'Explore our comprehensive nursing and biomedical sciences programs offered in English and French. Flexible scheduling, modern facilities, and 100% employment rate.',
+      description:
+        'Explore our comprehensive nursing and biomedical sciences programs offered in English and French. Flexible scheduling, modern facilities, and 100% employment rate.',
       image: metaImage.id,
       title: 'Academic Programs - SDU Institute',
     },

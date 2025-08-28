@@ -37,8 +37,8 @@ export const AcademicCalendarClient: React.FC<Props> = ({
   itemsToShow = 20,
 }) => {
   const [searchTerm, setSearchTerm] = useState('')
-  const [selectedCalendarType, setSelectedCalendarType] = useState<string>(filterByCalendarType || '')
-  const [selectedSemester, setSelectedSemester] = useState<string>(filterBySemester || '')
+  const [selectedCalendarType, setSelectedCalendarType] = useState<string>(filterByCalendarType || 'all')
+  const [selectedSemester, setSelectedSemester] = useState<string>(filterBySemester || 'all')
 
   // Filter calendar items based on search and filters
   const filteredItems = calendarItems.filter(item => {
@@ -47,26 +47,24 @@ export const AcademicCalendarClient: React.FC<Props> = ({
       item.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       descriptionText.toLowerCase().includes(searchTerm.toLowerCase())
     
-    const matchesCalendarType = !selectedCalendarType || item.calendarType === selectedCalendarType
-    const matchesSemester = !selectedSemester || item.semester === selectedSemester
+    const matchesCalendarType = selectedCalendarType === 'all' || item.calendarType === selectedCalendarType
+    const matchesSemester = selectedSemester === 'all' || item.semester === selectedSemester
     
     return matchesSearch && matchesCalendarType && matchesSemester
   })
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      weekday: 'short',
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    })
+    const date = new Date(dateString)
+    const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    return `${weekdays[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
   }
 
   const formatDateRange = (startDate: string, endDate: string) => {
     const start = new Date(startDate)
     const end = new Date(endDate)
     
-    if (start.toDateString() === end.toDateString()) {
+    if (start.getTime() === end.getTime()) {
       return formatDate(startDate)
     }
     
@@ -152,7 +150,7 @@ export const AcademicCalendarClient: React.FC<Props> = ({
                       <SelectValue placeholder="All Types" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">All Types</SelectItem>
+                      <SelectItem value="all">All Types</SelectItem>
                       <SelectItem value="Academic">Academic</SelectItem>
                       <SelectItem value="Administrative">Administrative</SelectItem>
                       <SelectItem value="Examination">Examination</SelectItem>
@@ -165,7 +163,7 @@ export const AcademicCalendarClient: React.FC<Props> = ({
                       <SelectValue placeholder="All Semesters" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">All Semesters</SelectItem>
+                      <SelectItem value="all">All Semesters</SelectItem>
                       <SelectItem value="First Semester">First Semester</SelectItem>
                       <SelectItem value="Second Semester">Second Semester</SelectItem>
                       <SelectItem value="Summer Session">Summer Session</SelectItem>

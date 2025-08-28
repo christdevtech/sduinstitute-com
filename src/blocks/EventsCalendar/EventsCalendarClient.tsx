@@ -45,8 +45,8 @@ export const EventsCalendarClient: React.FC<EventsCalendarClientProps> = ({
   showRegistrationStatus = true,
 }) => {
   const [searchTerm, setSearchTerm] = useState('')
-  const [selectedDepartment, setSelectedDepartment] = useState<string>('')
-  const [selectedEventType, setSelectedEventType] = useState<string>('')
+  const [selectedDepartment, setSelectedDepartment] = useState<string>('all')
+  const [selectedEventType, setSelectedEventType] = useState<string>('all')
 
   // Filter events based on search and filters
   const filteredEvents = events.filter((event) => {
@@ -57,30 +57,28 @@ export const EventsCalendarClient: React.FC<EventsCalendarClientProps> = ({
       descriptionText.toLowerCase().includes(searchTerm.toLowerCase())
 
     const matchesDepartment =
-      !selectedDepartment ||
+      selectedDepartment === 'all' ||
       (typeof event.department === 'object' && event.department?.id === selectedDepartment)
 
-    const matchesEventType = !selectedEventType || event.eventType === selectedEventType
+    const matchesEventType = selectedEventType === 'all' || event.eventType === selectedEventType
 
     return matchesSearch && matchesDepartment && matchesEventType
   })
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      weekday: 'short',
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    })
+    const date = new Date(dateString)
+    const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    return `${weekdays[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
   }
 
   const formatTime = (timeString: string) => {
     if (!timeString) return ''
-    return new Date(`2000-01-01T${timeString}`).toLocaleTimeString('en-US', {
-      hour: 'numeric',
-      minute: '2-digit',
-      hour12: true,
-    })
+    const [hours, minutes] = timeString.split(':')
+    const hour = parseInt(hours, 10)
+    const ampm = hour >= 12 ? 'PM' : 'AM'
+    const displayHour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour
+    return `${displayHour}:${minutes} ${ampm}`
   }
 
   const getEventTypeColor = (eventType: string) => {
@@ -123,7 +121,7 @@ export const EventsCalendarClient: React.FC<EventsCalendarClientProps> = ({
                       <SelectValue placeholder="All Departments" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">All Departments</SelectItem>
+                      <SelectItem value="all">All Departments</SelectItem>
                       {departments.map((dept) => (
                         <SelectItem key={dept.id} value={dept.id}>
                           {dept.title}
@@ -137,7 +135,7 @@ export const EventsCalendarClient: React.FC<EventsCalendarClientProps> = ({
                       <SelectValue placeholder="All Types" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">All Types</SelectItem>
+                      <SelectItem value="all">All Types</SelectItem>
                       <SelectItem value="Academic">Academic</SelectItem>
                       <SelectItem value="Administrative">Administrative</SelectItem>
                       <SelectItem value="Social">Social</SelectItem>

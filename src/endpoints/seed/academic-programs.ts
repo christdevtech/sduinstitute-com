@@ -8,7 +8,9 @@ type AcademicProgramsArgs = {
   biomedicalDepartment: any
 }
 
-export const academicPrograms: (args: AcademicProgramsArgs) => RequiredDataFromCollectionSlug<'academic-programs'>[] = ({
+export const academicPrograms: (
+  args: AcademicProgramsArgs,
+) => RequiredDataFromCollectionSlug<'academic-programs'>[] = ({
   featuredImage,
   metaImage,
   nursingDepartment,
@@ -160,8 +162,9 @@ export const academicPrograms: (args: AcademicProgramsArgs) => RequiredDataFromC
         },
       ],
       meta: {
-        title: 'HND in Nursing Science - St. David\'s University Institute',
-        description: 'Comprehensive 3-year Higher National Diploma program in Nursing Science at St. David\'s University Institute. Prepare for a rewarding career in healthcare with 100% employment opportunities.',
+        title: "HND in Nursing Science - St. David's University Institute",
+        description:
+          "Comprehensive 3-year Higher National Diploma program in Nursing Science at St. David's University Institute. Prepare for a rewarding career in healthcare with 100% employment opportunities.",
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),
@@ -310,8 +313,9 @@ export const academicPrograms: (args: AcademicProgramsArgs) => RequiredDataFromC
         },
       ],
       meta: {
-        title: 'HND in Midwifery - St. David\'s University Institute',
-        description: 'Specialized 3-year Higher National Diploma program in Midwifery. Train to become a skilled midwife at St. David\'s University Institute with 100% employment opportunities.',
+        title: "HND in Midwifery - St. David's University Institute",
+        description:
+          "Specialized 3-year Higher National Diploma program in Midwifery. Train to become a skilled midwife at St. David's University Institute with 100% employment opportunities.",
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),
@@ -460,8 +464,9 @@ export const academicPrograms: (args: AcademicProgramsArgs) => RequiredDataFromC
         },
       ],
       meta: {
-        title: 'HND in Laboratory Technology - St. David\'s University Institute',
-        description: 'Advanced 3-year program in Laboratory Technology. Master medical diagnostics and laboratory procedures at St. David\'s University Institute with 100% employment opportunities.',
+        title: "HND in Laboratory Technology - St. David's University Institute",
+        description:
+          "Advanced 3-year program in Laboratory Technology. Master medical diagnostics and laboratory procedures at St. David's University Institute with 100% employment opportunities.",
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),
@@ -610,8 +615,9 @@ export const academicPrograms: (args: AcademicProgramsArgs) => RequiredDataFromC
         },
       ],
       meta: {
-        title: 'HND in Pharmacy Technology - St. David\'s University Institute',
-        description: 'Comprehensive 3-year program in Pharmacy Technology. Master pharmaceutical sciences and pharmacy management at St. David\'s University Institute with 100% employment opportunities.',
+        title: "HND in Pharmacy Technology - St. David's University Institute",
+        description:
+          "Comprehensive 3-year program in Pharmacy Technology. Master pharmaceutical sciences and pharmacy management at St. David's University Institute with 100% employment opportunities.",
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),
@@ -761,8 +767,9 @@ export const academicPrograms: (args: AcademicProgramsArgs) => RequiredDataFromC
         },
       ],
       meta: {
-        title: '2-Year HND in Nursing Science - St. David\'s University Institute',
-        description: 'Accelerated 2-year HND program for State Enrolled Nurse qualification at St. David\'s University Institute with 100% employment opportunities.',
+        title: "2-Year HND in Nursing Science - St. David's University Institute",
+        description:
+          "Accelerated 2-year HND program for State Enrolled Nurse qualification at St. David's University Institute with 100% employment opportunities.",
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),
@@ -912,8 +919,9 @@ export const academicPrograms: (args: AcademicProgramsArgs) => RequiredDataFromC
         },
       ],
       meta: {
-        title: 'Associate Vocational Nurse Certificate - St. David\'s University Institute',
-        description: 'Intensive 1-year vocational nursing certificate program at St. David\'s University Institute. Start your nursing career with practical training.',
+        title: "Associate Vocational Nurse Certificate - St. David's University Institute",
+        description:
+          "Intensive 1-year vocational nursing certificate program at St. David's University Institute. Start your nursing career with practical training.",
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),
@@ -1063,8 +1071,9 @@ export const academicPrograms: (args: AcademicProgramsArgs) => RequiredDataFromC
         },
       ],
       meta: {
-        title: 'Bachelor of Science in Nursing - St. David\'s University Institute',
-        description: 'Comprehensive 4-year Bachelor of Science in Nursing program at St. David\'s University Institute with 100% employment opportunities.',
+        title: "Bachelor of Science in Nursing - St. David's University Institute",
+        description:
+          "Comprehensive 4-year Bachelor of Science in Nursing program at St. David's University Institute with 100% employment opportunities.",
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),

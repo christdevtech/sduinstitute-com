@@ -71,11 +71,12 @@ export function AdmissionsInfoClient({
 }: AdmissionsInfoClientProps) {
   const formatDate = (dateString: string) => {
     if (!dateString) return 'Not specified'
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    })
+    const date = new Date(dateString)
+    const months = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ]
+    return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
   }
 
   const renderProgramCard = (program: AcademicProgram) => (

@@ -41,7 +41,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
           <Media fill imgClassName="-z-10 object-cover" priority resource={media} />
         )}
       </div>
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-orange-900/60 via-cyan-800/40 to-red-900/40 z-0"></div>
+      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-slate-950/90 via-cyan-800/40 to-blue-950/70 z-0"></div>
     </div>
   )
 }

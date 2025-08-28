@@ -1,14 +1,16 @@
 import type { RequiredDataFromCollectionSlug } from 'payload'
-import type { Media } from '@/payload-types'
+import type { Media, Department } from '@/payload-types'
 
 type AboutArgs = {
   heroImage: Media
   metaImage: Media
+  nursingDepartment: Department
 }
 
 export const about: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pages'> = ({
   heroImage,
   metaImage,
+  nursingDepartment,
 }) => {
   return {
     slug: 'about',
@@ -504,7 +506,7 @@ export const about: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pages'>
       {
         blockName: 'Department Details',
         blockType: 'departmentOverview',
-        selectedDepartment: 'nursing-department',
+        selectedDepartment: nursingDepartment.id,
         showStaffList: true,
         showPrograms: true,
         showContactInfo: true,
