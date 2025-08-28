@@ -33,7 +33,6 @@ export const applicationForm: RequiredDataFromCollectionSlug<'forms'> = {
     },
   },
   confirmationType: 'message',
-  createdAt: '2023-01-12T21:47:41.374Z',
   emails: [
     {
       emailFrom: '"SDU Institute" <admissions@sduinstitute.com>',
@@ -145,5 +144,4 @@ export const applicationForm: RequiredDataFromCollectionSlug<'forms'> = {
   ],
   redirect: undefined,
   submitButtonLabel: 'Submit Application',
-  updatedAt: '2023-01-12T21:47:41.374Z',
 }

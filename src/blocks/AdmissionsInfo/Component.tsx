@@ -7,7 +7,6 @@ import {
   Department,
 } from '@/payload-types'
 import { AdmissionsInfoClient } from './AdmissionsInfoClient'
-import { title } from 'process'
 
 export default async function AdmissionsInfoBlock({
   displayType = 'all-programs',

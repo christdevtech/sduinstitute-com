@@ -47,7 +47,7 @@ export const about: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pages'>
                   format: 0,
                   mode: 'normal',
                   style: '',
-                  text: 'About St. David\'s University Institute',
+                  text: "About St. David's University Institute",
                   version: 1,
                 },
               ],
@@ -232,7 +232,7 @@ export const about: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pages'>
                         format: 0,
                         mode: 'normal',
                         style: '',
-                        text: 'St. David\'s University Institute was established with a vision to address the critical shortage of qualified healthcare professionals in Cameroon and the Central African region.',
+                        text: "St. David's University Institute was established with a vision to address the critical shortage of qualified healthcare professionals in Cameroon and the Central African region.",
                         version: 1,
                       },
                     ],
@@ -599,9 +599,10 @@ export const about: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pages'>
       },
     ],
     meta: {
-      description: 'Learn about St. David\'s University Institute - our mission, vision, history, and commitment to healthcare education excellence in Cameroon.',
+      description:
+        "Learn about St. David's University Institute - our mission, vision, history, and commitment to healthcare education excellence in Cameroon.",
       image: metaImage.id,
-      title: 'About Us - St. David\'s University Institute',
+      title: "About Us - St. David's University Institute",
     },
     title: 'About Us',
   }

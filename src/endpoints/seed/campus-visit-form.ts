@@ -33,7 +33,6 @@ export const campusVisitForm: RequiredDataFromCollectionSlug<'forms'> = {
     },
   },
   confirmationType: 'message',
-  createdAt: '2023-01-12T21:47:41.374Z',
   emails: [
     {
       emailFrom: '"SDU Institute" <info@sduinstitute.com>',
@@ -150,5 +149,4 @@ export const campusVisitForm: RequiredDataFromCollectionSlug<'forms'> = {
   ],
   redirect: undefined,
   submitButtonLabel: 'Schedule Visit',
-  updatedAt: '2023-01-12T21:47:41.374Z',
 }

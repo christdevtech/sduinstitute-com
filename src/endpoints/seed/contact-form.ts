@@ -32,7 +32,6 @@ export const contactForm: RequiredDataFromCollectionSlug<'forms'> = {
     },
   },
   confirmationType: 'message',
-  createdAt: '2023-01-12T21:47:41.374Z',
   emails: [
     {
       emailFrom: '"Payload" \u003Cdemo@payloadcms.com\u003E',
@@ -105,7 +104,6 @@ export const contactForm: RequiredDataFromCollectionSlug<'forms'> = {
     },
   ],
   redirect: undefined,
-  submitButtonLabel: 'Submit',
+  submitButtonLabel: 'Send Message',
   title: 'Contact Form',
-  updatedAt: '2023-01-12T21:47:41.374Z',
 }
