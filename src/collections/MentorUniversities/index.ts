@@ -84,7 +84,15 @@ export const MentorUniversities: CollectionConfig<'mentor-universities'> = {
       options: [
         {
           label: "Bachelor's Programs",
-          value: 'bachelors',
+          value: 'degree',
+        },
+        {
+          label: 'Higher National Diploma',
+          value: 'hnd',
+        },
+        {
+          label: 'BTS',
+          value: 'bts',
         },
         {
           label: 'Masters Programs',

@@ -1707,7 +1707,7 @@ export interface MentorUniversity {
   /**
    * Types of certification programs offered through this partnership (can select multiple)
    */
-  partnershipType: ('bachelors' | 'masters' | 'phd')[];
+  partnershipType: ('degree' | 'hnd' | 'bts' | 'masters' | 'phd')[];
   /**
    * Information about university accreditation and recognition
    */

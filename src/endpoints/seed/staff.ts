@@ -6,6 +6,8 @@ type StaffArgs = {
   metaImage: Media
   nursingDepartment: any
   biomedicalDepartment: any
+  computerScienceDepartment: any
+  businessDepartment: any
 }
 
 export const staff: (args: StaffArgs) => RequiredDataFromCollectionSlug<'staff'>[] = ({
@@ -13,15 +15,17 @@ export const staff: (args: StaffArgs) => RequiredDataFromCollectionSlug<'staff'>
   metaImage,
   nursingDepartment,
   biomedicalDepartment,
+  computerScienceDepartment,
+  businessDepartment,
 }) => {
   return [
     {
       name: 'Dr. Sarah Mbah',
       fullName: 'Dr. Sarah Mbah',
       slug: 'dr-sarah-mbah',
-      position: 'Dean of Nursing',
+      position: 'Dean of Nursing Sciences',
       department: nursingDepartment.id,
-      email: 'sarah.mbah@sduinstitute.com',
+      email: 'sarah.mbah@stdaviduniversity.com',
       phone: '+237 677 123 456',
       bio: {
         root: {
@@ -36,7 +40,7 @@ export const staff: (args: StaffArgs) => RequiredDataFromCollectionSlug<'staff'>
                   format: 0,
                   mode: 'normal',
                   style: '',
-                  text: 'Dr. Sarah Mbah is a distinguished nursing educator with over 15 years of experience in clinical practice and academic leadership. She holds a PhD in Nursing from the University of Buea and has published extensively in peer-reviewed journals on maternal health and nursing education.',
+                  text: 'Dr. Sarah Mbah is a distinguished nursing educator with over 15 years of experience in clinical practice and academic leadership. She holds a PhD in Nursing Sciences from the University of Buea and has published extensively in peer-reviewed journals on maternal health and nursing education at St. David\'s University Institute.',
                   version: 1,
                 },
               ],
@@ -54,9 +58,9 @@ export const staff: (args: StaffArgs) => RequiredDataFromCollectionSlug<'staff'>
         },
       },
       qualifications: [
-        { qualification: 'PhD in Nursing - University of Buea' },
+        { qualification: 'PhD in Nursing Sciences - University of Buea' },
         { qualification: 'MSc in Public Health - University of Dschang' },
-        { qualification: 'BSc in Nursing - Catholic University of Cameroon' },
+        { qualification: 'BSc in Nursing Sciences - University of Buea' },
       ],
       specializations: [
         { specialization: 'Maternal and Child Health' },
@@ -66,8 +70,8 @@ export const staff: (args: StaffArgs) => RequiredDataFromCollectionSlug<'staff'>
       photo: featuredImage.id,
       _status: 'published',
       meta: {
-        title: 'Dr. Sarah Mbah - Dean of Nursing',
-        description: 'Dr. Sarah Mbah serves as Dean of Nursing at SDU Institute, bringing extensive experience in nursing education and clinical practice.',
+        title: 'Dr. Sarah Mbah - Dean of Nursing Sciences',
+        description: 'Dr. Sarah Mbah serves as Dean of Nursing Sciences at St. David\'s University Institute, bringing extensive experience in nursing education and clinical practice.',
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),
@@ -76,9 +80,9 @@ export const staff: (args: StaffArgs) => RequiredDataFromCollectionSlug<'staff'>
       name: 'Prof. Jean-Claude Fotso',
       fullName: 'Prof. Jean-Claude Fotso',
       slug: 'prof-jean-claude-fotso',
-      position: 'Head of Laboratory Technology',
+      position: 'Head of Biomedical Sciences',
       department: biomedicalDepartment.id,
-      email: 'jc.fotso@sduinstitute.com',
+      email: 'jc.fotso@stdaviduniversity.com',
       phone: '+237 677 234 567',
       bio: {
         root: {
@@ -93,7 +97,7 @@ export const staff: (args: StaffArgs) => RequiredDataFromCollectionSlug<'staff'>
                   format: 0,
                   mode: 'normal',
                   style: '',
-                  text: 'Professor Jean-Claude Fotso is a renowned biomedical scientist with over 20 years of experience in laboratory medicine and diagnostics. He leads our Laboratory Technology program and has been instrumental in establishing state-of-the-art laboratory facilities at SDU Institute.',
+                  text: 'Professor Jean-Claude Fotso is a renowned biomedical scientist with over 20 years of experience in laboratory medicine and diagnostics. He leads our Biomedical Sciences department and has been instrumental in establishing state-of-the-art laboratory facilities at St. David\'s University Institute.',
                   version: 1,
                 },
               ],
@@ -123,8 +127,8 @@ export const staff: (args: StaffArgs) => RequiredDataFromCollectionSlug<'staff'>
       photo: featuredImage.id,
       _status: 'published',
       meta: {
-        title: 'Prof. Jean-Claude Fotso - Head of Laboratory Technology',
-        description: 'Professor Jean-Claude Fotso leads the Laboratory Technology program at SDU Institute with extensive expertise in biomedical sciences.',
+        title: 'Prof. Jean-Claude Fotso - Head of Biomedical Sciences',
+        description: 'Professor Jean-Claude Fotso leads the Biomedical Sciences department at St. David\'s University Institute with extensive expertise in laboratory medicine.',
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),
@@ -135,7 +139,7 @@ export const staff: (args: StaffArgs) => RequiredDataFromCollectionSlug<'staff'>
       slug: 'dr-marie-nkomo',
       position: 'Senior Lecturer in Midwifery',
       department: nursingDepartment.id,
-      email: 'marie.nkomo@sduinstitute.com',
+      email: 'marie.nkomo@stdaviduniversity.com',
       phone: '+237 677 345 678',
       bio: {
         root: {
@@ -150,7 +154,7 @@ export const staff: (args: StaffArgs) => RequiredDataFromCollectionSlug<'staff'>
                   format: 0,
                   mode: 'normal',
                   style: '',
-                  text: 'Dr. Marie Nkomo is a certified midwife and educator with extensive experience in maternal and neonatal care. She has worked in various healthcare settings across Cameroon and brings practical expertise to our midwifery program.',
+                  text: 'Dr. Marie Nkomo is a certified midwife and educator with extensive experience in maternal and neonatal care. She has worked in various healthcare settings across Cameroon and brings practical expertise to our midwifery program at St. David\'s University Institute.',
                   version: 1,
                 },
               ],
@@ -181,7 +185,7 @@ export const staff: (args: StaffArgs) => RequiredDataFromCollectionSlug<'staff'>
       _status: 'published',
       meta: {
         title: 'Dr. Marie Nkomo - Senior Lecturer in Midwifery',
-        description: 'Dr. Marie Nkomo is a senior lecturer specializing in midwifery and maternal health at SDU Institute.',
+        description: 'Dr. Marie Nkomo is a senior lecturer specializing in midwifery and maternal health at St. David\'s University Institute.',
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),
@@ -192,7 +196,7 @@ export const staff: (args: StaffArgs) => RequiredDataFromCollectionSlug<'staff'>
       slug: 'mr-paul-tabi',
       position: 'Registrar',
       department: null,
-      email: 'paul.tabi@sduinstitute.com',
+      email: 'paul.tabi@stdaviduniversity.com',
       phone: '+237 677 456 789',
       bio: {
         root: {
@@ -207,7 +211,7 @@ export const staff: (args: StaffArgs) => RequiredDataFromCollectionSlug<'staff'>
                   format: 0,
                   mode: 'normal',
                   style: '',
-                  text: 'Mr. Paul Tabi serves as the Registrar of SDU Institute, overseeing student admissions, academic records, and institutional compliance. With over 12 years of experience in higher education administration, he ensures smooth academic operations.',
+                  text: 'Mr. Paul Tabi serves as the Registrar of St. David\'s University Institute, overseeing student admissions, academic records, and institutional compliance. With over 12 years of experience in higher education administration, he ensures smooth academic operations.',
                   version: 1,
                 },
               ],
@@ -238,7 +242,7 @@ export const staff: (args: StaffArgs) => RequiredDataFromCollectionSlug<'staff'>
       _status: 'published',
       meta: {
         title: 'Mr. Paul Tabi - Registrar',
-        description: 'Mr. Paul Tabi serves as Registrar at SDU Institute, managing academic administration and student services.',
+        description: 'Mr. Paul Tabi serves as Registrar at St. David\'s University Institute, managing academic administration and student services.',
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),
@@ -249,7 +253,7 @@ export const staff: (args: StaffArgs) => RequiredDataFromCollectionSlug<'staff'>
       slug: 'mrs-grace-fon',
       position: 'Director of Student Affairs',
       department: null,
-      email: 'grace.fon@sduinstitute.com',
+      email: 'grace.fon@stdaviduniversity.com',
       phone: '+237 677 567 890',
       bio: {
         root: {
@@ -264,7 +268,7 @@ export const staff: (args: StaffArgs) => RequiredDataFromCollectionSlug<'staff'>
                   format: 0,
                   mode: 'normal',
                   style: '',
-                  text: 'Mrs. Grace Fon is responsible for student welfare, counseling services, and extracurricular activities at SDU Institute. She is passionate about student development and creating a supportive learning environment.',
+                  text: 'Mrs. Grace Fon is responsible for student welfare, counseling services, and extracurricular activities at St. David\'s University Institute. She is passionate about student development and creating a supportive learning environment.',
                   version: 1,
                 },
               ],
@@ -295,7 +299,7 @@ export const staff: (args: StaffArgs) => RequiredDataFromCollectionSlug<'staff'>
       _status: 'published',
       meta: {
         title: 'Mrs. Grace Fon - Director of Student Affairs',
-        description: 'Mrs. Grace Fon oversees student affairs and welfare services at SDU Institute.',
+        description: 'Mrs. Grace Fon oversees student affairs and welfare services at St. David\'s University Institute.',
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),
@@ -306,7 +310,7 @@ export const staff: (args: StaffArgs) => RequiredDataFromCollectionSlug<'staff'>
       slug: 'dr-emmanuel-njie',
       position: 'Lecturer in Clinical Practice',
       department: nursingDepartment.id,
-      email: 'emmanuel.njie@sduinstitute.com',
+      email: 'emmanuel.njie@stdaviduniversity.com',
       phone: '+237 677 678 901',
       bio: {
         root: {
@@ -352,7 +356,7 @@ export const staff: (args: StaffArgs) => RequiredDataFromCollectionSlug<'staff'>
       _status: 'published',
       meta: {
         title: 'Dr. Emmanuel Njie - Lecturer in Clinical Practice',
-        description: 'Dr. Emmanuel Njie teaches clinical nursing practice at SDU Institute while maintaining active medical practice.',
+        description: 'Dr. Emmanuel Njie teaches clinical nursing practice at St. David\'s University Institute while maintaining active medical practice.',
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),

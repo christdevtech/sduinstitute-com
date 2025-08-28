@@ -11,13 +11,13 @@ export const mentorUniversities: (
 ) => RequiredDataFromCollectionSlug<'mentor-universities'>[] = ({ featuredImage, metaImage }) => {
   return [
     {
-      title: 'University of Buea',
+      title: 'University of BUEA',
       slug: 'university-of-buea',
       country: 'Cameroon',
       website: {
         type: 'custom',
         url: 'https://www.ubuea.cm',
-        label: 'University of Buea'
+        label: 'University of BUEA',
       },
       description: {
         root: {
@@ -32,7 +32,7 @@ export const mentorUniversities: (
                   format: 0,
                   mode: 'normal',
                   style: '',
-                  text: 'The University of Buea is a leading public university in Cameroon, known for its excellence in higher education and research. As one of our key mentor universities, UB provides academic oversight and quality assurance for our degree programs.',
+                  text: 'The University of BUEA is a leading public university in Cameroon and one of our key local partner universities. UB provides academic supervision, curriculum validation, and certificate credibility for our HND, BTS, and degree programs, ensuring that our graduates receive internationally recognized qualifications.',
                   version: 1,
                 },
               ],
@@ -52,22 +52,22 @@ export const mentorUniversities: (
       logo: featuredImage.id,
       _status: 'published',
       meta: {
-        title: 'University of Buea - Mentor University',
+        title: 'University of BUEA - Local Partner University',
         description:
-          'University of Buea serves as a mentor university for SDU Institute, providing academic oversight and quality assurance.',
+          "University of BUEA serves as a local partner university for St. David's University Institute, providing academic supervision and certificate credibility.",
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),
-      partnershipType: ['bachelors'],
+      partnershipType: ['hnd', 'bts', 'degree'],
     },
     {
-      title: 'University of Bamenda',
+      title: 'University of BAMENDA',
       slug: 'university-of-bamenda',
       country: 'Cameroon',
       website: {
         type: 'custom',
         url: 'https://www.uniba.cm',
-        label: 'University of Bamenda'
+        label: 'University of BAMENDA',
       },
       description: {
         root: {
@@ -82,7 +82,7 @@ export const mentorUniversities: (
                   format: 0,
                   mode: 'normal',
                   style: '',
-                  text: "The University of Bamenda is a prestigious institution in Cameroon's Northwest Region. Our partnership with UNIBA ensures that our academic programs meet international standards and provide students with globally recognized qualifications.",
+                  text: "The University of BAMENDA is a prestigious institution in Cameroon's Northwest Region and one of our trusted local partner universities. Our partnership with UNIBA ensures that our academic programs meet international standards and provide students with globally recognized qualifications in nursing and biomedical sciences.",
                   version: 1,
                 },
               ],
@@ -102,22 +102,22 @@ export const mentorUniversities: (
       logo: featuredImage.id,
       _status: 'published',
       meta: {
-        title: 'University of Bamenda - Mentor University',
+        title: 'University of BAMENDA - Local Partner University',
         description:
-          'University of Bamenda partners with SDU Institute to ensure academic excellence and international recognition.',
+          "University of BAMENDA partners with St. David's University Institute to ensure academic excellence and international recognition.",
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),
-      partnershipType: ['bachelors']
+      partnershipType: ['hnd', 'bts', 'degree'],
     },
     {
-      title: 'Catholic University of Cameroon',
-      slug: 'catholic-university-cameroon',
+      title: 'HIPDET University of BAMENDA',
+      slug: 'hipdet-university-bamenda',
       country: 'Cameroon',
       website: {
         type: 'custom',
-        url: 'https://www.catuc.org',
-        label: 'Catholic University of Cameroon'
+        url: 'https://www.hipdet.edu.cm',
+        label: 'HIPDET University of BAMENDA',
       },
       description: {
         root: {
@@ -132,7 +132,7 @@ export const mentorUniversities: (
                   format: 0,
                   mode: 'normal',
                   style: '',
-                  text: 'The Catholic University of Cameroon (CATUC) is a private institution known for its commitment to academic excellence and moral values. Our collaboration with CATUC enhances the quality of education we provide to our students.',
+                  text: 'HIPDET University of BAMENDA is a specialized institution focused on health sciences and technology. As one of our local partner universities, HIPDET provides academic supervision and validation for our nursing and biomedical sciences programs, ensuring our students receive quality education aligned with industry standards.',
                   version: 1,
                 },
               ],
@@ -152,13 +152,13 @@ export const mentorUniversities: (
       logo: featuredImage.id,
       _status: 'published',
       meta: {
-        title: 'Catholic University of Cameroon - Mentor University',
+        title: 'HIPDET University of BAMENDA - Local Partner University',
         description:
-          'Catholic University of Cameroon collaborates with SDU Institute to maintain high academic standards.',
+          "HIPDET University of BAMENDA collaborates with St. David's University Institute to maintain high academic standards in health sciences.",
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),
-      partnershipType: ['bachelors']
+      partnershipType: ['hnd', 'bts', 'degree'],
     },
     {
       title: 'University of Dschang',
@@ -167,7 +167,7 @@ export const mentorUniversities: (
       website: {
         type: 'custom',
         url: 'https://www.univ-dschang.org',
-        label: 'University of Dschang'
+        label: 'University of Dschang',
       },
       description: {
         root: {
@@ -182,7 +182,7 @@ export const mentorUniversities: (
                   format: 0,
                   mode: 'normal',
                   style: '',
-                  text: "The University of Dschang is one of Cameroon's leading public universities, renowned for its research and academic programs. Our partnership ensures that our students receive education that meets the highest academic standards.",
+                  text: "The University of Dschang is one of Cameroon's leading public universities, renowned for its research and academic programs. As one of our local partner universities, UDs provides academic supervision and curriculum validation for our nursing and biomedical sciences programs, ensuring our graduates receive internationally recognized qualifications.",
                   version: 1,
                 },
               ],
@@ -202,22 +202,22 @@ export const mentorUniversities: (
       logo: featuredImage.id,
       _status: 'published',
       meta: {
-        title: 'University of Dschang - Mentor University',
+        title: 'University of Dschang - Local Partner University',
         description:
-          'University of Dschang partners with SDU Institute to deliver world-class education and research opportunities.',
+          "University of Dschang partners with St. David's University Institute to deliver world-class education and research opportunities.",
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),
-      partnershipType: ['bachelors']
+      partnershipType: ['hnd', 'bts', 'degree'],
     },
     {
-      title: 'University of Maroua',
-      slug: 'university-of-maroua',
+      title: 'HIAS University BUEA',
+      slug: 'hias-university-buea',
       country: 'Cameroon',
       website: {
         type: 'custom',
-        url: 'https://www.univ-maroua.cm',
-        label: 'University of Maroua'
+        url: 'https://www.hias.edu.cm',
+        label: 'HIAS University BUEA',
       },
       description: {
         root: {
@@ -232,7 +232,7 @@ export const mentorUniversities: (
                   format: 0,
                   mode: 'normal',
                   style: '',
-                  text: 'The University of Maroua is a dynamic institution in Northern Cameroon, committed to providing quality higher education. Our collaboration with this university strengthens our academic offerings and research capabilities.',
+                  text: 'HIAS University BUEA is a dynamic institution committed to providing quality higher education in health sciences. As one of our local partner universities, HIAS strengthens our academic offerings and research capabilities in nursing and biomedical sciences, ensuring our students receive comprehensive education.',
                   version: 1,
                 },
               ],
@@ -251,23 +251,23 @@ export const mentorUniversities: (
       },
       logo: featuredImage.id,
       _status: 'published',
-      partnershipType: ['bachelors'],
+      partnershipType: ['hnd', 'bts', 'degree'],
       meta: {
-        title: 'University of Maroua - Mentor University',
+        title: 'HIAS University BUEA - Local Partner University',
         description:
-          'University of Maroua collaborates with SDU Institute to enhance academic quality and research excellence.',
+          "HIAS University BUEA collaborates with St. David's University Institute to enhance academic quality and research excellence.",
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),
     },
     {
-      title: 'University of Ngaoundéré',
-      slug: 'university-of-ngaoundere',
-      country: 'Cameroon',
+      title: 'European International University - PARIS',
+      slug: 'european-international-university-paris',
+      country: 'France',
       website: {
         type: 'custom',
-        url: 'https://www.univ-ndere.cm',
-        label: 'University of Ngaoundéré'
+        url: 'https://www.eiu-paris.com',
+        label: 'European International University - PARIS',
       },
       description: {
         root: {
@@ -282,7 +282,7 @@ export const mentorUniversities: (
                   format: 0,
                   mode: 'normal',
                   style: '',
-                  text: 'The University of Ngaoundéré is a respected public university in Cameroon, known for its diverse academic programs and research initiatives. Our partnership ensures that our students benefit from established academic traditions and modern educational approaches.',
+                  text: 'European International University - PARIS is our prestigious international partner university, providing global academic standards and international recognition to our programs. This partnership ensures that our students benefit from established European academic traditions and modern educational approaches, enhancing their career prospects internationally.',
                   version: 1,
                 },
               ],
@@ -302,13 +302,13 @@ export const mentorUniversities: (
       logo: featuredImage.id,
       _status: 'published',
       meta: {
-        title: 'University of Ngaoundéré - Mentor University',
+        title: 'European International University - PARIS - International Partner',
         description:
-          'University of Ngaoundéré partners with SDU Institute to provide quality education and academic excellence.',
+          "European International University - PARIS partners with St. David's University Institute to provide international academic standards and global recognition.",
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),
-      partnershipType: ['bachelors'],
+      partnershipType: ['degree', 'bts'],
     },
   ]
 }
