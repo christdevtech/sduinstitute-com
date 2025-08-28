@@ -5,6 +5,7 @@ import { applicationForm as applicationFormData } from './application-form'
 import { campusVisitForm as campusVisitFormData } from './campus-visit-form'
 import { contact as contactPageData } from './contact-page'
 import { admissions } from './admissions-page'
+import { about } from './about-page'
 import { home } from './home'
 import { image1 } from './image-1'
 import { image2 } from './image-2'
@@ -306,7 +307,7 @@ export const seed = async ({
       featuredImage: image1Doc,
       metaImage: image2Doc,
       nursingDepartment: departmentDocs[0],
-      biomedicalDepartment: departmentDocs[0],
+      biomedicalDepartment: departmentDocs[1],
     }).map((program) =>
       payload.create({
         collection: 'academic-programs',
@@ -363,7 +364,7 @@ export const seed = async ({
 
   payload.logger.info(`— Seeding pages...`)
 
-  const [_, contactPage, campusPage, admissionsPage] = await Promise.all([
+  const [_, contactPage, campusPage, admissionsPage, aboutPage] = await Promise.all([
     payload.create({
       collection: 'pages',
       depth: 0,
@@ -383,6 +384,11 @@ export const seed = async ({
       collection: 'pages',
       depth: 0,
       data: admissions({ heroImage: imageHomeDoc, metaImage: image2Doc, applicationForm: applicationForm }),
+    }),
+    payload.create({
+      collection: 'pages',
+      depth: 0,
+      data: about({ heroImage: imageHomeDoc, metaImage: image2Doc }),
     }),
   ])
 

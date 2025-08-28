@@ -612,7 +612,7 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
     ],
     meta: {
       description: 'St. David\'s University Institute of Nursing and Biomedical Sciences - Excellence in Healthcare Education across Cameroon. Bilingual programs with 100% employment opportunities.',
-      image: heroImage.id,
+      image: metaImage.id,
       title: 'SDU Institute - Healthcare Education Excellence',
     },
     title: 'Home',
