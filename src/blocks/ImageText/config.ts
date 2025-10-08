@@ -70,7 +70,7 @@ export const ImageText: Block = {
     linkGroup({
       appearances: ['default', 'outline'],
       overrides: {
-        maxRows: 1,
+        maxRows: 2,
         admin: {
           description: 'Optional link to include with this content',
         },
