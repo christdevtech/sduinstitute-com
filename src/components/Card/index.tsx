@@ -3,6 +3,7 @@ import { cn } from '@/utilities/ui'
 import useClickableCard from '@/utilities/useClickableCard'
 import Link from 'next/link'
 import React, { Fragment } from 'react'
+import { motion } from 'framer-motion'
 
 import type { Post } from '@/payload-types'
 
@@ -30,20 +31,47 @@ export const Card: React.FC<{
   const href = `/${relationTo}/${slug}`
 
   return (
-    <article
+    <motion.article
       className={cn(
         'border border-border rounded-lg overflow-hidden bg-card hover:cursor-pointer',
         className,
       )}
       ref={card.ref}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: false, amount: 0.3 }}
+      transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+      whileHover={{
+        y: -5,
+        scale: 1.02,
+        boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
+        transition: { duration: 0.2 },
+      }}
+      whileTap={{ scale: 0.98 }}
     >
-      <div className="relative w-full ">
-        {!metaImage && <div className="">No image</div>}
+      <motion.div
+        className="relative w-full"
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 0.3 }}
+      >
+        {!metaImage && <div className="bg-muted flex items-center justify-center h-48 text-muted-foreground">No image</div>}
         {metaImage && typeof metaImage !== 'string' && <Media resource={metaImage} size="33vw" />}
-      </div>
-      <div className="p-4">
+      </motion.div>
+      <motion.div
+        className="p-4"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.3, delay: 0.1 }}
+      >
         {showCategories && hasCategories && (
-          <div className="uppercase text-sm mb-4">
+          <motion.div
+            className="uppercase text-sm mb-4"
+            initial={{ opacity: 0, x: -10 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.3, delay: 0.2 }}
+          >
             {showCategories && hasCategories && (
               <div>
                 {categories?.map((category, index) => {
@@ -55,10 +83,16 @@ export const Card: React.FC<{
                     const isLast = index === categories.length - 1
 
                     return (
-                      <Fragment key={index}>
+                      <motion.span
+                        key={index}
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: false, amount: 0.3 }}
+                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                      >
                         {categoryTitle}
                         {!isLast && <Fragment>, &nbsp;</Fragment>}
-                      </Fragment>
+                      </motion.span>
                     )
                   }
 
@@ -66,19 +100,35 @@ export const Card: React.FC<{
                 })}
               </div>
             )}
-          </div>
+          </motion.div>
         )}
         {titleToUse && (
-          <div className="prose">
+          <motion.div
+            className="prose"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.3, delay: 0.3 }}
+          >
             <h3>
               <Link className="not-prose" href={href} ref={link.ref}>
                 {titleToUse}
               </Link>
             </h3>
-          </div>
+          </motion.div>
         )}
-        {description && <div className="mt-2">{description && <p>{sanitizedDescription}</p>}</div>}
-      </div>
-    </article>
+        {description && (
+          <motion.div
+            className="mt-2"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.3, delay: 0.4 }}
+          >
+            {description && <p>{sanitizedDescription}</p>}
+          </motion.div>
+        )}
+      </motion.div>
+    </motion.article>
   )
 }

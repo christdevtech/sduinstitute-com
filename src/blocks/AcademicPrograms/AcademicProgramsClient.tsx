@@ -3,10 +3,10 @@
 import type { AcademicProgram, Department } from '@/payload-types'
 
 import React, { useState, useEffect, useMemo } from 'react'
+import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Media } from '@/components/Media'
 import Link from 'next/link'
-import RichText from '@/components/RichText'
 
 type ProgramCardProps = {
   program: AcademicProgram
@@ -19,8 +19,12 @@ const ProgramCard: React.FC<ProgramCardProps> = ({ program, showApplicationCTA }
   const departmentName = typeof department === 'object' ? department.title : ''
 
   return (
-    <article className="border border-border rounded-lg overflow-hidden bg-card hover:cursor-pointer transition-all hover:shadow-md">
-      <div className="relative w-full h-48">
+    <motion.article
+      className="border border-border rounded-lg overflow-hidden bg-card hover:cursor-pointer transition-all hover:shadow-md"
+      whileHover={{ y: -5, scale: 1.02 }}
+      transition={{ duration: 0.2 }}
+    >
+      <div className="relative w-full aspect-video overflow-hidden">
         {featuredImage && typeof featuredImage === 'object' ? (
           <Media resource={featuredImage} size="33vw" className="object-cover w-full h-full" />
         ) : (
@@ -54,10 +58,15 @@ const ProgramCard: React.FC<ProgramCardProps> = ({ program, showApplicationCTA }
           <p className="mb-1">
             <strong>Duration:</strong> {duration}
           </p>
-          {entryRequirements && (
+          {entryRequirements && entryRequirements.length > 0 && (
             <div className="line-clamp-3">
               <strong>Entry Requirements:</strong>
-              <RichText data={entryRequirements} className="mt-1 text-xs"></RichText>
+              <ul className="mt-1 text-xs list-disc list-inside space-y-0.5">
+                {entryRequirements.slice(0, 3).map((requirement, index) => (
+                  <li key={index}>{requirement.requirement}</li>
+                ))}
+                {entryRequirements.length > 3 && <li>...</li>}
+              </ul>
             </div>
           )}
         </div>
@@ -73,7 +82,7 @@ const ProgramCard: React.FC<ProgramCardProps> = ({ program, showApplicationCTA }
           )}
         </div>
       </div>
-    </article>
+    </motion.article>
   )
 }
 
@@ -235,12 +244,16 @@ export const AcademicProgramsClient: React.FC<{
       {/* Programs grid */}
       {paginatedPrograms.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          {paginatedPrograms.map((program) => (
-            <ProgramCard
+          {paginatedPrograms.map((program, index) => (
+            <motion.div
               key={program.id}
-              program={program}
-              showApplicationCTA={showApplicationCTA}
-            />
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <ProgramCard program={program} showApplicationCTA={showApplicationCTA} />
+            </motion.div>
           ))}
         </div>
       ) : (

@@ -66,7 +66,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
 
     if (iconPlacement === 'left') {
       return (
-        <span className="flex items-center gap-2">
+        <span className="flex items-center justify-center gap-2">
           {renderIcon}
           {textContent}
         </span>
@@ -74,7 +74,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
     }
 
     return (
-      <span className="flex items-center gap-2">
+      <span className="flex items-center justify-center gap-2">
         {textContent}
         {renderIcon}
       </span>

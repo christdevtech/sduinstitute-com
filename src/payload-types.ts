@@ -626,6 +626,10 @@ export interface Department {
    */
   headOfDepartment?: (string | null) | Staff;
   /**
+   * Academic programs offered by this department (will be available when Academic Programs collection is created)
+   */
+  programs?: (string | AcademicProgram)[] | null;
+  /**
    * Staff members belonging to this department (will be available when Staff collection is created)
    */
   staffMembers?: (string | Staff)[] | null;
@@ -897,6 +901,306 @@ export interface Staff {
     | null;
   /**
    * Whether this staff member is currently active
+   */
+  isActive?: boolean | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "academic-programs".
+ */
+export interface AcademicProgram {
+  id: string;
+  title: string;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  programType: 'Basic' | 'HND' | 'Degree-TopUp' | 'Degree-Direct' | 'Masters' | 'PhD';
+  department: string | Department;
+  /**
+   * e.g., "3 years", "2 years", "18 months"
+   */
+  duration: string;
+  /**
+   * Required for Masters and PhD programs
+   */
+  mentorUniversity?: (string | null) | MentorUniversity;
+  programCoordinator?: (string | null) | Staff;
+  featuredImage?: (string | null) | Media;
+  /**
+   * List of entry requirements for this program
+   */
+  entryRequirements: {
+    requirement: string;
+    id?: string | null;
+  }[];
+  curriculumOverview?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  careerProspects?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  tuitionFees?: {
+    /**
+     * Tuition fees for local students (e.g., "500,000 FCFA per semester")
+     */
+    local?: string | null;
+    /**
+     * Tuition fees for international students (e.g., "$2,000 per semester")
+     */
+    international?: string | null;
+  };
+  applicationDeadline?: string | null;
+  /**
+   * Available intake periods for this program
+   */
+  intakePeriods?:
+    | {
+        intakeDate: string;
+        /**
+         * e.g., "Fall 2024", "Spring 2025"
+         */
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Program brochure (PDF format recommended)
+   */
+  brochure?: (string | null) | Media;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "mentor-universities".
+ */
+export interface MentorUniversity {
+  id: string;
+  /**
+   * Full name of the mentor university
+   */
+  title: string;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  /**
+   * Country where the university is located
+   */
+  country: string;
+  /**
+   * Official website URL
+   */
+  website: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: string | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: string | Post;
+        } | null);
+    url?: string | null;
+    label: string;
+    /**
+     * Choose how the link should be rendered.
+     */
+    appearance?: ('default' | 'outline') | null;
+    /**
+     * Choose an icon to display with the link.
+     */
+    icon?:
+      | (
+          | ''
+          | 'MdHome'
+          | 'MdInfo'
+          | 'MdEmail'
+          | 'MdPhone'
+          | 'MdLocationOn'
+          | 'MdArrowForward'
+          | 'MdArrowBack'
+          | 'MdDownload'
+          | 'MdUpload'
+          | 'MdShare'
+          | 'MdFavorite'
+          | 'MdStar'
+          | 'MdSearch'
+          | 'MdMenu'
+          | 'MdClose'
+          | 'MdAdd'
+          | 'MdRemove'
+          | 'MdEdit'
+          | 'MdDelete'
+          | 'MdSave'
+          | 'MdCancel'
+          | 'MdCheck'
+          | 'MdWarning'
+          | 'MdError'
+          | 'MdNotifications'
+          | 'MdSettings'
+          | 'MdShoppingCart'
+          | 'MdPayment'
+          | 'MdSecurity'
+          | 'MdVisibility'
+          | 'MdVisibilityOff'
+          | 'MdHelp'
+          | 'MdSupport'
+          | 'MdFeedback'
+          | 'MdBusiness'
+          | 'MdWork'
+          | 'MdSchool'
+          | 'MdEvent'
+          | 'MdCalendarToday'
+          | 'MdAccessTime'
+          | 'MdLanguage'
+          | 'MdPublic'
+          | 'MdLock'
+          | 'MdLockOpen'
+          | 'MdRefresh'
+          | 'MdSync'
+          | 'MdCloudDownload'
+          | 'MdCloudUpload'
+          | 'MdPrint'
+          | 'MdFileDownload'
+          | 'MdFileUpload'
+          | 'MdAttachFile'
+          | 'MdLink'
+          | 'MdLaunch'
+          | 'MdOpenInNew'
+          | 'MdExpandMore'
+          | 'MdExpandLess'
+          | 'MdChevronLeft'
+          | 'MdChevronRight'
+          | 'MdKeyboardArrowUp'
+          | 'MdKeyboardArrowDown'
+          | 'MdKeyboardArrowLeft'
+          | 'MdKeyboardArrowRight'
+          | 'MdPerson'
+          | 'MdOutlineTv'
+          | 'MdOutlineTurnedInNot'
+          | 'MdOutlineTurnedIn'
+        )
+      | null;
+    /**
+     * Choose where to place the icon.
+     */
+    iconPlacement?: ('right' | 'left') | null;
+  };
+  /**
+   * University logo or emblem
+   */
+  logo?: (string | null) | Media;
+  /**
+   * Date when the partnership began
+   */
+  partnershipStartDate?: string | null;
+  /**
+   * Types of certification programs offered through this partnership (can select multiple)
+   */
+  partnershipType: ('degree' | 'hnd' | 'bts' | 'masters' | 'phd')[];
+  /**
+   * Information about university accreditation and recognition
+   */
+  accreditationInfo?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Primary contact person for partnership matters
+   */
+  contactPerson?: {
+    /**
+     * Name of the primary contact person
+     */
+    name?: string | null;
+    /**
+     * Email address of the contact person
+     */
+    email?: string | null;
+    /**
+     * Phone number of the contact person
+     */
+    phone?: string | null;
+  };
+  /**
+   * Academic programs offered through this partnership
+   */
+  programsOffered?: (string | AcademicProgram)[] | null;
+  /**
+   * General description of the university and partnership
+   */
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Whether this partnership is currently active
    */
   isActive?: boolean | null;
   meta?: {
@@ -1578,314 +1882,6 @@ export interface Form {
     | null;
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "mentor-universities".
- */
-export interface MentorUniversity {
-  id: string;
-  /**
-   * Full name of the mentor university
-   */
-  title: string;
-  slug?: string | null;
-  slugLock?: boolean | null;
-  /**
-   * Country where the university is located
-   */
-  country: string;
-  /**
-   * Official website URL
-   */
-  website: {
-    type?: ('reference' | 'custom') | null;
-    newTab?: boolean | null;
-    reference?:
-      | ({
-          relationTo: 'pages';
-          value: string | Page;
-        } | null)
-      | ({
-          relationTo: 'posts';
-          value: string | Post;
-        } | null);
-    url?: string | null;
-    label: string;
-    /**
-     * Choose how the link should be rendered.
-     */
-    appearance?: ('default' | 'outline') | null;
-    /**
-     * Choose an icon to display with the link.
-     */
-    icon?:
-      | (
-          | ''
-          | 'MdHome'
-          | 'MdInfo'
-          | 'MdEmail'
-          | 'MdPhone'
-          | 'MdLocationOn'
-          | 'MdArrowForward'
-          | 'MdArrowBack'
-          | 'MdDownload'
-          | 'MdUpload'
-          | 'MdShare'
-          | 'MdFavorite'
-          | 'MdStar'
-          | 'MdSearch'
-          | 'MdMenu'
-          | 'MdClose'
-          | 'MdAdd'
-          | 'MdRemove'
-          | 'MdEdit'
-          | 'MdDelete'
-          | 'MdSave'
-          | 'MdCancel'
-          | 'MdCheck'
-          | 'MdWarning'
-          | 'MdError'
-          | 'MdNotifications'
-          | 'MdSettings'
-          | 'MdShoppingCart'
-          | 'MdPayment'
-          | 'MdSecurity'
-          | 'MdVisibility'
-          | 'MdVisibilityOff'
-          | 'MdHelp'
-          | 'MdSupport'
-          | 'MdFeedback'
-          | 'MdBusiness'
-          | 'MdWork'
-          | 'MdSchool'
-          | 'MdEvent'
-          | 'MdCalendarToday'
-          | 'MdAccessTime'
-          | 'MdLanguage'
-          | 'MdPublic'
-          | 'MdLock'
-          | 'MdLockOpen'
-          | 'MdRefresh'
-          | 'MdSync'
-          | 'MdCloudDownload'
-          | 'MdCloudUpload'
-          | 'MdPrint'
-          | 'MdFileDownload'
-          | 'MdFileUpload'
-          | 'MdAttachFile'
-          | 'MdLink'
-          | 'MdLaunch'
-          | 'MdOpenInNew'
-          | 'MdExpandMore'
-          | 'MdExpandLess'
-          | 'MdChevronLeft'
-          | 'MdChevronRight'
-          | 'MdKeyboardArrowUp'
-          | 'MdKeyboardArrowDown'
-          | 'MdKeyboardArrowLeft'
-          | 'MdKeyboardArrowRight'
-          | 'MdPerson'
-          | 'MdOutlineTv'
-          | 'MdOutlineTurnedInNot'
-          | 'MdOutlineTurnedIn'
-        )
-      | null;
-    /**
-     * Choose where to place the icon.
-     */
-    iconPlacement?: ('right' | 'left') | null;
-  };
-  /**
-   * University logo or emblem
-   */
-  logo?: (string | null) | Media;
-  /**
-   * Date when the partnership began
-   */
-  partnershipStartDate?: string | null;
-  /**
-   * Types of certification programs offered through this partnership (can select multiple)
-   */
-  partnershipType: ('degree' | 'hnd' | 'bts' | 'masters' | 'phd')[];
-  /**
-   * Information about university accreditation and recognition
-   */
-  accreditationInfo?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  /**
-   * Primary contact person for partnership matters
-   */
-  contactPerson?: {
-    /**
-     * Name of the primary contact person
-     */
-    name?: string | null;
-    /**
-     * Email address of the contact person
-     */
-    email?: string | null;
-    /**
-     * Phone number of the contact person
-     */
-    phone?: string | null;
-  };
-  /**
-   * Academic programs offered through this partnership
-   */
-  programsOffered?: (string | AcademicProgram)[] | null;
-  /**
-   * General description of the university and partnership
-   */
-  description?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  /**
-   * Whether this partnership is currently active
-   */
-  isActive?: boolean | null;
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (string | null) | Media;
-    description?: string | null;
-  };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "academic-programs".
- */
-export interface AcademicProgram {
-  id: string;
-  title: string;
-  slug?: string | null;
-  slugLock?: boolean | null;
-  programType: 'Basic' | 'HND' | 'Degree-TopUp' | 'Degree-Direct' | 'Masters' | 'PhD';
-  department: string | Department;
-  /**
-   * e.g., "3 years", "2 years", "18 months"
-   */
-  duration: string;
-  /**
-   * Required for Masters and PhD programs
-   */
-  mentorUniversity?: (string | null) | MentorUniversity;
-  programCoordinator?: (string | null) | Staff;
-  featuredImage?: (string | null) | Media;
-  entryRequirements: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  curriculumOverview: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  careerProspects: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  tuitionFees?: {
-    /**
-     * Tuition fees for local students (e.g., "500,000 FCFA per semester")
-     */
-    local?: string | null;
-    /**
-     * Tuition fees for international students (e.g., "$2,000 per semester")
-     */
-    international?: string | null;
-  };
-  applicationDeadline?: string | null;
-  /**
-   * Available intake periods for this program
-   */
-  intakePeriods?:
-    | {
-        intakeDate: string;
-        /**
-         * e.g., "Fall 2024", "Spring 2025"
-         */
-        label?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  /**
-   * Program brochure (PDF format recommended)
-   */
-  brochure?: (string | null) | Media;
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (string | null) | Media;
-    description?: string | null;
-  };
-  publishedAt?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2749,6 +2745,7 @@ export interface DepartmentsSelect<T extends boolean = true> {
         office?: T;
       };
   headOfDepartment?: T;
+  programs?: T;
   staffMembers?: T;
   meta?:
     | T
@@ -2895,7 +2892,12 @@ export interface AcademicProgramsSelect<T extends boolean = true> {
   mentorUniversity?: T;
   programCoordinator?: T;
   featuredImage?: T;
-  entryRequirements?: T;
+  entryRequirements?:
+    | T
+    | {
+        requirement?: T;
+        id?: T;
+      };
   curriculumOverview?: T;
   careerProspects?: T;
   tuitionFees?:
@@ -3364,6 +3366,109 @@ export interface Header {
         id?: string | null;
       }[]
     | null;
+  buttons?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+          /**
+           * Choose how the link should be rendered.
+           */
+          appearance?: ('default' | 'outline') | null;
+          /**
+           * Choose an icon to display with the link.
+           */
+          icon?:
+            | (
+                | ''
+                | 'MdHome'
+                | 'MdInfo'
+                | 'MdEmail'
+                | 'MdPhone'
+                | 'MdLocationOn'
+                | 'MdArrowForward'
+                | 'MdArrowBack'
+                | 'MdDownload'
+                | 'MdUpload'
+                | 'MdShare'
+                | 'MdFavorite'
+                | 'MdStar'
+                | 'MdSearch'
+                | 'MdMenu'
+                | 'MdClose'
+                | 'MdAdd'
+                | 'MdRemove'
+                | 'MdEdit'
+                | 'MdDelete'
+                | 'MdSave'
+                | 'MdCancel'
+                | 'MdCheck'
+                | 'MdWarning'
+                | 'MdError'
+                | 'MdNotifications'
+                | 'MdSettings'
+                | 'MdShoppingCart'
+                | 'MdPayment'
+                | 'MdSecurity'
+                | 'MdVisibility'
+                | 'MdVisibilityOff'
+                | 'MdHelp'
+                | 'MdSupport'
+                | 'MdFeedback'
+                | 'MdBusiness'
+                | 'MdWork'
+                | 'MdSchool'
+                | 'MdEvent'
+                | 'MdCalendarToday'
+                | 'MdAccessTime'
+                | 'MdLanguage'
+                | 'MdPublic'
+                | 'MdLock'
+                | 'MdLockOpen'
+                | 'MdRefresh'
+                | 'MdSync'
+                | 'MdCloudDownload'
+                | 'MdCloudUpload'
+                | 'MdPrint'
+                | 'MdFileDownload'
+                | 'MdFileUpload'
+                | 'MdAttachFile'
+                | 'MdLink'
+                | 'MdLaunch'
+                | 'MdOpenInNew'
+                | 'MdExpandMore'
+                | 'MdExpandLess'
+                | 'MdChevronLeft'
+                | 'MdChevronRight'
+                | 'MdKeyboardArrowUp'
+                | 'MdKeyboardArrowDown'
+                | 'MdKeyboardArrowLeft'
+                | 'MdKeyboardArrowRight'
+                | 'MdPerson'
+                | 'MdOutlineTv'
+                | 'MdOutlineTurnedInNot'
+                | 'MdOutlineTurnedIn'
+              )
+            | null;
+          /**
+           * Choose where to place the icon.
+           */
+          iconPlacement?: ('right' | 'left') | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -3491,6 +3596,23 @@ export interface HeaderSelect<T extends boolean = true> {
               reference?: T;
               url?: T;
               label?: T;
+              icon?: T;
+              iconPlacement?: T;
+            };
+        id?: T;
+      };
+  buttons?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
               icon?: T;
               iconPlacement?: T;
             };

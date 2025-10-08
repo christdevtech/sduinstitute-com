@@ -5,7 +5,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { CalendarDays, DollarSign, GraduationCap, FileText } from 'lucide-react'
-import RichText from '@/components/RichText'
 import { AcademicProgram, AdmissionsInfoBlock } from '@/payload-types'
 
 type AdmissionsInfoClientProps = {
@@ -73,8 +72,18 @@ export function AdmissionsInfoClient({
     if (!dateString) return 'Not specified'
     const date = new Date(dateString)
     const months = [
-      'January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
     ]
     return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
   }
@@ -151,14 +160,18 @@ export function AdmissionsInfoClient({
           </div>
         )}
 
-        {showRequirements && program.entryRequirements && (
+        {showRequirements && program.entryRequirements && program.entryRequirements.length > 0 && (
           <div className="space-y-2">
             <div className="flex items-center gap-2 text-sm font-medium">
               <FileText className="h-4 w-4" />
               <span>Entry Requirements</span>
             </div>
             <div className="text-sm">
-              <RichText data={program.entryRequirements} />
+              <ul className="list-disc list-inside space-y-1">
+                {program.entryRequirements.map((requirement, index) => (
+                  <li key={index}>{requirement.requirement}</li>
+                ))}
+              </ul>
             </div>
           </div>
         )}
@@ -276,17 +289,23 @@ export function AdmissionsInfoClient({
               </div>
 
               <div className="space-y-3">
-                {showRequirements && program.entryRequirements && (
-                  <div>
-                    <div className="flex items-center gap-2 text-sm font-medium mb-1">
-                      <FileText className="h-4 w-4" />
-                      <span>Entry Requirements</span>
+                {showRequirements &&
+                  program.entryRequirements &&
+                  program.entryRequirements.length > 0 && (
+                    <div>
+                      <div className="flex items-center gap-2 text-sm font-medium mb-1">
+                        <FileText className="h-4 w-4" />
+                        <span>Entry Requirements</span>
+                      </div>
+                      <div className="text-sm">
+                        <ul className="list-disc list-inside space-y-1">
+                          {program.entryRequirements.map((requirement, index) => (
+                            <li key={index}>{requirement.requirement}</li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
-                    <div className="text-sm">
-                      <RichText data={program.entryRequirements} />
-                    </div>
-                  </div>
-                )}
+                  )}
 
                 <Button className="w-full">Apply Now</Button>
               </div>

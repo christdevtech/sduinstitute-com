@@ -5,18 +5,18 @@ type StaffArgs = {
   featuredImage: Media
   metaImage: Media
   nursingDepartment: any
-  biomedicalDepartment: any
-  computerScienceDepartment: any
-  businessDepartment: any
+  midwiferyDepartment: any
+  pharmacyDepartment: any
+  laboratoryTechnologyDepartment: any
 }
 
 export const staff: (args: StaffArgs) => RequiredDataFromCollectionSlug<'staff'>[] = ({
   featuredImage,
   metaImage,
   nursingDepartment,
-  biomedicalDepartment,
-  computerScienceDepartment,
-  businessDepartment,
+  midwiferyDepartment,
+  pharmacyDepartment,
+  laboratoryTechnologyDepartment,
 }) => {
   return [
     {
@@ -80,8 +80,8 @@ export const staff: (args: StaffArgs) => RequiredDataFromCollectionSlug<'staff'>
       name: 'Prof. Jean-Claude Fotso',
       fullName: 'Prof. Jean-Claude Fotso',
       slug: 'prof-jean-claude-fotso',
-      position: 'Head of Biomedical Sciences',
-      department: biomedicalDepartment.id,
+      position: 'Head of Laboratory Technology',
+      department: laboratoryTechnologyDepartment.id,
       email: 'jc.fotso@stdaviduniversity.com',
       phone: '+237 677 234 567',
       bio: {

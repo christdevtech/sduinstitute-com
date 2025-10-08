@@ -1,5 +1,8 @@
+'use client'
+
 import clsx from 'clsx'
 import React from 'react'
+import { motion } from 'framer-motion'
 import RichText from '@/components/RichText'
 
 import type { Post } from '@/payload-types'
@@ -24,7 +27,17 @@ export const RelatedPosts: React.FC<RelatedPostsProps> = (props) => {
         {docs?.map((doc, index) => {
           if (typeof doc === 'string') return null
 
-          return <Card key={index} doc={doc} relationTo="posts" showCategories />
+          return (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <Card doc={doc} relationTo="posts" showCategories />
+            </motion.div>
+          )
         })}
       </div>
     </div>

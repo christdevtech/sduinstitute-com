@@ -308,7 +308,9 @@ export const seed = async ({
       featuredImage: image1Doc,
       metaImage: image2Doc,
       nursingDepartment: departmentDocs[0],
-      biomedicalDepartment: departmentDocs[1],
+      midwiferyDepartment: departmentDocs[1],
+      pharmacyDepartment: departmentDocs[2],
+      laboratoryTechnologyDepartment: departmentDocs[3],
     }).map((program) =>
       payload.create({
         collection: 'academic-programs',
@@ -328,9 +330,9 @@ export const seed = async ({
       featuredImage: image1Doc,
       metaImage: image2Doc,
       nursingDepartment: departmentDocs[0],
-      biomedicalDepartment: departmentDocs[1],
-      computerScienceDepartment: departmentDocs[2],
-      businessDepartment: departmentDocs[3],
+      midwiferyDepartment: departmentDocs[1],
+      pharmacyDepartment: departmentDocs[2],
+      laboratoryTechnologyDepartment: departmentDocs[3],
     }).map((staffMember) =>
       payload.create({
         collection: 'staff',
@@ -414,7 +416,9 @@ export const seed = async ({
         heroImage: imageHomeDoc,
         metaImage: image2Doc,
         nursingDepartment: departmentDocs[0],
-        biomedicalDepartment: departmentDocs[1],
+        midwiferyDepartment: departmentDocs[1],
+        pharmacyDepartment: departmentDocs[2],
+        laboratoryTechnologyDepartment: departmentDocs[3],
       }),
     }),
   ])

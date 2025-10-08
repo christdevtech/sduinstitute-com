@@ -1,5 +1,8 @@
+'use client'
+
 import { cn } from '@/utilities/ui'
 import React from 'react'
+import { motion } from 'framer-motion'
 
 import { Card, CardPostData } from '@/components/Card'
 
@@ -17,9 +20,16 @@ export const CollectionArchive: React.FC<Props> = (props) => {
           {posts?.map((result, index) => {
             if (typeof result === 'object' && result !== null) {
               return (
-                <div className="col-span-4" key={index}>
+                <motion.div
+                  className="col-span-4"
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
                   <Card className="h-full" doc={result} relationTo="posts" showCategories />
-                </div>
+                </motion.div>
               )
             }
 

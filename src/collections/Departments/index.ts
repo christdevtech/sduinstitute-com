@@ -159,17 +159,18 @@ export const Departments: CollectionConfig<'departments'> = {
               },
               label: 'Head of Department',
             },
-            // {
-            //   name: 'programs',
-            //   type: 'relationship',
-            //   relationTo: 'academic-programs',
-            //   hasMany: true,
-            //   admin: {
-            //     position: 'sidebar',
-            //     description: 'Academic programs offered by this department (will be available when Academic Programs collection is created)',
-            //   },
-            //   label: 'Academic Programs',
-            // },
+            {
+              name: 'programs',
+              type: 'relationship',
+              relationTo: 'academic-programs',
+              hasMany: true,
+              admin: {
+                position: 'sidebar',
+                description:
+                  'Academic programs offered by this department (will be available when Academic Programs collection is created)',
+              },
+              label: 'Academic Programs',
+            },
             {
               name: 'staffMembers',
               type: 'relationship',

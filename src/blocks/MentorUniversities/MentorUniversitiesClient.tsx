@@ -8,6 +8,7 @@ import { Media } from '@/components/Media'
 import { CMSLink } from '@/components/Link'
 import { ExternalLink, MapPin, Users, GraduationCap } from 'lucide-react'
 import type { MentorUniversity, AcademicProgram } from '@/payload-types'
+import RichText from '@/components/RichText'
 
 type Props = {
   className?: string
@@ -35,9 +36,9 @@ export const MentorUniversitiesClient: React.FC<Props> = ({
   // Helper function to format certification types
   const formatCertificationTypes = (partnershipTypes: string[] | string | undefined) => {
     if (!partnershipTypes) return null
-    
+
     const types = Array.isArray(partnershipTypes) ? partnershipTypes : [partnershipTypes]
-    const typeLabels = types.map(type => {
+    const typeLabels = types.map((type) => {
       switch (type) {
         case 'bachelors':
           return "Bachelor's"
@@ -45,11 +46,13 @@ export const MentorUniversitiesClient: React.FC<Props> = ({
           return "Master's"
         case 'phd':
           return 'PhD'
+        case 'all':
+          return 'Bachelor, Master, & PhD'
         default:
           return type
       }
     })
-    
+
     if (typeLabels.length === 1) {
       return `${typeLabels[0]} Programs`
     } else if (typeLabels.length === 2) {
@@ -62,13 +65,13 @@ export const MentorUniversitiesClient: React.FC<Props> = ({
     return (
       <div className="container mx-auto px-4 py-12">
         <div className="text-center">
-          <div className="mx-auto w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-6">
-            <GraduationCap className="w-12 h-12 text-gray-400" />
+          <div className="mx-auto w-24 h-24 bg-muted rounded-full flex items-center justify-center mb-6">
+            <GraduationCap className="w-12 h-12 text-muted-foreground" />
           </div>
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">
+          <h3 className="text-xl font-semibold text-foreground mb-2">
             No Partner Universities Found
           </h3>
-          <p className="text-gray-600 max-w-md mx-auto">
+          <p className="text-muted-foreground max-w-md mx-auto">
             We're constantly expanding our network of partner institutions. Check back soon for
             updates.
           </p>
@@ -100,17 +103,17 @@ export const MentorUniversitiesClient: React.FC<Props> = ({
       <CardHeader className="pb-4">
         {showLogos && university.logo && typeof university.logo === 'object' && (
           <div className="flex justify-center mb-6">
-            <div className="relative overflow-hidden rounded-xl bg-white p-4 shadow-sm border">
-              <Media resource={university.logo} imgClassName="h-full w-auto object-contain" />
+            <div className="relative overflow-hidden">
+              <Media resource={university.logo} imgClassName="h-[110px] w-auto object-contain" />
             </div>
           </div>
         )}
         <div className="text-center space-y-2">
-          <CardTitle className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+          <CardTitle className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
             {university.title}
           </CardTitle>
           {university.country && (
-            <div className="flex items-center justify-center gap-1 text-gray-600">
+            <div className="flex items-center justify-center gap-1 text-muted-foreground">
               <MapPin className="w-4 h-4" />
               <span className="text-sm font-medium">{university.country}</span>
             </div>
@@ -123,7 +126,7 @@ export const MentorUniversitiesClient: React.FC<Props> = ({
           <div className="flex justify-center">
             <Badge
               variant="secondary"
-              className="bg-blue-50 text-blue-700 hover:bg-blue-100 font-medium px-3 py-1"
+              className="bg-primary/10 text-primary hover:bg-primary/20 font-medium px-3 py-1"
             >
               {formatCertificationTypes(university.partnershipType)}
             </Badge>
@@ -133,8 +136,8 @@ export const MentorUniversitiesClient: React.FC<Props> = ({
         {university.description && (
           <>
             <Separator className="my-4" />
-            <div className="text-sm text-gray-700 leading-relaxed">
-              <div dangerouslySetInnerHTML={{ __html: university.description }} />
+            <div className="text-sm text-muted-foreground leading-relaxed">
+              <RichText enableGutter={false} data={university.description} />
             </div>
           </>
         )}
@@ -147,8 +150,8 @@ export const MentorUniversitiesClient: React.FC<Props> = ({
               <Separator className="my-4" />
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
-                  <GraduationCap className="w-4 h-4 text-blue-600" />
-                  <h4 className="font-semibold text-sm text-gray-900">Available Programs</h4>
+                  <GraduationCap className="w-4 h-4 text-primary" />
+                  <h4 className="font-semibold text-sm text-foreground">Available Programs</h4>
                 </div>
                 <div className="space-y-2">
                   {university.programsOffered.slice(0, 3).map((program) => {
@@ -157,17 +160,17 @@ export const MentorUniversitiesClient: React.FC<Props> = ({
                     return programData ? (
                       <div
                         key={programData.id}
-                        className="flex items-start gap-3 p-2 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
+                        className="flex items-start gap-3 p-2 rounded-lg bg-muted hover:bg-muted/80 transition-colors"
                       >
-                        <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-sm text-gray-700 font-medium">
+                        <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                        <span className="text-sm text-muted-foreground font-medium">
                           {programData.title}
                         </span>
                       </div>
                     ) : null
                   })}
                   {university.programsOffered.length > 3 && (
-                    <div className="text-xs text-gray-500 pl-5 font-medium">
+                    <div className="text-xs text-muted-foreground/70 pl-5 font-medium">
                       +{university.programsOffered.length - 3} additional programs available
                     </div>
                   )}
@@ -181,20 +184,20 @@ export const MentorUniversitiesClient: React.FC<Props> = ({
             <Separator className="my-4" />
             <div className="space-y-3">
               <div className="flex items-center gap-2">
-                <Users className="w-4 h-4 text-blue-600" />
-                <h4 className="font-semibold text-sm text-gray-900">Contact Information</h4>
+                <Users className="w-4 h-4 text-primary" />
+                <h4 className="font-semibold text-sm text-foreground">Contact Information</h4>
               </div>
               <div className="space-y-2 pl-6">
                 {university.contactPerson.name && (
-                  <p className="text-sm text-gray-700 font-medium">
+                  <p className="text-sm text-muted-foreground font-medium">
                     {university.contactPerson.name}
                   </p>
                 )}
                 {university.contactPerson.email && (
-                  <p className="text-sm text-gray-600">{university.contactPerson.email}</p>
+                  <p className="text-sm text-muted-foreground">{university.contactPerson.email}</p>
                 )}
                 {university.contactPerson.phone && (
-                  <p className="text-sm text-gray-600">{university.contactPerson.phone}</p>
+                  <p className="text-sm text-muted-foreground">{university.contactPerson.phone}</p>
                 )}
               </div>
             </div>
@@ -243,31 +246,29 @@ export const MentorUniversitiesClient: React.FC<Props> = ({
               >
                 <div className="flex flex-col lg:flex-row">
                   {showLogos && university.logo && typeof university.logo === 'object' && (
-                    <div className="lg:w-48 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-8">
-                      <div className="bg-white rounded-xl p-4 shadow-sm border">
-                        <Media
-                          resource={university.logo}
-                          className="max-h-20 w-auto object-contain"
-                        />
-                      </div>
+                    <div className="lg:w-72 bg-gradient-to-br from-muted/50 to-accent flex items-center justify-center p-8">
+                      <Media
+                        resource={university.logo}
+                        imgClassName="max-h-20 lg:h-auto w-auto lg:w-full object-contain"
+                      />
                     </div>
                   )}
                   <div className="flex-1 p-8">
                     <div className="space-y-6">
                       <div className="space-y-3">
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                          <h3 className="text-2xl font-bold text-gray-900">{university.title}</h3>
+                          <h3 className="text-2xl font-bold text-foreground">{university.title}</h3>
                           {university.partnershipType && (
                             <Badge
                               variant="secondary"
-                              className="bg-blue-50 text-blue-700 font-medium px-3 py-1 w-fit"
+                              className="bg-primary/10 text-primary font-medium px-3 py-1 w-fit"
                             >
                               {formatCertificationTypes(university.partnershipType)}
                             </Badge>
                           )}
                         </div>
                         {university.country && (
-                          <div className="flex items-center gap-2 text-gray-600">
+                          <div className="flex items-center gap-2 text-muted-foreground">
                             <MapPin className="w-4 h-4" />
                             <span className="font-medium">{university.country}</span>
                           </div>
@@ -275,12 +276,15 @@ export const MentorUniversitiesClient: React.FC<Props> = ({
                       </div>
 
                       {university.description && (
-                        <>
+                        <React.Fragment>
                           <Separator />
-                          <div className="text-gray-700 leading-relaxed">
-                            <div dangerouslySetInnerHTML={{ __html: university.description }} />
-                          </div>
-                        </>
+
+                          <RichText
+                            enableGutter={false}
+                            data={university.description}
+                            className="text-muted-foreground leading-relaxed"
+                          />
+                        </React.Fragment>
                       )}
 
                       {showPrograms &&
@@ -291,8 +295,10 @@ export const MentorUniversitiesClient: React.FC<Props> = ({
                             <Separator />
                             <div className="space-y-3">
                               <div className="flex items-center gap-2">
-                                <GraduationCap className="w-5 h-5 text-blue-600" />
-                                <h4 className="font-semibold text-gray-900">Available Programs</h4>
+                                <GraduationCap className="w-5 h-5 text-primary" />
+                                <h4 className="font-semibold text-foreground">
+                                  Available Programs
+                                </h4>
                               </div>
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                                 {university.programsOffered.slice(0, 6).map((program) => {
@@ -303,10 +309,10 @@ export const MentorUniversitiesClient: React.FC<Props> = ({
                                   return programData ? (
                                     <div
                                       key={programData.id}
-                                      className="flex items-center gap-3 p-3 rounded-lg bg-gray-50"
+                                      className="flex items-center gap-3 p-3 rounded-lg bg-muted"
                                     >
-                                      <div className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></div>
-                                      <span className="text-sm text-gray-700 font-medium">
+                                      <div className="w-2 h-2 bg-primary rounded-full flex-shrink-0"></div>
+                                      <span className="text-sm text-muted-foreground font-medium">
                                         {programData.title}
                                       </span>
                                     </div>
@@ -314,7 +320,7 @@ export const MentorUniversitiesClient: React.FC<Props> = ({
                                 })}
                               </div>
                               {university.programsOffered.length > 6 && (
-                                <p className="text-sm text-gray-500 font-medium">
+                                <p className="text-sm text-muted-foreground/70 font-medium">
                                   +{university.programsOffered.length - 6} additional programs
                                   available
                                 </p>
@@ -328,36 +334,36 @@ export const MentorUniversitiesClient: React.FC<Props> = ({
                           <Separator />
                           <div className="space-y-3">
                             <div className="flex items-center gap-2">
-                              <Users className="w-5 h-5 text-blue-600" />
-                              <h4 className="font-semibold text-gray-900">Contact Information</h4>
+                              <Users className="w-5 h-5 text-primary" />
+                              <h4 className="font-semibold text-foreground">Contact Information</h4>
                             </div>
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pl-7">
                               {university.contactPerson.name && (
                                 <div>
-                                  <p className="text-xs text-gray-500 uppercase tracking-wide font-medium">
+                                  <p className="text-xs text-muted-foreground/70 uppercase tracking-wide font-medium">
                                     Contact Person
                                   </p>
-                                  <p className="text-sm text-gray-900 font-medium">
+                                  <p className="text-sm text-foreground font-medium">
                                     {university.contactPerson.name}
                                   </p>
                                 </div>
                               )}
                               {university.contactPerson.email && (
                                 <div>
-                                  <p className="text-xs text-gray-500 uppercase tracking-wide font-medium">
+                                  <p className="text-xs text-muted-foreground/70 uppercase tracking-wide font-medium">
                                     Email
                                   </p>
-                                  <p className="text-sm text-gray-700">
+                                  <p className="text-sm text-muted-foreground">
                                     {university.contactPerson.email}
                                   </p>
                                 </div>
                               )}
                               {university.contactPerson.phone && (
                                 <div>
-                                  <p className="text-xs text-gray-500 uppercase tracking-wide font-medium">
+                                  <p className="text-xs text-muted-foreground/70 uppercase tracking-wide font-medium">
                                     Phone
                                   </p>
-                                  <p className="text-sm text-gray-700">
+                                  <p className="text-sm text-muted-foreground">
                                     {university.contactPerson.phone}
                                   </p>
                                 </div>
@@ -406,8 +412,8 @@ export const MentorUniversitiesClient: React.FC<Props> = ({
                 ))}
               </div>
             </div>
-            <div className="absolute top-0 right-0 h-full w-8 bg-gradient-to-l from-white to-transparent pointer-events-none" />
-            <div className="absolute top-0 left-0 h-full w-8 bg-gradient-to-r from-white to-transparent pointer-events-none" />
+            <div className="absolute top-0 right-0 h-full w-8 bg-gradient-to-l from-background to-transparent pointer-events-none" />
+            <div className="absolute top-0 left-0 h-full w-8 bg-gradient-to-r from-background to-transparent pointer-events-none" />
           </div>
         )
 
@@ -425,23 +431,23 @@ export const MentorUniversitiesClient: React.FC<Props> = ({
       <div className="container mx-auto px-4 py-16">
         <div className="text-center space-y-6 mb-16">
           <div className="space-y-4">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight">
               Our Partner Universities
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full" />
+            <div className="w-24 h-1 bg-gradient-to-r from-primary to-primary/70 mx-auto rounded-full" />
           </div>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             We collaborate with prestigious universities worldwide to offer high-quality degree
             programs and create pathways for academic excellence and global opportunities.
           </p>
           {displayType !== 'all' && (
             <div className="flex flex-wrap justify-center gap-2 pt-4">
               {selectedPartnershipType && (
-                <Badge variant="outline" className="text-blue-700 border-blue-200">
+                <Badge variant="outline" className="text-primary border-primary/20">
                   {formatCertificationTypes([selectedPartnershipType])}
                 </Badge>
               )}
-              <Badge variant="secondary" className="bg-gray-100 text-gray-700">
+              <Badge variant="secondary" className="bg-muted text-muted-foreground">
                 {universities.length} {universities.length === 1 ? 'University' : 'Universities'}
               </Badge>
             </div>

@@ -152,19 +152,18 @@ export const AcademicPrograms: CollectionConfig<'academic-programs'> = {
             },
             {
               name: 'entryRequirements',
-              type: 'richText',
-              editor: lexicalEditor({
-                features: ({ rootFeatures }) => {
-                  return [
-                    ...rootFeatures,
-                    HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
-                    FixedToolbarFeature(),
-                    InlineToolbarFeature(),
-                    HorizontalRuleFeature(),
-                  ]
+              type: 'array',
+              fields: [
+                {
+                  name: 'requirement',
+                  type: 'text',
+                  required: true,
                 },
-              }),
+              ],
               required: true,
+              admin: {
+                description: 'List of entry requirements for this program',
+              },
             },
             {
               name: 'curriculumOverview',
@@ -180,7 +179,7 @@ export const AcademicPrograms: CollectionConfig<'academic-programs'> = {
                   ]
                 },
               }),
-              required: true,
+              required: false,
             },
             {
               name: 'careerProspects',
@@ -196,7 +195,7 @@ export const AcademicPrograms: CollectionConfig<'academic-programs'> = {
                   ]
                 },
               }),
-              required: true,
+              required: false,
             },
           ],
           label: 'Content',

@@ -8,6 +8,7 @@ import configPromise from '@payload-config'
 import { getPayload, PaginatedDocs } from 'payload'
 import React from 'react'
 import { AcademicProgramsClient } from './AcademicProgramsClient'
+import { AcademicProgramsWrapper } from './AcademicProgramsWrapper'
 
 export const AcademicProgramsBlock: React.FC<
   AcademicProgramsBlockProps & {
@@ -64,22 +65,14 @@ export const AcademicProgramsBlock: React.FC<
   })
 
   return (
-    <div className="container my-16" id={`block-${id}`}>
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold mb-4">Academic Programs</h2>
-        <p className="text-muted-foreground">
-          Explore our comprehensive range of academic programs designed to prepare you for success.
-        </p>
-      </div>
-
-      <AcademicProgramsClient
-        initialPrograms={programs.docs}
-        departments={departments.docs}
-        showFilters={showFilters ?? true}
-        showSearch={showSearch ?? true}
-        showApplicationCTA={showApplicationCTA ?? true}
-        itemsPerPage={itemsPerPage ?? 12}
-      />
-    </div>
+    <AcademicProgramsWrapper
+      id={id}
+      initialPrograms={programs.docs}
+      departments={departments.docs}
+      showFilters={showFilters ?? true}
+      showSearch={showSearch ?? true}
+      showApplicationCTA={showApplicationCTA ?? true}
+      itemsPerPage={itemsPerPage ?? 12}
+    />
   )
 }

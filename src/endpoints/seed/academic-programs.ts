@@ -5,7 +5,9 @@ type AcademicProgramsArgs = {
   featuredImage: Media
   metaImage: Media
   nursingDepartment: any
-  biomedicalDepartment: any
+  midwiferyDepartment: any
+  pharmacyDepartment: any
+  laboratoryTechnologyDepartment: any
 }
 
 export const academicPrograms: (
@@ -14,142 +16,30 @@ export const academicPrograms: (
   featuredImage,
   metaImage,
   nursingDepartment,
-  biomedicalDepartment,
+  midwiferyDepartment,
+  pharmacyDepartment,
+  laboratoryTechnologyDepartment,
 }) => {
   return [
-    // English Programs - HND (3 Years)
+    // BASIC PROGRAMS (Assistant Level)
+
+    // Assistant Nursing
     {
-      title: 'HND in Nursing Science',
-      slug: 'hnd-nursing-science',
-      programType: 'HND',
+      title: 'Assistant Nursing (1 Year)',
+      slug: 'assistant-nursing-1-year',
+      programType: 'Basic',
       department: nursingDepartment.id,
-      duration: '3 years',
+      duration: '1 year',
       _status: 'published',
       featuredImage: featuredImage.id,
-      entryRequirements: {
-        root: {
-          type: 'root',
-          children: [
-            {
-              type: 'list',
-              children: [
-                {
-                  type: 'listitem',
-                  children: [
-                    {
-                      type: 'text',
-                      detail: 0,
-                      format: 0,
-                      mode: 'normal',
-                      style: '',
-                      text: 'GCE A/L or BAC (Baccalauréat)',
-                      version: 1,
-                    },
-                  ],
-                  direction: 'ltr',
-                  format: '',
-                  indent: 0,
-                  version: 1,
-                  value: 1,
-                },
-                {
-                  type: 'listitem',
-                  children: [
-                    {
-                      type: 'text',
-                      detail: 0,
-                      format: 0,
-                      mode: 'normal',
-                      style: '',
-                      text: 'Registration fee: 25,000 XAF',
-                      version: 1,
-                    },
-                  ],
-                  direction: 'ltr',
-                  format: '',
-                  indent: 0,
-                  version: 1,
-                  value: 2,
-                },
-              ],
-              direction: 'ltr',
-              format: '',
-              indent: 0,
-              listType: 'bullet',
-              start: 1,
-              tag: 'ul',
-              version: 1,
-            },
-          ],
-          direction: 'ltr',
-          format: '',
-          indent: 0,
-          version: 1,
-        },
-      },
-      curriculumOverview: {
-        root: {
-          type: 'root',
-          children: [
-            {
-              type: 'paragraph',
-              children: [
-                {
-                  type: 'text',
-                  detail: 0,
-                  format: 0,
-                  mode: 'normal',
-                  style: '',
-                  text: 'Comprehensive 3-year nursing education program covering anatomy, physiology, pharmacology, patient care, and clinical practice. Includes 2.5 months of lectures and 2.5 months of internship per semester with experienced lecturers from state universities and regional hospitals.',
-                  version: 1,
-                },
-              ],
-              direction: 'ltr',
-              format: '',
-              indent: 0,
-              textFormat: 0,
-              version: 1,
-            },
-          ],
-          direction: 'ltr',
-          format: '',
-          indent: 0,
-          version: 1,
-        },
-      },
-      careerProspects: {
-        root: {
-          type: 'root',
-          children: [
-            {
-              type: 'paragraph',
-              children: [
-                {
-                  type: 'text',
-                  detail: 0,
-                  format: 0,
-                  mode: 'normal',
-                  style: '',
-                  text: 'Graduates can work as registered nurses in hospitals, clinics, community health centers, and private healthcare facilities. 100% employment opportunities available both in Cameroon and internationally with license and visa assistance provided.',
-                  version: 1,
-                },
-              ],
-              direction: 'ltr',
-              format: '',
-              indent: 0,
-              textFormat: 0,
-              version: 1,
-            },
-          ],
-          direction: 'ltr',
-          format: '',
-          indent: 0,
-          version: 1,
-        },
-      },
+      entryRequirements: [
+        { requirement: 'Photocopy of first school leaving certificate or equivalent' },
+        { requirement: 'Photocopy of birth certificate' },
+        { requirement: 'Four passport size photographs' },
+      ],
       tuitionFees: {
-        local: '325,000 XAF per year',
-        international: '325,000 XAF per year',
+        local: '150,000 XAF per year',
+        international: '150,000 XAF per year',
       },
       intakePeriods: [
         {
@@ -162,145 +52,324 @@ export const academicPrograms: (
         },
       ],
       meta: {
-        title: "HND in Nursing Science - St. David's University Institute",
+        title: "Assistant Nursing (1 Year) - St. David's University Institute",
         description:
-          "Comprehensive 3-year Higher National Diploma program in Nursing Science at St. David's University Institute. Prepare for a rewarding career in healthcare with 100% employment opportunities.",
+          "One-year Assistant Nursing certificate program at St. David's University Institute.",
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),
     },
     {
-      title: 'HND in Midwifery',
-      slug: 'hnd-midwifery',
+      title: 'Assistant Nursing (2 Years)',
+      slug: 'assistant-nursing-2-years',
+      programType: 'Basic',
+      department: nursingDepartment.id,
+      duration: '2 years',
+      _status: 'published',
+      featuredImage: featuredImage.id,
+      entryRequirements: [
+        { requirement: 'Photocopy of ordinary level certificate or equivalent' },
+        { requirement: 'Photocopy of birth certificate' },
+        { requirement: 'Four passport size photographs' },
+      ],
+      tuitionFees: {
+        local: '150,000 XAF per year',
+        international: '150,000 XAF per year',
+      },
+      intakePeriods: [
+        {
+          intakeDate: '2024-09-01',
+          label: 'September 2024',
+        },
+        {
+          intakeDate: '2025-01-15',
+          label: 'January 2025',
+        },
+      ],
+      meta: {
+        title: "Assistant Nursing (2 Years) - St. David's University Institute",
+        description:
+          "Two-year Assistant Nursing certificate program at St. David's University Institute.",
+        image: metaImage.id,
+      },
+      publishedAt: new Date().toISOString(),
+    },
+
+    // Assistant Midwifery
+    {
+      title: 'Assistant Midwifery (1 Year)',
+      slug: 'assistant-midwifery-1-year',
+      programType: 'Basic',
+      department: midwiferyDepartment.id,
+      duration: '1 year',
+      _status: 'published',
+      featuredImage: featuredImage.id,
+      entryRequirements: [
+        { requirement: 'Photocopy of first school leaving certificate or equivalent' },
+        { requirement: 'Photocopy of birth certificate' },
+        { requirement: 'Four passport size photographs' },
+      ],
+      tuitionFees: {
+        local: '150,000 XAF per year',
+        international: '150,000 XAF per year',
+      },
+      intakePeriods: [
+        {
+          intakeDate: '2024-09-01',
+          label: 'September 2024',
+        },
+        {
+          intakeDate: '2025-01-15',
+          label: 'January 2025',
+        },
+      ],
+      meta: {
+        title: "Assistant Midwifery (1 Year) - St. David's University Institute",
+        description:
+          "One-year Assistant Midwifery certificate program at St. David's University Institute.",
+        image: metaImage.id,
+      },
+      publishedAt: new Date().toISOString(),
+    },
+    {
+      title: 'Assistant Midwifery (2 Years)',
+      slug: 'assistant-midwifery-2-years',
+      programType: 'Basic',
+      department: midwiferyDepartment.id,
+      duration: '2 years',
+      _status: 'published',
+      featuredImage: featuredImage.id,
+      entryRequirements: [
+        { requirement: 'Photocopy of ordinary level certificate or equivalent' },
+        { requirement: 'Photocopy of birth certificate' },
+        { requirement: 'Four passport size photographs' },
+      ],
+      tuitionFees: {
+        local: '150,000 XAF per year',
+        international: '150,000 XAF per year',
+      },
+      intakePeriods: [
+        {
+          intakeDate: '2024-09-01',
+          label: 'September 2024',
+        },
+        {
+          intakeDate: '2025-01-15',
+          label: 'January 2025',
+        },
+      ],
+      meta: {
+        title: "Assistant Midwifery (2 Years) - St. David's University Institute",
+        description:
+          "Two-year Assistant Midwifery certificate program at St. David's University Institute.",
+        image: metaImage.id,
+      },
+      publishedAt: new Date().toISOString(),
+    },
+
+    // Assistant Pharmacy
+    {
+      title: 'Assistant Pharmacy (1 Year)',
+      slug: 'assistant-pharmacy-1-year',
+      programType: 'Basic',
+      department: pharmacyDepartment.id,
+      duration: '1 year',
+      _status: 'published',
+      featuredImage: featuredImage.id,
+      entryRequirements: [
+        { requirement: 'Photocopy of first school leaving certificate or equivalent' },
+        { requirement: 'Photocopy of birth certificate' },
+        { requirement: 'Four passport size photographs' },
+      ],
+      tuitionFees: {
+        local: '150,000 XAF per year',
+        international: '150,000 XAF per year',
+      },
+      intakePeriods: [
+        {
+          intakeDate: '2024-09-01',
+          label: 'September 2024',
+        },
+        {
+          intakeDate: '2025-01-15',
+          label: 'January 2025',
+        },
+      ],
+      meta: {
+        title: "Assistant Pharmacy (1 Year) - St. David's University Institute",
+        description:
+          "One-year Assistant Pharmacy certificate program at St. David's University Institute.",
+        image: metaImage.id,
+      },
+      publishedAt: new Date().toISOString(),
+    },
+    {
+      title: 'Assistant Pharmacy (2 Years)',
+      slug: 'assistant-pharmacy-2-years',
+      programType: 'Basic',
+      department: pharmacyDepartment.id,
+      duration: '2 years',
+      _status: 'published',
+      featuredImage: featuredImage.id,
+      entryRequirements: [
+        { requirement: 'Photocopy of ordinary level certificate or equivalent' },
+        { requirement: 'Photocopy of birth certificate' },
+        { requirement: 'Four passport size photographs' },
+      ],
+      tuitionFees: {
+        local: '150,000 XAF per year',
+        international: '150,000 XAF per year',
+      },
+      intakePeriods: [
+        {
+          intakeDate: '2024-09-01',
+          label: 'September 2024',
+        },
+        {
+          intakeDate: '2025-01-15',
+          label: 'January 2025',
+        },
+      ],
+      meta: {
+        title: "Assistant Pharmacy (2 Years) - St. David's University Institute",
+        description:
+          "Two-year Assistant Pharmacy certificate program at St. David's University Institute.",
+        image: metaImage.id,
+      },
+      publishedAt: new Date().toISOString(),
+    },
+
+    // Assistant Laboratory Technology
+    {
+      title: 'Assistant Laboratory Technology (1 Year)',
+      slug: 'assistant-laboratory-technology-1-year',
+      programType: 'Basic',
+      department: laboratoryTechnologyDepartment.id,
+      duration: '1 year',
+      _status: 'published',
+      featuredImage: featuredImage.id,
+      entryRequirements: [
+        { requirement: 'Photocopy of first school leaving certificate or equivalent' },
+        { requirement: 'Photocopy of birth certificate' },
+        { requirement: 'Four passport size photographs' },
+      ],
+      tuitionFees: {
+        local: '150,000 XAF per year',
+        international: '150,000 XAF per year',
+      },
+      intakePeriods: [
+        {
+          intakeDate: '2024-09-01',
+          label: 'September 2024',
+        },
+        {
+          intakeDate: '2025-01-15',
+          label: 'January 2025',
+        },
+      ],
+      meta: {
+        title: "Assistant Laboratory Technology (1 Year) - St. David's University Institute",
+        description:
+          "One-year Assistant Laboratory Technology certificate program at St. David's University Institute.",
+        image: metaImage.id,
+      },
+      publishedAt: new Date().toISOString(),
+    },
+    {
+      title: 'Assistant Laboratory Technology (2 Years)',
+      slug: 'assistant-laboratory-technology-2-years',
+      programType: 'Basic',
+      department: laboratoryTechnologyDepartment.id,
+      duration: '2 years',
+      _status: 'published',
+      featuredImage: featuredImage.id,
+      entryRequirements: [
+        { requirement: 'Photocopy of ordinary level certificate or equivalent' },
+        { requirement: 'Photocopy of birth certificate' },
+        { requirement: 'Four passport size photographs' },
+      ],
+      tuitionFees: {
+        local: '150,000 XAF per year',
+        international: '150,000 XAF per year',
+      },
+      intakePeriods: [
+        {
+          intakeDate: '2024-09-01',
+          label: 'September 2024',
+        },
+        {
+          intakeDate: '2025-01-15',
+          label: 'January 2025',
+        },
+      ],
+      meta: {
+        title: "Assistant Laboratory Technology (2 Years) - St. David's University Institute",
+        description:
+          "Two-year Assistant Laboratory Technology certificate program at St. David's University Institute.",
+        image: metaImage.id,
+      },
+      publishedAt: new Date().toISOString(),
+    },
+
+    // HND PROGRAMS
+
+    // HND Nursing
+    {
+      title: 'HND in Nursing',
+      slug: 'hnd-nursing',
       programType: 'HND',
       department: nursingDepartment.id,
       duration: '3 years',
       _status: 'published',
       featuredImage: featuredImage.id,
-      entryRequirements: {
-        root: {
-          type: 'root',
-          children: [
-            {
-              type: 'list',
-              children: [
-                {
-                  type: 'listitem',
-                  children: [
-                    {
-                      type: 'text',
-                      detail: 0,
-                      format: 0,
-                      mode: 'normal',
-                      style: '',
-                      text: 'GCE A/L or BAC (Baccalauréat)',
-                      version: 1,
-                    },
-                  ],
-                  direction: 'ltr',
-                  format: '',
-                  indent: 0,
-                  version: 1,
-                  value: 1,
-                },
-                {
-                  type: 'listitem',
-                  children: [
-                    {
-                      type: 'text',
-                      detail: 0,
-                      format: 0,
-                      mode: 'normal',
-                      style: '',
-                      text: 'Registration fee: 25,000 XAF',
-                      version: 1,
-                    },
-                  ],
-                  direction: 'ltr',
-                  format: '',
-                  indent: 0,
-                  version: 1,
-                  value: 2,
-                },
-              ],
-              direction: 'ltr',
-              format: '',
-              indent: 0,
-              listType: 'bullet',
-              start: 1,
-              tag: 'ul',
-              version: 1,
-            },
-          ],
-          direction: 'ltr',
-          format: '',
-          indent: 0,
-          version: 1,
-        },
-      },
-      curriculumOverview: {
-        root: {
-          type: 'root',
-          children: [
-            {
-              type: 'paragraph',
-              children: [
-                {
-                  type: 'text',
-                  detail: 0,
-                  format: 0,
-                  mode: 'normal',
-                  style: '',
-                  text: 'Specialized 3-year training in maternal and child health, obstetrics, gynecology, and neonatal care. Program includes comprehensive practical training with 2.5 months of lectures and 2.5 months of internship per semester.',
-                  version: 1,
-                },
-              ],
-              direction: 'ltr',
-              format: '',
-              indent: 0,
-              textFormat: 0,
-              version: 1,
-            },
-          ],
-          direction: 'ltr',
-          format: '',
-          indent: 0,
-          version: 1,
-        },
-      },
-      careerProspects: {
-        root: {
-          type: 'root',
-          children: [
-            {
-              type: 'paragraph',
-              children: [
-                {
-                  type: 'text',
-                  detail: 0,
-                  format: 0,
-                  mode: 'normal',
-                  style: '',
-                  text: 'Career opportunities in maternity wards, birthing centers, family planning clinics, and community health programs. 100% employment opportunities with international licensing and visa assistance.',
-                  version: 1,
-                },
-              ],
-              direction: 'ltr',
-              format: '',
-              indent: 0,
-              textFormat: 0,
-              version: 1,
-            },
-          ],
-          direction: 'ltr',
-          format: '',
-          indent: 0,
-          version: 1,
-        },
-      },
+      entryRequirements: [
+        { requirement: 'Photocopy of advanced level certificate or equivalent in any field' },
+        { requirement: 'Photocopy of birth certificate' },
+        { requirement: 'Four passport size photos' },
+      ],
       tuitionFees: {
-        local: '325,000 XAF per year',
-        international: '325,000 XAF per year',
+        local: '250,000 XAF per year',
+        international: '250,000 XAF per year',
+      },
+      intakePeriods: [
+        {
+          intakeDate: '2024-09-01',
+          label: 'September 2024',
+        },
+        {
+          intakeDate: '2025-01-15',
+          label: 'January 2025',
+        },
+      ],
+      meta: {
+        title: "HND in Nursing - St. David's University Institute",
+        description:
+          "Three-year Higher National Diploma in Nursing at St. David's University Institute.",
+        image: metaImage.id,
+      },
+      publishedAt: new Date().toISOString(),
+    },
+
+    // HND Midwifery
+    {
+      title: 'HND in Midwifery',
+      slug: 'hnd-midwifery',
+      programType: 'HND',
+      department: midwiferyDepartment.id,
+      duration: '3 years',
+      _status: 'published',
+      featuredImage: featuredImage.id,
+      entryRequirements: [
+        {
+          requirement:
+            'Photocopy of advanced level certificate or equivalent in any field plus biology',
+        },
+        { requirement: 'Photocopy of birth certificate' },
+        { requirement: 'Four passport size photos' },
+      ],
+      tuitionFees: {
+        local: '250,000 XAF per year',
+        international: '250,000 XAF per year',
       },
       intakePeriods: [
         {
@@ -315,143 +384,72 @@ export const academicPrograms: (
       meta: {
         title: "HND in Midwifery - St. David's University Institute",
         description:
-          "Specialized 3-year Higher National Diploma program in Midwifery. Train to become a skilled midwife at St. David's University Institute with 100% employment opportunities.",
+          "Three-year Higher National Diploma in Midwifery at St. David's University Institute.",
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),
     },
+
+    // HND Pharmacy
+    {
+      title: 'HND in Pharmacy',
+      slug: 'hnd-pharmacy',
+      programType: 'HND',
+      department: pharmacyDepartment.id,
+      duration: '3 years',
+      _status: 'published',
+      featuredImage: featuredImage.id,
+      entryRequirements: [
+        {
+          requirement:
+            'Photocopy of advanced level certificate or equivalent in any field, from a science background',
+        },
+        { requirement: 'Photocopy of birth certificate' },
+        { requirement: 'Four passport size photos' },
+      ],
+      tuitionFees: {
+        local: '250,000 XAF per year',
+        international: '250,000 XAF per year',
+      },
+      intakePeriods: [
+        {
+          intakeDate: '2024-09-01',
+          label: 'September 2024',
+        },
+        {
+          intakeDate: '2025-01-15',
+          label: 'January 2025',
+        },
+      ],
+      meta: {
+        title: "HND in Pharmacy - St. David's University Institute",
+        description:
+          "Three-year Higher National Diploma in Pharmacy at St. David's University Institute.",
+        image: metaImage.id,
+      },
+      publishedAt: new Date().toISOString(),
+    },
+
+    // HND Laboratory Technology
     {
       title: 'HND in Laboratory Technology',
       slug: 'hnd-laboratory-technology',
       programType: 'HND',
-      department: biomedicalDepartment.id,
+      department: laboratoryTechnologyDepartment.id,
       duration: '3 years',
       _status: 'published',
       featuredImage: featuredImage.id,
-      entryRequirements: {
-        root: {
-          type: 'root',
-          children: [
-            {
-              type: 'list',
-              children: [
-                {
-                  type: 'listitem',
-                  children: [
-                    {
-                      type: 'text',
-                      detail: 0,
-                      format: 0,
-                      mode: 'normal',
-                      style: '',
-                      text: 'GCE A/L or BAC (Baccalauréat)',
-                      version: 1,
-                    },
-                  ],
-                  direction: 'ltr',
-                  format: '',
-                  indent: 0,
-                  version: 1,
-                  value: 1,
-                },
-                {
-                  type: 'listitem',
-                  children: [
-                    {
-                      type: 'text',
-                      detail: 0,
-                      format: 0,
-                      mode: 'normal',
-                      style: '',
-                      text: 'Registration fee: 25,000 XAF',
-                      version: 1,
-                    },
-                  ],
-                  direction: 'ltr',
-                  format: '',
-                  indent: 0,
-                  version: 1,
-                  value: 2,
-                },
-              ],
-              direction: 'ltr',
-              format: '',
-              indent: 0,
-              listType: 'bullet',
-              start: 1,
-              tag: 'ul',
-              version: 1,
-            },
-          ],
-          direction: 'ltr',
-          format: '',
-          indent: 0,
-          version: 1,
+      entryRequirements: [
+        {
+          requirement:
+            'Photocopy of advanced level certificate or equivalent in any field, from a science background',
         },
-      },
-      curriculumOverview: {
-        root: {
-          type: 'root',
-          children: [
-            {
-              type: 'paragraph',
-              children: [
-                {
-                  type: 'text',
-                  detail: 0,
-                  format: 0,
-                  mode: 'normal',
-                  style: '',
-                  text: 'Comprehensive 3-year training in clinical laboratory procedures, medical diagnostics, and laboratory management. Program includes well-equipped practical halls and 2.5 months of lectures with 2.5 months of internship per semester.',
-                  version: 1,
-                },
-              ],
-              direction: 'ltr',
-              format: '',
-              indent: 0,
-              textFormat: 0,
-              version: 1,
-            },
-          ],
-          direction: 'ltr',
-          format: '',
-          indent: 0,
-          version: 1,
-        },
-      },
-      careerProspects: {
-        root: {
-          type: 'root',
-          children: [
-            {
-              type: 'paragraph',
-              children: [
-                {
-                  type: 'text',
-                  detail: 0,
-                  format: 0,
-                  mode: 'normal',
-                  style: '',
-                  text: 'Employment opportunities in hospital laboratories, diagnostic centers, research institutions, and pharmaceutical companies. 100% employment opportunities with international licensing and visa assistance.',
-                  version: 1,
-                },
-              ],
-              direction: 'ltr',
-              format: '',
-              indent: 0,
-              textFormat: 0,
-              version: 1,
-            },
-          ],
-          direction: 'ltr',
-          format: '',
-          indent: 0,
-          version: 1,
-        },
-      },
+        { requirement: 'Photocopy of birth certificate' },
+        { requirement: 'Four passport size photos' },
+      ],
       tuitionFees: {
-        local: '325,000 XAF per year',
-        international: '325,000 XAF per year',
+        local: '250,000 XAF per year',
+        international: '250,000 XAF per year',
       },
       intakePeriods: [
         {
@@ -466,292 +464,28 @@ export const academicPrograms: (
       meta: {
         title: "HND in Laboratory Technology - St. David's University Institute",
         description:
-          "Advanced 3-year program in Laboratory Technology. Master medical diagnostics and laboratory procedures at St. David's University Institute with 100% employment opportunities.",
+          "Three-year Higher National Diploma in Laboratory Technology at St. David's University Institute.",
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),
     },
+
+    // TOP-UP DEGREE PROGRAMS
+
+    // Top-up BSc Nursing
     {
-      title: 'HND in Pharmacy Technology',
-      slug: 'hnd-pharmacy-technology',
-      programType: 'HND',
-      department: biomedicalDepartment.id,
-      duration: '3 years',
-      _status: 'published',
-      featuredImage: featuredImage.id,
-      entryRequirements: {
-        root: {
-          type: 'root',
-          children: [
-            {
-              type: 'list',
-              children: [
-                {
-                  type: 'listitem',
-                  children: [
-                    {
-                      type: 'text',
-                      detail: 0,
-                      format: 0,
-                      mode: 'normal',
-                      style: '',
-                      text: 'GCE A/L or BAC (Baccalauréat)',
-                      version: 1,
-                    },
-                  ],
-                  direction: 'ltr',
-                  format: '',
-                  indent: 0,
-                  version: 1,
-                  value: 1,
-                },
-                {
-                  type: 'listitem',
-                  children: [
-                    {
-                      type: 'text',
-                      detail: 0,
-                      format: 0,
-                      mode: 'normal',
-                      style: '',
-                      text: 'Registration fee: 25,000 XAF',
-                      version: 1,
-                    },
-                  ],
-                  direction: 'ltr',
-                  format: '',
-                  indent: 0,
-                  version: 1,
-                  value: 2,
-                },
-              ],
-              direction: 'ltr',
-              format: '',
-              indent: 0,
-              listType: 'bullet',
-              start: 1,
-              tag: 'ul',
-              version: 1,
-            },
-          ],
-          direction: 'ltr',
-          format: '',
-          indent: 0,
-          version: 1,
-        },
-      },
-      curriculumOverview: {
-        root: {
-          type: 'root',
-          children: [
-            {
-              type: 'paragraph',
-              children: [
-                {
-                  type: 'text',
-                  detail: 0,
-                  format: 0,
-                  mode: 'normal',
-                  style: '',
-                  text: 'Comprehensive 3-year training in pharmaceutical sciences, drug preparation, dispensing, and pharmacy management. Program includes well-equipped practical halls and 2.5 months of lectures with 2.5 months of internship per semester.',
-                  version: 1,
-                },
-              ],
-              direction: 'ltr',
-              format: '',
-              indent: 0,
-              textFormat: 0,
-              version: 1,
-            },
-          ],
-          direction: 'ltr',
-          format: '',
-          indent: 0,
-          version: 1,
-        },
-      },
-      careerProspects: {
-        root: {
-          type: 'root',
-          children: [
-            {
-              type: 'paragraph',
-              children: [
-                {
-                  type: 'text',
-                  detail: 0,
-                  format: 0,
-                  mode: 'normal',
-                  style: '',
-                  text: 'Employment opportunities in community pharmacies, hospital pharmacies, pharmaceutical companies, and drug regulatory agencies. 100% employment opportunities with international licensing and visa assistance.',
-                  version: 1,
-                },
-              ],
-              direction: 'ltr',
-              format: '',
-              indent: 0,
-              textFormat: 0,
-              version: 1,
-            },
-          ],
-          direction: 'ltr',
-          format: '',
-          indent: 0,
-          version: 1,
-        },
-      },
-      tuitionFees: {
-        local: '325,000 XAF per year',
-        international: '325,000 XAF per year',
-      },
-      intakePeriods: [
-        {
-          intakeDate: '2024-09-01',
-          label: 'September 2024',
-        },
-        {
-          intakeDate: '2025-01-15',
-          label: 'January 2025',
-        },
-      ],
-      meta: {
-        title: "HND in Pharmacy Technology - St. David's University Institute",
-        description:
-          "Comprehensive 3-year program in Pharmacy Technology. Master pharmaceutical sciences and pharmacy management at St. David's University Institute with 100% employment opportunities.",
-        image: metaImage.id,
-      },
-      publishedAt: new Date().toISOString(),
-    },
-    // 2-Year HND Programs
-    {
-      title: '2-Year HND in Nursing Science',
-      slug: '2-year-hnd-nursing-science',
-      programType: 'HND',
+      title: 'BSc Nursing (Top-up)',
+      slug: 'bsc-nursing-top-up',
+      programType: 'Degree-Direct',
       department: nursingDepartment.id,
       duration: '2 years',
       _status: 'published',
       featuredImage: featuredImage.id,
-      entryRequirements: {
-        root: {
-          type: 'root',
-          children: [
-            {
-              type: 'list',
-              children: [
-                {
-                  type: 'listitem',
-                  children: [
-                    {
-                      type: 'text',
-                      detail: 0,
-                      format: 0,
-                      mode: 'normal',
-                      style: '',
-                      text: 'GCE B.E.P.C or O/L',
-                      version: 1,
-                    },
-                  ],
-                  direction: 'ltr',
-                  format: '',
-                  indent: 0,
-                  version: 1,
-                  value: 1,
-                },
-                {
-                  type: 'listitem',
-                  children: [
-                    {
-                      type: 'text',
-                      detail: 0,
-                      format: 0,
-                      mode: 'normal',
-                      style: '',
-                      text: 'Registration fee: 25,000 XAF',
-                      version: 1,
-                    },
-                  ],
-                  direction: 'ltr',
-                  format: '',
-                  indent: 0,
-                  version: 1,
-                  value: 2,
-                },
-              ],
-              direction: 'ltr',
-              format: '',
-              indent: 0,
-              listType: 'bullet',
-              start: 1,
-              tag: 'ul',
-              version: 1,
-            },
-          ],
-          direction: 'ltr',
-          format: '',
-          indent: 0,
-          version: 1,
-        },
-      },
-      curriculumOverview: {
-        root: {
-          type: 'root',
-          children: [
-            {
-              type: 'paragraph',
-              children: [
-                {
-                  type: 'text',
-                  detail: 0,
-                  format: 0,
-                  mode: 'normal',
-                  style: '',
-                  text: 'Accelerated 2-year nursing program for State Enrolled Nurse qualification. Comprehensive training in nursing fundamentals, patient care, and clinical practice with 2.5 months of lectures and 2.5 months of internship per semester.',
-                  version: 1,
-                },
-              ],
-              direction: 'ltr',
-              format: '',
-              indent: 0,
-              textFormat: 0,
-              version: 1,
-            },
-          ],
-          direction: 'ltr',
-          format: '',
-          indent: 0,
-          version: 1,
-        },
-      },
-      careerProspects: {
-        root: {
-          type: 'root',
-          children: [
-            {
-              type: 'paragraph',
-              children: [
-                {
-                  type: 'text',
-                  detail: 0,
-                  format: 0,
-                  mode: 'normal',
-                  style: '',
-                  text: 'Career opportunities as State Enrolled Nurse in hospitals, clinics, community health centers, and private healthcare facilities. 100% employment opportunities with international licensing and visa assistance.',
-                  version: 1,
-                },
-              ],
-              direction: 'ltr',
-              format: '',
-              indent: 0,
-              textFormat: 0,
-              version: 1,
-            },
-          ],
-          direction: 'ltr',
-          format: '',
-          indent: 0,
-          version: 1,
-        },
-      },
+      entryRequirements: [
+        { requirement: 'Photocopy of HND certificate or equivalent in nursing' },
+        { requirement: 'Photocopy of birth certificate' },
+        { requirement: 'Four passport size photos' },
+      ],
       tuitionFees: {
         local: '300,000 XAF per year',
         international: '300,000 XAF per year',
@@ -767,146 +501,31 @@ export const academicPrograms: (
         },
       ],
       meta: {
-        title: "2-Year HND in Nursing Science - St. David's University Institute",
+        title: "BSc Nursing (Top-up) - St. David's University Institute",
         description:
-          "Accelerated 2-year HND program for State Enrolled Nurse qualification at St. David's University Institute with 100% employment opportunities.",
+          "Two-year Bachelor of Science in Nursing top-up program at St. David's University Institute.",
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),
     },
-    // Certificate Programs
+
+    // Top-up BSc Midwifery
     {
-      title: 'Associate Vocational Nurse Certificate',
-      slug: 'associate-vocational-nurse-certificate',
-      programType: 'Basic',
-      department: nursingDepartment.id,
-      duration: '1 year',
+      title: 'BSc Midwifery (Top-up)',
+      slug: 'bsc-midwifery-top-up',
+      programType: 'Degree-TopUp',
+      department: midwiferyDepartment.id,
+      duration: '2 years',
       _status: 'published',
       featuredImage: featuredImage.id,
-      entryRequirements: {
-        root: {
-          type: 'root',
-          children: [
-            {
-              type: 'list',
-              children: [
-                {
-                  type: 'listitem',
-                  children: [
-                    {
-                      type: 'text',
-                      detail: 0,
-                      format: 0,
-                      mode: 'normal',
-                      style: '',
-                      text: 'F.S.L.C or C.E.P',
-                      version: 1,
-                    },
-                  ],
-                  direction: 'ltr',
-                  format: '',
-                  indent: 0,
-                  version: 1,
-                  value: 1,
-                },
-                {
-                  type: 'listitem',
-                  children: [
-                    {
-                      type: 'text',
-                      detail: 0,
-                      format: 0,
-                      mode: 'normal',
-                      style: '',
-                      text: 'Registration fee: 25,000 XAF',
-                      version: 1,
-                    },
-                  ],
-                  direction: 'ltr',
-                  format: '',
-                  indent: 0,
-                  version: 1,
-                  value: 2,
-                },
-              ],
-              direction: 'ltr',
-              format: '',
-              indent: 0,
-              listType: 'bullet',
-              start: 1,
-              tag: 'ul',
-              version: 1,
-            },
-          ],
-          direction: 'ltr',
-          format: '',
-          indent: 0,
-          version: 1,
-        },
-      },
-      curriculumOverview: {
-        root: {
-          type: 'root',
-          children: [
-            {
-              type: 'paragraph',
-              children: [
-                {
-                  type: 'text',
-                  detail: 0,
-                  format: 0,
-                  mode: 'normal',
-                  style: '',
-                  text: 'Intensive 1-year vocational nursing program covering basic nursing skills, patient care fundamentals, and clinical practice. Program includes practical training and internship opportunities.',
-                  version: 1,
-                },
-              ],
-              direction: 'ltr',
-              format: '',
-              indent: 0,
-              textFormat: 0,
-              version: 1,
-            },
-          ],
-          direction: 'ltr',
-          format: '',
-          indent: 0,
-          version: 1,
-        },
-      },
-      careerProspects: {
-        root: {
-          type: 'root',
-          children: [
-            {
-              type: 'paragraph',
-              children: [
-                {
-                  type: 'text',
-                  detail: 0,
-                  format: 0,
-                  mode: 'normal',
-                  style: '',
-                  text: 'Entry-level nursing positions in healthcare facilities, nursing homes, and community health centers. Pathway to further nursing education and career advancement.',
-                  version: 1,
-                },
-              ],
-              direction: 'ltr',
-              format: '',
-              indent: 0,
-              textFormat: 0,
-              version: 1,
-            },
-          ],
-          direction: 'ltr',
-          format: '',
-          indent: 0,
-          version: 1,
-        },
-      },
+      entryRequirements: [
+        { requirement: 'Photocopy of HND certificate or equivalent in midwifery' },
+        { requirement: 'Photocopy of birth certificate' },
+        { requirement: 'Four passport size photos' },
+      ],
       tuitionFees: {
-        local: '260,000 XAF per year',
-        international: '260,000 XAF per year',
+        local: '300,000 XAF per year',
+        international: '300,000 XAF per year',
       },
       intakePeriods: [
         {
@@ -919,143 +538,104 @@ export const academicPrograms: (
         },
       ],
       meta: {
-        title: "Associate Vocational Nurse Certificate - St. David's University Institute",
+        title: "BSc Midwifery (Top-up) - St. David's University Institute",
         description:
-          "Intensive 1-year vocational nursing certificate program at St. David's University Institute. Start your nursing career with practical training.",
+          "Two-year Bachelor of Science in Midwifery top-up program at St. David's University Institute.",
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),
     },
-    // Bachelor's Degree Programs
+
+    // Top-up BSc Pharmacy
     {
-      title: 'Bachelor of Science in Nursing',
-      slug: 'bsc-nursing',
+      title: 'BSc Pharmacy (Top-up)',
+      slug: 'bsc-pharmacy-top-up',
+      programType: 'Degree-TopUp',
+      department: pharmacyDepartment.id,
+      duration: '2 years',
+      _status: 'published',
+      featuredImage: featuredImage.id,
+      entryRequirements: [
+        { requirement: 'Photocopy of HND certificate or equivalent in pharmacy' },
+        { requirement: 'Photocopy of birth certificate' },
+        { requirement: 'Four passport size photos' },
+      ],
+      tuitionFees: {
+        local: '300,000 XAF per year',
+        international: '300,000 XAF per year',
+      },
+      intakePeriods: [
+        {
+          intakeDate: '2024-09-01',
+          label: 'September 2024',
+        },
+        {
+          intakeDate: '2025-01-15',
+          label: 'January 2025',
+        },
+      ],
+      meta: {
+        title: "BSc Pharmacy (Top-up) - St. David's University Institute",
+        description:
+          "Two-year Bachelor of Science in Pharmacy top-up program at St. David's University Institute.",
+        image: metaImage.id,
+      },
+      publishedAt: new Date().toISOString(),
+    },
+
+    // Top-up BSc Laboratory Technology
+    {
+      title: 'BSc Laboratory Technology (Top-up)',
+      slug: 'bsc-laboratory-technology-top-up',
+      programType: 'Degree-TopUp',
+      department: laboratoryTechnologyDepartment.id,
+      duration: '2 years',
+      _status: 'published',
+      featuredImage: featuredImage.id,
+      entryRequirements: [
+        { requirement: 'Photocopy of HND certificate or equivalent in laboratory technology' },
+        { requirement: 'Photocopy of birth certificate' },
+        { requirement: 'Four passport size photos' },
+      ],
+      tuitionFees: {
+        local: '300,000 XAF per year',
+        international: '300,000 XAF per year',
+      },
+      intakePeriods: [
+        {
+          intakeDate: '2024-09-01',
+          label: 'September 2024',
+        },
+        {
+          intakeDate: '2025-01-15',
+          label: 'January 2025',
+        },
+      ],
+      meta: {
+        title: "BSc Laboratory Technology (Top-up) - St. David's University Institute",
+        description:
+          "Two-year Bachelor of Science in Laboratory Technology top-up program at St. David's University Institute.",
+        image: metaImage.id,
+      },
+      publishedAt: new Date().toISOString(),
+    },
+
+    // DIRECT DEGREE PROGRAMS
+
+    // Direct BSc Nursing
+    {
+      title: 'BSc Nursing (Direct Entry)',
+      slug: 'bsc-nursing-direct',
       programType: 'Degree-Direct',
       department: nursingDepartment.id,
       duration: '4 years',
       _status: 'published',
       featuredImage: featuredImage.id,
-      entryRequirements: {
-        root: {
-          type: 'root',
-          children: [
-            {
-              type: 'list',
-              children: [
-                {
-                  type: 'listitem',
-                  children: [
-                    {
-                      type: 'text',
-                      detail: 0,
-                      format: 0,
-                      mode: 'normal',
-                      style: '',
-                      text: 'GCE A/L or BAC (Baccalauréat)',
-                      version: 1,
-                    },
-                  ],
-                  direction: 'ltr',
-                  format: '',
-                  indent: 0,
-                  version: 1,
-                  value: 1,
-                },
-                {
-                  type: 'listitem',
-                  children: [
-                    {
-                      type: 'text',
-                      detail: 0,
-                      format: 0,
-                      mode: 'normal',
-                      style: '',
-                      text: 'Registration fee: 25,000 XAF',
-                      version: 1,
-                    },
-                  ],
-                  direction: 'ltr',
-                  format: '',
-                  indent: 0,
-                  version: 1,
-                  value: 2,
-                },
-              ],
-              direction: 'ltr',
-              format: '',
-              indent: 0,
-              listType: 'bullet',
-              start: 1,
-              tag: 'ul',
-              version: 1,
-            },
-          ],
-          direction: 'ltr',
-          format: '',
-          indent: 0,
-          version: 1,
-        },
-      },
-      curriculumOverview: {
-        root: {
-          type: 'root',
-          children: [
-            {
-              type: 'paragraph',
-              children: [
-                {
-                  type: 'text',
-                  detail: 0,
-                  format: 0,
-                  mode: 'normal',
-                  style: '',
-                  text: 'Comprehensive 4-year degree program in nursing science with advanced clinical training, research methodology, and leadership development. Program includes well-equipped practical halls and 2.5 months of lectures with 2.5 months of internship per semester.',
-                  version: 1,
-                },
-              ],
-              direction: 'ltr',
-              format: '',
-              indent: 0,
-              textFormat: 0,
-              version: 1,
-            },
-          ],
-          direction: 'ltr',
-          format: '',
-          indent: 0,
-          version: 1,
-        },
-      },
-      careerProspects: {
-        root: {
-          type: 'root',
-          children: [
-            {
-              type: 'paragraph',
-              children: [
-                {
-                  type: 'text',
-                  detail: 0,
-                  format: 0,
-                  mode: 'normal',
-                  style: '',
-                  text: 'Career opportunities as Registered Nurse in hospitals, healthcare institutions, research facilities, and nursing education. 100% employment opportunities with international licensing and visa assistance.',
-                  version: 1,
-                },
-              ],
-              direction: 'ltr',
-              format: '',
-              indent: 0,
-              textFormat: 0,
-              version: 1,
-            },
-          ],
-          direction: 'ltr',
-          format: '',
-          indent: 0,
-          version: 1,
-        },
-      },
+      entryRequirements: [
+        { requirement: 'Photocopy of advanced level certificate or equivalent in any field' },
+        { requirement: 'Photocopy of birth certificate' },
+        { requirement: 'Four passport size photos' },
+      ],
       tuitionFees: {
         local: '350,000 XAF per year',
         international: '350,000 XAF per year',
@@ -1071,9 +651,279 @@ export const academicPrograms: (
         },
       ],
       meta: {
-        title: "Bachelor of Science in Nursing - St. David's University Institute",
+        title: "BSc Nursing (Direct Entry) - St. David's University Institute",
         description:
-          "Comprehensive 4-year Bachelor of Science in Nursing program at St. David's University Institute with 100% employment opportunities.",
+          "Four-year Bachelor of Science in Nursing direct entry program at St. David's University Institute.",
+        image: metaImage.id,
+      },
+      publishedAt: new Date().toISOString(),
+    },
+
+    // Direct BSc Midwifery
+    {
+      title: 'BSc Midwifery (Direct Entry)',
+      slug: 'bsc-midwifery-direct',
+      programType: 'Degree-Direct',
+      department: midwiferyDepartment.id,
+      duration: '4 years',
+      _status: 'published',
+      featuredImage: featuredImage.id,
+      entryRequirements: [
+        {
+          requirement:
+            'Photocopy of advanced level certificate or equivalent in any field plus biology',
+        },
+        { requirement: 'Photocopy of birth certificate' },
+        { requirement: 'Four passport size photos' },
+      ],
+      tuitionFees: {
+        local: '350,000 XAF per year',
+        international: '350,000 XAF per year',
+      },
+      intakePeriods: [
+        {
+          intakeDate: '2024-09-01',
+          label: 'September 2024',
+        },
+        {
+          intakeDate: '2025-01-15',
+          label: 'January 2025',
+        },
+      ],
+      meta: {
+        title: "BSc Midwifery (Direct Entry) - St. David's University Institute",
+        description:
+          "Four-year Bachelor of Science in Midwifery direct entry program at St. David's University Institute.",
+        image: metaImage.id,
+      },
+      publishedAt: new Date().toISOString(),
+    },
+
+    // Direct BSc Pharmacy
+    {
+      title: 'BSc Pharmacy (Direct Entry)',
+      slug: 'bsc-pharmacy-direct',
+      programType: 'Degree-Direct',
+      department: pharmacyDepartment.id,
+      duration: '4 years',
+      _status: 'published',
+      featuredImage: featuredImage.id,
+      entryRequirements: [
+        {
+          requirement:
+            'Photocopy of advanced level certificate or equivalent in any field, from a science background',
+        },
+        { requirement: 'Photocopy of birth certificate' },
+        { requirement: 'Four passport size photos' },
+      ],
+      tuitionFees: {
+        local: '350,000 XAF per year',
+        international: '350,000 XAF per year',
+      },
+      intakePeriods: [
+        {
+          intakeDate: '2024-09-01',
+          label: 'September 2024',
+        },
+        {
+          intakeDate: '2025-01-15',
+          label: 'January 2025',
+        },
+      ],
+      meta: {
+        title: "BSc Pharmacy (Direct Entry) - St. David's University Institute",
+        description:
+          "Four-year Bachelor of Science in Pharmacy direct entry program at St. David's University Institute.",
+        image: metaImage.id,
+      },
+      publishedAt: new Date().toISOString(),
+    },
+
+    // Direct BSc Laboratory Technology
+    {
+      title: 'BSc Laboratory Technology (Direct Entry)',
+      slug: 'bsc-laboratory-technology-direct',
+      programType: 'Degree-Direct',
+      department: laboratoryTechnologyDepartment.id,
+      duration: '4 years',
+      _status: 'published',
+      featuredImage: featuredImage.id,
+      entryRequirements: [
+        {
+          requirement:
+            'Photocopy of advanced level certificate or equivalent in any field, from a science background',
+        },
+        { requirement: 'Photocopy of birth certificate' },
+        { requirement: 'Four passport size photos' },
+      ],
+      tuitionFees: {
+        local: '350,000 XAF per year',
+        international: '350,000 XAF per year',
+      },
+      intakePeriods: [
+        {
+          intakeDate: '2024-09-01',
+          label: 'September 2024',
+        },
+        {
+          intakeDate: '2025-01-15',
+          label: 'January 2025',
+        },
+      ],
+      meta: {
+        title: "BSc Laboratory Technology (Direct Entry) - St. David's University Institute",
+        description:
+          "Four-year Bachelor of Science in Laboratory Technology direct entry program at St. David's University Institute.",
+        image: metaImage.id,
+      },
+      publishedAt: new Date().toISOString(),
+    },
+
+    // MASTERS PROGRAMS
+
+    // MSc Nursing
+    {
+      title: 'MSc Nursing',
+      slug: 'msc-nursing',
+      programType: 'Masters',
+      department: nursingDepartment.id,
+      duration: '2 years',
+      _status: 'published',
+      featuredImage: featuredImage.id,
+      entryRequirements: [
+        { requirement: 'Photocopy of BSc certificate or equivalent in nursing' },
+        { requirement: 'Photocopy of birth certificate' },
+        { requirement: 'Four passport size photos' },
+      ],
+      tuitionFees: {
+        local: '450,000 XAF per year',
+        international: '450,000 XAF per year',
+      },
+      intakePeriods: [
+        {
+          intakeDate: '2024-09-01',
+          label: 'September 2024',
+        },
+        {
+          intakeDate: '2025-01-15',
+          label: 'January 2025',
+        },
+      ],
+      meta: {
+        title: "MSc Nursing - St. David's University Institute",
+        description:
+          "Two-year Master of Science in Nursing program at St. David's University Institute.",
+        image: metaImage.id,
+      },
+      publishedAt: new Date().toISOString(),
+    },
+
+    // MSc Midwifery
+    {
+      title: 'MSc Midwifery',
+      slug: 'msc-midwifery',
+      programType: 'Masters',
+      department: midwiferyDepartment.id,
+      duration: '2 years',
+      _status: 'published',
+      featuredImage: featuredImage.id,
+      entryRequirements: [
+        { requirement: 'Photocopy of BSc certificate or equivalent in midwifery' },
+        { requirement: 'Photocopy of birth certificate' },
+        { requirement: 'Four passport size photos' },
+      ],
+      tuitionFees: {
+        local: '450,000 XAF per year',
+        international: '450,000 XAF per year',
+      },
+      intakePeriods: [
+        {
+          intakeDate: '2024-09-01',
+          label: 'September 2024',
+        },
+        {
+          intakeDate: '2025-01-15',
+          label: 'January 2025',
+        },
+      ],
+      meta: {
+        title: "MSc Midwifery - St. David's University Institute",
+        description:
+          "Two-year Master of Science in Midwifery program at St. David's University Institute.",
+        image: metaImage.id,
+      },
+      publishedAt: new Date().toISOString(),
+    },
+
+    // MSc Pharmacy
+    {
+      title: 'MSc Pharmacy',
+      slug: 'msc-pharmacy',
+      programType: 'Masters',
+      department: pharmacyDepartment.id,
+      duration: '2 years',
+      _status: 'published',
+      featuredImage: featuredImage.id,
+      entryRequirements: [
+        { requirement: 'Photocopy of BSc or equivalent in pharmacy' },
+        { requirement: 'Photocopy of birth certificate' },
+        { requirement: 'Four passport size photos' },
+      ],
+      tuitionFees: {
+        local: '450,000 XAF per year',
+        international: '450,000 XAF per year',
+      },
+      intakePeriods: [
+        {
+          intakeDate: '2024-09-01',
+          label: 'September 2024',
+        },
+        {
+          intakeDate: '2025-01-15',
+          label: 'January 2025',
+        },
+      ],
+      meta: {
+        title: "MSc Pharmacy - St. David's University Institute",
+        description:
+          "Two-year Master of Science in Pharmacy program at St. David's University Institute.",
+        image: metaImage.id,
+      },
+      publishedAt: new Date().toISOString(),
+    },
+
+    // MSc Laboratory Technology
+    {
+      title: 'MSc Laboratory Technology',
+      slug: 'msc-laboratory-technology',
+      programType: 'Masters',
+      department: laboratoryTechnologyDepartment.id,
+      duration: '2 years',
+      _status: 'published',
+      featuredImage: featuredImage.id,
+      entryRequirements: [
+        { requirement: 'Photocopy of BSc certificate or equivalent in laboratory technology' },
+        { requirement: 'Photocopy of birth certificate' },
+        { requirement: 'Four passport size photos' },
+      ],
+      tuitionFees: {
+        local: '450,000 XAF per year',
+        international: '450,000 XAF per year',
+      },
+      intakePeriods: [
+        {
+          intakeDate: '2024-09-01',
+          label: 'September 2024',
+        },
+        {
+          intakeDate: '2025-01-15',
+          label: 'January 2025',
+        },
+      ],
+      meta: {
+        title: "MSc Laboratory Technology - St. David's University Institute",
+        description:
+          "Two-year Master of Science in Laboratory Technology program at St. David's University Institute.",
         image: metaImage.id,
       },
       publishedAt: new Date().toISOString(),

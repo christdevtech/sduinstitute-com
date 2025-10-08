@@ -5,14 +5,18 @@ type ProgramsArgs = {
   heroImage: Media
   metaImage: Media
   nursingDepartment: Department
-  biomedicalDepartment: Department
+  midwiferyDepartment: Department
+  pharmacyDepartment: Department
+  laboratoryTechnologyDepartment: Department
 }
 
 export const programs: (args: ProgramsArgs) => RequiredDataFromCollectionSlug<'pages'> = ({
   heroImage,
   metaImage,
   nursingDepartment,
-  biomedicalDepartment,
+  midwiferyDepartment,
+  pharmacyDepartment,
+  laboratoryTechnologyDepartment,
 }) => {
   return {
     slug: 'programs',
@@ -765,7 +769,7 @@ export const programs: (args: ProgramsArgs) => RequiredDataFromCollectionSlug<'p
       {
         blockName: 'Department Overview',
         blockType: 'departmentOverview',
-        selectedDepartment: biomedicalDepartment.id,
+        selectedDepartment: laboratoryTechnologyDepartment.id,
         showStaffList: true,
         showPrograms: true,
         showContactInfo: true,

@@ -10,11 +10,15 @@ import { SearchIcon } from 'lucide-react'
 
 export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
   const navItems = data?.navItems || []
+  const buttons = data?.buttons || []
 
   return (
     <nav className="flex gap-3 items-center">
       {navItems.map(({ link }, i) => {
         return <CMSLink key={i} {...link} appearance="link" />
+      })}
+      {buttons.map(({ link }, i) => {
+        return <CMSLink key={i} {...link} className={'block w-full text-center'} />
       })}
       <Link href="/search">
         <span className="sr-only">Search</span>
