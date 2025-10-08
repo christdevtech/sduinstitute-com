@@ -1,0 +1,1 @@
+1. For icons, always prefer lucide react icons. Rather than use typed uncustomizable icons, create a client component and use the icons in those client components and then use the components in the server components that require the icon.

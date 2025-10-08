@@ -1907,24 +1907,13 @@ export interface Event {
     [k: string]: unknown;
   };
   eventImage?: (string | null) | Media;
-  attachments?:
-    | {
-        file: string | Media;
-        title?: string | null;
-        id?: string | null;
-      }[]
-    | null;
+  /**
+   * Upload multiple images and media files for this event
+   */
+  gallery?: (string | Media)[] | null;
   startDate: string;
   endDate?: string | null;
   isAllDay?: boolean | null;
-  /**
-   * Format: HH:MM (e.g., 09:00, 14:30)
-   */
-  startTime?: string | null;
-  /**
-   * Format: HH:MM (e.g., 17:00, 18:30)
-   */
-  endTime?: string | null;
   location: string;
   department?: (string | null) | Department;
   organizer?: (string | null) | Staff;
@@ -2936,18 +2925,10 @@ export interface EventsSelect<T extends boolean = true> {
   eventType?: T;
   description?: T;
   eventImage?: T;
-  attachments?:
-    | T
-    | {
-        file?: T;
-        title?: T;
-        id?: T;
-      };
+  gallery?: T;
   startDate?: T;
   endDate?: T;
   isAllDay?: T;
-  startTime?: T;
-  endTime?: T;
   location?: T;
   department?: T;
   organizer?: T;

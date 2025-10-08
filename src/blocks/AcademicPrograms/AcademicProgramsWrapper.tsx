@@ -5,25 +5,6 @@ import { motion } from 'framer-motion'
 import type { AcademicProgram, Department } from '@/payload-types'
 import { AcademicProgramsClient } from './AcademicProgramsClient'
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.1,
-    },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-  },
-}
-
 interface AcademicProgramsWrapperProps {
   id?: string
   initialPrograms: AcademicProgram[]
@@ -44,17 +25,12 @@ export const AcademicProgramsWrapper: React.FC<AcademicProgramsWrapperProps> = (
   itemsPerPage,
 }) => {
   return (
-    <motion.div
-      className="container my-16"
-      id={`block-${id}`}
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: false, amount: 0.3 }}
-    >
+    <div className="container my-16" id={`block-${id}`}>
       <motion.div
         className="mb-8"
-        variants={itemVariants}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.3 }}
         transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
         <h2 className="text-3xl font-bold mb-4">Academic Programs</h2>
@@ -63,10 +39,7 @@ export const AcademicProgramsWrapper: React.FC<AcademicProgramsWrapperProps> = (
         </p>
       </motion.div>
 
-      <motion.div
-        variants={itemVariants}
-        transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-      >
+      <div>
         <AcademicProgramsClient
           initialPrograms={initialPrograms}
           departments={departments}
@@ -75,7 +48,7 @@ export const AcademicProgramsWrapper: React.FC<AcademicProgramsWrapperProps> = (
           showApplicationCTA={showApplicationCTA}
           itemsPerPage={itemsPerPage}
         />
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   )
 }

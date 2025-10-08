@@ -108,7 +108,13 @@ const Filters: React.FC<FilterProps> = ({
   const programTypes = ['Basic', 'HND', 'Degree-TopUp', 'Degree-Direct', 'Masters', 'PhD']
 
   return (
-    <div className="mb-8 p-6 bg-muted/50 rounded-lg">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: false, amount: 0.3 }}
+      transition={{ duration: 0.5, delay: 0.1 }}
+      className="mb-8 p-6 bg-muted/50 rounded-lg"
+    >
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div>
           <label htmlFor="search" className="block text-sm font-medium mb-2">
@@ -168,7 +174,7 @@ const Filters: React.FC<FilterProps> = ({
           </select>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 

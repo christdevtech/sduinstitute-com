@@ -43,6 +43,8 @@ export const Events: CollectionConfig<'events'> = {
     department: true,
     organizer: true,
     isFeatured: true,
+    eventImage: true,
+    gallery: true,
     meta: {
       image: true,
       description: true,
@@ -143,22 +145,14 @@ export const Events: CollectionConfig<'events'> = {
               label: 'Event Image',
             },
             {
-              name: 'attachments',
-              type: 'array',
-              label: 'Event Attachments',
-              fields: [
-                {
-                  name: 'file',
-                  type: 'upload',
-                  relationTo: 'media',
-                  required: true,
-                },
-                {
-                  name: 'title',
-                  type: 'text',
-                  label: 'File Title',
-                },
-              ],
+              name: 'gallery',
+              type: 'upload',
+              relationTo: 'media',
+              hasMany: true,
+              label: 'Event Gallery',
+              admin: {
+                description: 'Upload multiple images and media files for this event',
+              },
             },
           ],
           label: 'Content',
@@ -191,30 +185,12 @@ export const Events: CollectionConfig<'events'> = {
               defaultValue: false,
             },
             {
-              name: 'startTime',
-              type: 'text',
-              label: 'Start Time',
-              admin: {
-                condition: (data) => !data.isAllDay,
-                description: 'Format: HH:MM (e.g., 09:00, 14:30)',
-              },
-            },
-            {
-              name: 'endTime',
-              type: 'text',
-              label: 'End Time',
-              admin: {
-                condition: (data) => !data.isAllDay,
-                description: 'Format: HH:MM (e.g., 17:00, 18:30)',
-              },
-            },
-            {
               name: 'location',
               type: 'text',
               required: true,
             },
           ],
-          label: 'Date & Time',
+          label: 'Date, Time and Venue',
         },
         {
           fields: [
