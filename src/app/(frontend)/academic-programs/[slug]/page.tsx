@@ -14,6 +14,7 @@ import type { AcademicProgram } from '@/payload-types'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
+import Link from 'next/link'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -235,7 +236,7 @@ export default async function AcademicProgramPage({ params: paramsPromise }: Arg
             {program.brochure && typeof program.brochure === 'object' && (
               <div className="bg-card border border-border rounded-lg p-6">
                 <h3 className="text-lg font-semibold mb-4">Download Brochure</h3>
-                <a
+                <Link
                   href={program.brochure.url || ''}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -250,7 +251,7 @@ export default async function AcademicProgramPage({ params: paramsPromise }: Arg
                     />
                   </svg>
                   Download PDF
-                </a>
+                </Link>
               </div>
             )}
 
