@@ -68,7 +68,20 @@ export const EventsCalendarClient: React.FC<EventsCalendarClientProps> = ({
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
     const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    const months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ]
     return `${weekdays[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
   }
 
@@ -79,6 +92,29 @@ export const EventsCalendarClient: React.FC<EventsCalendarClientProps> = ({
     const ampm = hour >= 12 ? 'PM' : 'AM'
     const displayHour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour
     return `${displayHour}:${minutes} ${ampm}`
+  }
+
+  const extractTimeFromDate = (dateString: string) => {
+    if (!dateString) return ''
+    const date = new Date(dateString)
+    const hours = date.getHours()
+    const minutes = date.getMinutes()
+
+    // Only show time if it's not midnight (00:00)
+    if (hours === 0 && minutes === 0) return ''
+
+    const ampm = hours >= 12 ? 'PM' : 'AM'
+    const displayHour = hours === 0 ? 12 : hours > 12 ? hours - 12 : hours
+    const displayMinutes = minutes.toString().padStart(2, '0')
+    return `${displayHour}:${displayMinutes} ${ampm}`
+  }
+
+  const getEventTimeDisplay = (event: Event) => {
+    // If no dedicated time fields, extract from date fields
+    const startTime = extractTimeFromDate(event.startDate)
+    const endTime = event.endDate ? extractTimeFromDate(event.endDate) : ''
+
+    return { startTime, endTime }
   }
 
   const getEventTypeColor = (eventType: string) => {
@@ -183,15 +219,20 @@ export const EventsCalendarClient: React.FC<EventsCalendarClientProps> = ({
                       )}
                     </div>
 
-                    {(event.startTime || event.endTime) && (
-                      <div className="flex items-center gap-2">
-                        <Clock className="h-4 w-4" />
-                        <span>
-                          {event.startTime && formatTime(event.startTime)}
-                          {event.endTime && ` - ${formatTime(event.endTime)}`}
-                        </span>
-                      </div>
-                    )}
+                    {(() => {
+                      const { startTime, endTime } = getEventTimeDisplay(event)
+                      return (
+                        (startTime || endTime) && (
+                          <div className="flex items-center gap-2">
+                            <Clock className="h-4 w-4" />
+                            <span>
+                              {startTime}
+                              {endTime && startTime !== endTime && ` - ${endTime}`}
+                            </span>
+                          </div>
+                        )
+                      )
+                    })()}
 
                     {event.location && (
                       <div className="flex items-center gap-2">
