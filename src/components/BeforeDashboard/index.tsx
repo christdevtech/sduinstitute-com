@@ -12,7 +12,7 @@ const BeforeDashboard: React.FC = () => {
       <Banner className={`${baseClass}__banner`} type="success">
         <h4>Welcome to St. David University Institute dashboard!</h4>
       </Banner>
-      <ul className={`${baseClass}__instructions`}>
+      {/* <ul className={`${baseClass}__instructions`}>
         <li>
           <SeedButton />
           {' with a few pages, posts, and projects to jump-start your new site, then '}
@@ -65,7 +65,7 @@ const BeforeDashboard: React.FC = () => {
       >
         custom component
       </a>
-      , you can remove it at any time by updating your <strong>payload.config</strong>.
+      , you can remove it at any time by updating your <strong>payload.config</strong>. */}
     </div>
   )
 }
