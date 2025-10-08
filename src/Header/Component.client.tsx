@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useEffect, useState, useRef } from 'react'
 import { Menu, X, SearchIcon } from 'lucide-react'
-// import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
+import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 import type { Header } from '@/payload-types'
 
 import { Logo } from '@/components/Logo/Logo'
@@ -141,13 +141,16 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
               <Link href="/" onClick={closeMobileMenu}>
                 <Logo loading="eager" priority="high" />
               </Link>
-              <button
-                onClick={toggleMobileMenu}
-                className="p-2 rounded-md dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                aria-label="Close mobile menu"
-              >
-                <X className="w-6 h-6" />
-              </button>
+              <div className="flex items-center gap-2">
+                <ThemeSelector />
+                <button
+                  onClick={toggleMobileMenu}
+                  className="p-2 rounded-md dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  aria-label="Close mobile menu"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
             </div>
 
             {/* Menu Content */}
