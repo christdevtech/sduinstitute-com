@@ -6,7 +6,7 @@ import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 import { AcademicProgramCard } from '@/components/AcademicProgramCard'
 import PageClient from './page.client'
-import type { Department, Staff, AcademicProgram } from '@/payload-types'
+import type { Department as _Department, Staff as _Staff, AcademicProgram as _AcademicProgram } from '@/payload-types'
 import Link from 'next/link'
 
 interface Props {

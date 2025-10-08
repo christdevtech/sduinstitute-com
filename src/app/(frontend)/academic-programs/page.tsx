@@ -26,7 +26,11 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
   const currentPage = parseInt(page, 10) || 1
 
   // Build where clause for filtering
-  const whereClause: any = {
+  const whereClause: {
+    _status: { equals: string }
+    programType?: { equals: string }
+    department?: { equals: string }
+  } = {
     _status: {
       equals: 'published',
     },

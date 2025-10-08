@@ -1,7 +1,7 @@
 import React from 'react'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import type { Event, Department } from '@/payload-types'
+import type { Event as _Event, Department } from '@/payload-types'
 import { EventsCalendarClient } from './EventsCalendarClient'
 
 type EventsCalendarBlockProps = {
@@ -34,8 +34,8 @@ export const EventsCalendarBlock: React.FC<
 
   // Calculate date range
   const now = new Date()
-  let startDate = new Date()
-  let endDate = new Date()
+  const startDate = new Date()
+  const endDate = new Date()
   
   switch (dateRange) {
     case 'week':
@@ -53,7 +53,20 @@ export const EventsCalendarBlock: React.FC<
   }
 
   // Build query conditions
-  const whereConditions: any = {
+  const whereConditions: {
+    and: Array<{
+      startDate?: {
+        greater_than_equal?: string
+        less_than_equal?: string
+      }
+      department?: {
+        equals: string
+      }
+      eventType?: {
+        equals: string
+      }
+    }>
+  } = {
     and: [
       {
         startDate: {

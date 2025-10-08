@@ -36,12 +36,12 @@ export const EventsCalendarClient: React.FC<EventsCalendarClientProps> = ({
   events,
   departments,
   viewType = 'upcoming',
-  filterByDepartment,
-  filterByEventType,
+  filterByDepartment: _filterByDepartment,
+  filterByEventType: _filterByEventType,
   showSearch = true,
   showFilters = true,
-  itemsToShow = 10,
-  dateRange = 'month',
+  itemsToShow: _itemsToShow = 10,
+  dateRange: _dateRange = 'month',
   showRegistrationStatus = true,
 }) => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -85,15 +85,6 @@ export const EventsCalendarClient: React.FC<EventsCalendarClientProps> = ({
     return `${weekdays[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
   }
 
-  const formatTime = (timeString: string) => {
-    if (!timeString) return ''
-    const [hours, minutes] = timeString.split(':')
-    const hour = parseInt(hours, 10)
-    const ampm = hour >= 12 ? 'PM' : 'AM'
-    const displayHour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour
-    return `${displayHour}:${minutes} ${ampm}`
-  }
-
   const extractTimeFromDate = (dateString: string) => {
     if (!dateString) return ''
     const date = new Date(dateString)
@@ -110,6 +101,14 @@ export const EventsCalendarClient: React.FC<EventsCalendarClientProps> = ({
   }
 
   const getEventTimeDisplay = (event: Event) => {
+    const formatTime = (timeString: string) => {
+      if (!timeString) return ''
+      const [hours, minutes] = timeString.split(':')
+      const hour = parseInt(hours, 10)
+      const ampm = hour >= 12 ? 'PM' : 'AM'
+      const displayHour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour
+      return `${displayHour}:${minutes} ${ampm}`
+    }
     // If no dedicated time fields, extract from date fields
     const startTime = extractTimeFromDate(event.startDate)
     const endTime = event.endDate ? extractTimeFromDate(event.endDate) : ''

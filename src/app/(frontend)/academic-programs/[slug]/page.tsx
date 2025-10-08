@@ -9,7 +9,7 @@ import RichText from '@/components/RichText'
 import { Media } from '@/components/Media'
 import { formatDateTime } from '@/utilities/formatDateTime'
 
-import type { AcademicProgram } from '@/payload-types'
+import type { AcademicProgram as _AcademicProgram } from '@/payload-types'
 
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
