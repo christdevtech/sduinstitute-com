@@ -104,6 +104,25 @@ export const AcademicPrograms: CollectionConfig<'academic-programs'> = {
       },
     },
     {
+      name: 'specialties',
+      type: 'array',
+      fields: [
+        {
+          name: 'specialty',
+          type: 'text',
+          required: true,
+        },
+      ],
+      required: true,
+      admin: {
+        description: 'List of specialties offered in this program',
+        position: 'sidebar',
+        condition: (data, siblingData) => {
+          return siblingData.programType === 'Masters' || siblingData.programType === 'PhD'
+        },
+      },
+    },
+    {
       name: 'department',
       type: 'relationship',
       relationTo: 'departments',

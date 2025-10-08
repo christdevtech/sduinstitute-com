@@ -925,6 +925,15 @@ export interface AcademicProgram {
   slug?: string | null;
   slugLock?: boolean | null;
   programType: 'Basic' | 'HND' | 'Degree-TopUp' | 'Degree-Direct' | 'Masters' | 'PhD';
+  /**
+   * List of specialties offered in this program
+   */
+  specialties?:
+    | {
+        specialty: string;
+        id?: string | null;
+      }[]
+    | null;
   department: string | Department;
   /**
    * e.g., "3 years", "2 years", "18 months"
@@ -3052,6 +3061,12 @@ export interface AcademicProgramsSelect<T extends boolean = true> {
   slug?: T;
   slugLock?: T;
   programType?: T;
+  specialties?:
+    | T
+    | {
+        specialty?: T;
+        id?: T;
+      };
   department?: T;
   duration?: T;
   mentorUniversity?: T;
