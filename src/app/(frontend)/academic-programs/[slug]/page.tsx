@@ -94,6 +94,30 @@ export default async function AcademicProgramPage({ params: paramsPromise }: Arg
                   </div>
                 )}
               </div>
+              
+              {/* Specialties Display for Masters/PhD */}
+              {program.specialties && 
+               program.specialties.length > 0 && 
+               (program.programType === 'Masters' || program.programType === 'PhD') && (
+                <div className="mt-6">
+                  <h3 className="text-sm font-medium text-muted-foreground mb-3">Available Specialties:</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {program.specialties.slice(0, 4).map((specialty, index) => (
+                      <span
+                        key={index}
+                        className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300"
+                      >
+                        {specialty.specialty}
+                      </span>
+                    ))}
+                    {program.specialties.length > 4 && (
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400">
+                        +{program.specialties.length - 4} more
+                      </span>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
             {program.featuredImage && typeof program.featuredImage === 'object' && (
               <div className="aspect-video rounded-lg overflow-hidden">
@@ -172,6 +196,30 @@ export default async function AcademicProgramPage({ params: paramsPromise }: Arg
                       Program Coordinator
                     </span>
                     <p className="font-medium">{program.programCoordinator.fullName}</p>
+                  </div>
+                )}
+                
+                {/* Specialties in Sidebar for Masters/PhD */}
+                {program.specialties && 
+                 program.specialties.length > 0 && 
+                 (program.programType === 'Masters' || program.programType === 'PhD') && (
+                  <div>
+                    <span className="text-sm font-medium text-muted-foreground">Specialties</span>
+                    <div className="mt-2 space-y-1">
+                      {program.specialties.slice(0, 3).map((specialty, index) => (
+                        <span
+                          key={index}
+                          className="inline-block mr-2 mb-1 px-2 py-1 rounded text-xs font-medium bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-300"
+                        >
+                          {specialty.specialty}
+                        </span>
+                      ))}
+                      {program.specialties.length > 3 && (
+                        <p className="text-xs text-muted-foreground mt-1">
+                          +{program.specialties.length - 3} more specialties available
+                        </p>
+                      )}
+                    </div>
                   </div>
                 )}
               </div>

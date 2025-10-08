@@ -38,7 +38,11 @@ export const generateMeta = async (args: {
               url: ogImage,
             },
           ]
-        : undefined,
+        : [
+            {
+              url: process.env.NEXT_PUBLIC_SERVER_URL + '/website-template-OG.webp',
+            },
+          ],
       title,
       url: Array.isArray(doc?.slug) ? doc?.slug.join('/') : '/',
     }),
