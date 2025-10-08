@@ -220,7 +220,7 @@ export function AdmissionsInfoClient({
                   <div className="text-sm">
                     {program.tuitionFees?.local && <div>Local: {program.tuitionFees.local}</div>}
                     {program.tuitionFees?.international && (
-                      <div>Int'l: {program.tuitionFees.international}</div>
+                      <div>International: {program.tuitionFees.international}</div>
                     )}
                   </div>
                 </td>

@@ -72,8 +72,8 @@ export const MentorUniversitiesClient: React.FC<Props> = ({
             No Partner Universities Found
           </h3>
           <p className="text-muted-foreground max-w-md mx-auto">
-            We're constantly expanding our network of partner institutions. Check back soon for
-            updates.
+            We&lsquo;re constantly expanding our network of partner institutions. Check back soon
+            for updates.
           </p>
         </div>
       </div>

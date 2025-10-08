@@ -29,7 +29,7 @@ export const AcademicProgramsBlock: React.FC<
   const payload = await getPayload({ config: configPromise })
 
   // Fetch programs based on display type
-  let programsQuery: any = {
+  const programsQuery: any = {
     depth: 2,
     limit: 1000, // Get all programs for client-side filtering
   }

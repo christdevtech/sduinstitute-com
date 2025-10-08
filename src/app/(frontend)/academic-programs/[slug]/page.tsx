@@ -259,7 +259,7 @@ export default async function AcademicProgramPage({ params: paramsPromise }: Arg
             <div className="bg-primary text-primary-foreground rounded-lg p-6 text-center">
               <h3 className="text-lg font-semibold mb-2">Ready to Apply?</h3>
               <p className="text-sm mb-4 opacity-90">Start your journey with us today</p>
-              <a
+              <Link
                 href="/apply"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-background text-foreground rounded-md hover:bg-background/90 transition-colors"
               >
@@ -272,7 +272,7 @@ export default async function AcademicProgramPage({ params: paramsPromise }: Arg
                     d="M17 8l4 4m0 0l-4 4m4-4H3"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
