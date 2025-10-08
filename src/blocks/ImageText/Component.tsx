@@ -54,11 +54,7 @@ export const ImageTextBlock: React.FC<ImageTextBlockProps> = ({
         >
           {image && typeof image === 'object' && (
             <div className="relative overflow-hidden rounded-lg shadow-lg">
-              <Media
-                resource={image}
-                className="w-full h-auto object-cover"
-                htmlElement="div"
-              />
+              <Media resource={image} className="w-full h-auto object-cover" htmlElement="div" />
             </div>
           )}
         </motion.div>
@@ -67,7 +63,7 @@ export const ImageTextBlock: React.FC<ImageTextBlockProps> = ({
         <motion.div
           className={`${
             isImageLeft ? 'lg:order-2 lg:text-left' : 'lg:order-1 lg:text-right'
-          } flex flex-col justify-center space-y-6`}
+          } flex flex-col justify-center space-y-4`}
           variants={itemVariants}
           transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
@@ -85,7 +81,7 @@ export const ImageTextBlock: React.FC<ImageTextBlockProps> = ({
           {/* Rich Text Content */}
           {richText && (
             <motion.div
-              className="prose prose-lg max-w-none text-muted-foreground"
+              className="prose prose-lg max-w-none text-foreground"
               variants={itemVariants}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
@@ -96,9 +92,7 @@ export const ImageTextBlock: React.FC<ImageTextBlockProps> = ({
           {/* Links */}
           {links && links.length > 0 && (
             <motion.div
-              className={`flex flex-wrap gap-4 ${
-                isImageLeft ? 'justify-start' : 'lg:justify-end'
-              }`}
+              className={`flex flex-wrap gap-4 ${isImageLeft ? 'justify-start' : 'lg:justify-end'}`}
               variants={itemVariants}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
