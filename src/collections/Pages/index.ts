@@ -11,6 +11,7 @@ import { Content } from '../../blocks/Content/config'
 import { DepartmentOverview } from '../../blocks/DepartmentOverview/config'
 import { EventsCalendar } from '../../blocks/EventsCalendar/config'
 import { FormBlock } from '../../blocks/Form/config'
+import { ImageText } from '../../blocks/ImageText/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { MentorUniversities } from '../../blocks/MentorUniversities/config'
 import { ProgramPathway } from '../../blocks/ProgramPathway/config'
@@ -91,6 +92,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 Content,
                 DepartmentOverview,
                 EventsCalendar,
+                ImageText,
                 MediaBlock,
                 MentorUniversities,
                 ProgramPathway,

@@ -290,6 +290,7 @@ export interface Page {
     | ContentBlock
     | DepartmentOverviewBlock
     | EventsCalendarBlock
+    | ImageTextBlock
     | MediaBlock
     | MentorUniversitiesBlock
     | ProgramPathwayBlock
@@ -1565,6 +1566,151 @@ export interface EventsCalendarBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageTextBlock".
+ */
+export interface ImageTextBlock {
+  /**
+   * Choose whether the image appears on the left or right side
+   */
+  layout: 'imageLeft' | 'imageRight';
+  /**
+   * The image to display alongside the text content
+   */
+  image: string | Media;
+  /**
+   * The main heading for this section
+   */
+  title: string;
+  /**
+   * Rich text content to display alongside the image
+   */
+  richText: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * Optional link to include with this content
+   */
+  links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+          /**
+           * Choose how the link should be rendered.
+           */
+          appearance?: ('default' | 'outline') | null;
+          /**
+           * Choose an icon to display with the link.
+           */
+          icon?:
+            | (
+                | ''
+                | 'MdHome'
+                | 'MdInfo'
+                | 'MdEmail'
+                | 'MdPhone'
+                | 'MdLocationOn'
+                | 'MdArrowForward'
+                | 'MdArrowBack'
+                | 'MdDownload'
+                | 'MdUpload'
+                | 'MdShare'
+                | 'MdFavorite'
+                | 'MdStar'
+                | 'MdSearch'
+                | 'MdMenu'
+                | 'MdClose'
+                | 'MdAdd'
+                | 'MdRemove'
+                | 'MdEdit'
+                | 'MdDelete'
+                | 'MdSave'
+                | 'MdCancel'
+                | 'MdCheck'
+                | 'MdWarning'
+                | 'MdError'
+                | 'MdNotifications'
+                | 'MdSettings'
+                | 'MdShoppingCart'
+                | 'MdPayment'
+                | 'MdSecurity'
+                | 'MdVisibility'
+                | 'MdVisibilityOff'
+                | 'MdHelp'
+                | 'MdSupport'
+                | 'MdFeedback'
+                | 'MdBusiness'
+                | 'MdWork'
+                | 'MdSchool'
+                | 'MdEvent'
+                | 'MdCalendarToday'
+                | 'MdAccessTime'
+                | 'MdLanguage'
+                | 'MdPublic'
+                | 'MdLock'
+                | 'MdLockOpen'
+                | 'MdRefresh'
+                | 'MdSync'
+                | 'MdCloudDownload'
+                | 'MdCloudUpload'
+                | 'MdPrint'
+                | 'MdFileDownload'
+                | 'MdFileUpload'
+                | 'MdAttachFile'
+                | 'MdLink'
+                | 'MdLaunch'
+                | 'MdOpenInNew'
+                | 'MdExpandMore'
+                | 'MdExpandLess'
+                | 'MdChevronLeft'
+                | 'MdChevronRight'
+                | 'MdKeyboardArrowUp'
+                | 'MdKeyboardArrowDown'
+                | 'MdKeyboardArrowLeft'
+                | 'MdKeyboardArrowRight'
+                | 'MdPerson'
+                | 'MdOutlineTv'
+                | 'MdOutlineTurnedInNot'
+                | 'MdOutlineTurnedIn'
+              )
+            | null;
+          /**
+           * Choose where to place the icon.
+           */
+          iconPlacement?: ('right' | 'left') | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'imageText';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "MediaBlock".
  */
 export interface MediaBlock {
@@ -2318,6 +2464,7 @@ export interface PagesSelect<T extends boolean = true> {
         content?: T | ContentBlockSelect<T>;
         departmentOverview?: T | DepartmentOverviewBlockSelect<T>;
         eventsCalendar?: T | EventsCalendarBlockSelect<T>;
+        imageText?: T | ImageTextBlockSelect<T>;
         mediaBlock?: T | MediaBlockSelect<T>;
         mentorUniversities?: T | MentorUniversitiesBlockSelect<T>;
         programPathway?: T | ProgramPathwayBlockSelect<T>;
@@ -2468,6 +2615,35 @@ export interface EventsCalendarBlockSelect<T extends boolean = true> {
   itemsToShow?: T;
   dateRange?: T;
   showRegistrationStatus?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageTextBlock_select".
+ */
+export interface ImageTextBlockSelect<T extends boolean = true> {
+  layout?: T;
+  image?: T;
+  title?: T;
+  richText?: T;
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+              icon?: T;
+              iconPlacement?: T;
+            };
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

@@ -17,11 +17,22 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
 
   return (
     <div
-      className="relative -mt-[12.9rem] pt-[10rem] flex items-end justify-center text-white"
+      className="relative -mt-[12.9rem] pt-[10rem] min-h-[50vh] md:min-h-[60vh] flex items-center justify-center text-white"
       data-theme="dark"
     >
-      <div className="container mb-8 z-30 relative flex items-end justify-center pb-16">
-        <div className="max-w-[36.5rem] lg:max-w-[60rem] md:text-center">
+      {/* Background Media */}
+      <div className="absolute inset-0 select-none">
+        {media && typeof media === 'object' && (
+          <Media fill imgClassName="object-cover" priority resource={media} />
+        )}
+      </div>
+
+      {/* Background Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-cyan-800/40 to-blue-950/70"></div>
+
+      {/* Content */}
+      <div className="container py-16 z-30 relative flex items-center justify-center">
+        <div className="max-w-[36.5rem] lg:max-w-[50rem] md:text-center">
           {richText && <RichText className="mb-6 text-lg" data={richText} enableGutter={false} />}
           {Array.isArray(links) && links.length > 0 && (
             <ul className="flex md:justify-center gap-4">
@@ -36,12 +47,6 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
           )}
         </div>
       </div>
-      <div className="min-h-[80vh] md:min-h-[80vh] select-none">
-        {media && typeof media === 'object' && (
-          <Media fill imgClassName="-z-10 object-cover" priority resource={media} />
-        )}
-      </div>
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-slate-950/90 via-cyan-800/40 to-blue-950/70 z-0"></div>
     </div>
   )
 }

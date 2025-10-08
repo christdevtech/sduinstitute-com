@@ -11,6 +11,7 @@ import { ContentBlock } from '@/blocks/Content/Component'
 import { DepartmentOverviewBlock } from '@/blocks/DepartmentOverview/Component'
 import {EventsCalendarBlock} from '@/blocks/EventsCalendar/Component'
 import { FormBlock } from '@/blocks/Form/Component'
+import { ImageTextBlock } from '@/blocks/ImageText/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { MentorUniversitiesBlockComponent } from '@/blocks/MentorUniversities/Component'
 import ProgramPathwayBlock from '@/blocks/ProgramPathway/Component'
@@ -26,6 +27,7 @@ const blockComponents = {
   departmentOverview: DepartmentOverviewBlock,
   eventsCalendar: EventsCalendarBlock,
   formBlock: FormBlock,
+  imageText: ImageTextBlock,
   mediaBlock: MediaBlock,
   mentorUniversities: MentorUniversitiesBlockComponent,
   programPathway: ProgramPathwayBlock,
