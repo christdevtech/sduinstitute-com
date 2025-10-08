@@ -202,7 +202,9 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
                       ? 'translate-x-0 opacity-100'
                       : 'translate-x-4 opacity-0'
                   }`}
-                  style={{ transitionDelay: `${(navItems.length + buttons.length) * 50}ms` }}
+                  style={{
+                    transitionDelay: `${(navItems.length + buttons.length) * 50}ms`,
+                  }}
                 >
                   <SearchIcon className="w-5 h-5" />
                   <span>Search</span>

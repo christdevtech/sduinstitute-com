@@ -40,7 +40,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText,
             transition={{ duration: 0.5 }}
             className="text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-bold mb-6"
             style={{
-              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8), 0px 0px 8px rgba(0, 0, 0, 0.6)'
+              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8), 0px 0px 8px rgba(0, 0, 0, 0.6)',
             }}
           >
             {title}
@@ -51,10 +51,14 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText,
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               style={{
-                textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8), 0px 0px 6px rgba(0, 0, 0, 0.5)'
+                textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8), 0px 0px 6px rgba(0, 0, 0, 0.5)',
               }}
             >
-              <RichText className="mb-6 text-lg font-bold" data={richText} enableGutter={false} />
+              <RichText
+                className="mb-6 text-lg font-bold text-white"
+                data={richText}
+                enableGutter={false}
+              />
             </motion.div>
           )}
           {Array.isArray(links) && links.length > 0 && (
