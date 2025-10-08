@@ -39,6 +39,17 @@ export const hero: Field = {
       required: true,
     },
     {
+      name: 'title',
+      type: 'text',
+      defaultValue:
+        "St. David's University Institute of Nursing, Midwifery and Biomedical Sciences",
+      required: true,
+      admin: {
+        description: 'The title of the hero section',
+        condition: (_, { type } = {}) => ['highImpact'].includes(type),
+      },
+    },
+    {
       name: 'richText',
       type: 'richText',
       editor: lexicalEditor({

@@ -7,8 +7,9 @@ import type { Page } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
+import { motion } from 'framer-motion'
 
-export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText }) => {
+export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText, title }) => {
   const { setHeaderTheme } = useHeaderTheme()
 
   useEffect(() => {
@@ -33,14 +34,35 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
       {/* Content */}
       <div className="container py-16 z-30 relative flex items-center justify-center">
         <div className="max-w-[36.5rem] lg:max-w-[50rem] md:text-center">
-          {richText && <RichText className="mb-6 text-lg" data={richText} enableGutter={false} />}
+          <motion.h1
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-bold mb-6"
+          >
+            {title}
+          </motion.h1>
+          {richText && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <RichText className="mb-6 text-lg font-bold" data={richText} enableGutter={false} />
+            </motion.div>
+          )}
           {Array.isArray(links) && links.length > 0 && (
             <ul className="flex md:justify-center gap-4">
               {links.map(({ link }, i) => {
                 return (
-                  <li key={i}>
+                  <motion.li
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    key={i}
+                  >
                     <CMSLink {...link} />
-                  </li>
+                  </motion.li>
                 )
               })}
             </ul>

@@ -64,7 +64,7 @@ export const ImageTextBlock: React.FC<ImageTextBlockProps> = ({
           <motion.div
             className={`${
               isImageLeft ? 'lg:order-2 lg:text-left' : 'lg:order-1 lg:text-right'
-            } flex flex-col justify-center space-y-4`}
+            } flex flex-col justify-center space-y-2 lg:space-y-4`}
             variants={itemVariants}
             transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
           >

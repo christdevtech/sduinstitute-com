@@ -162,6 +162,10 @@ export interface Page {
   title: string;
   hero: {
     type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
+    /**
+     * The title of the hero section
+     */
+    title?: string | null;
     richText?: {
       root: {
         type: string;
@@ -2443,6 +2447,7 @@ export interface PagesSelect<T extends boolean = true> {
     | T
     | {
         type?: T;
+        title?: T;
         richText?: T;
         links?:
           | T
