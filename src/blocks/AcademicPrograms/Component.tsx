@@ -53,8 +53,9 @@ export const AcademicProgramsBlock: React.FC<
     }
   }
 
-  const programs: PaginatedDocs<AcademicProgram> = await payload.find({
+  const programs = await payload.find({
     collection: 'academic-programs',
+    ...programsQuery,
   })
 
   // Fetch all departments for filtering
@@ -67,7 +68,7 @@ export const AcademicProgramsBlock: React.FC<
   return (
     <AcademicProgramsWrapper
       id={id}
-      initialPrograms={programs.docs}
+      initialPrograms={programs.docs as AcademicProgram[]}
       departments={departments.docs}
       showFilters={showFilters ?? true}
       showSearch={showSearch ?? true}

@@ -14,7 +14,7 @@ type ProgramCardProps = {
 }
 
 const ProgramCard: React.FC<ProgramCardProps> = ({ program, showApplicationCTA }) => {
-  const { title, slug, programType, department, duration, featuredImage, entryRequirements } =
+  const { title, slug, programType, department, duration, featuredImage, entryRequirements, specialties } =
     program
   const departmentName = typeof department === 'object' ? department.title : ''
 
@@ -58,6 +58,31 @@ const ProgramCard: React.FC<ProgramCardProps> = ({ program, showApplicationCTA }
           <p className="mb-1">
             <strong>Duration:</strong> {duration}
           </p>
+          
+          {/* Specialties for Masters/PhD programs */}
+          {specialties && specialties.length > 0 && (programType === 'Masters' || programType === 'PhD') && (
+            <div className="mb-3">
+              <p className="mb-1">
+                <strong>Specialties:</strong>
+              </p>
+              <div className="flex flex-wrap gap-1">
+                {specialties.slice(0, 2).map((specialty, index) => (
+                  <span
+                    key={index}
+                    className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200"
+                  >
+                    {specialty.specialty}
+                  </span>
+                ))}
+                {specialties.length > 2 && (
+                  <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-50 text-gray-600 border border-gray-200">
+                    +{specialties.length - 2} more
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
+          
           {entryRequirements && entryRequirements.length > 0 && (
             <div className="line-clamp-3">
               <strong>Entry Requirements:</strong>

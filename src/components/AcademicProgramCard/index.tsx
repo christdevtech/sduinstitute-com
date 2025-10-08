@@ -13,6 +13,7 @@ interface AcademicProgramCardProps {
     duration: string
     featuredImage?: any
     curriculumOverview?: any
+    specialties?: Array<{ specialty: string }> | null
     tuitionFees?: {
       local?: string | null
       international?: string | null
@@ -29,6 +30,7 @@ export const AcademicProgramCard: React.FC<AcademicProgramCardProps> = ({ progra
     duration,
     featuredImage,
     curriculumOverview,
+    specialties,
     tuitionFees,
   } = program
 
@@ -78,6 +80,28 @@ export const AcademicProgramCard: React.FC<AcademicProgramCardProps> = ({ progra
           <p className="text-sm text-muted-foreground mb-4">
             Duration: {duration}
           </p>
+
+          {/* Specialties for Masters/PhD programs */}
+          {specialties && specialties.length > 0 && (programType === 'Masters' || programType === 'PhD') && (
+            <div className="mb-4">
+              <p className="text-sm font-medium mb-2">Specialties:</p>
+              <div className="flex flex-wrap gap-1">
+                {specialties.slice(0, 3).map((specialty, index) => (
+                  <span
+                    key={index}
+                    className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200"
+                  >
+                    {specialty.specialty}
+                  </span>
+                ))}
+                {specialties.length > 3 && (
+                  <span className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-50 text-gray-600 border border-gray-200">
+                    +{specialties.length - 3} more
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
 
           {/* Curriculum Overview (excerpt) */}
           {curriculumOverview && (
