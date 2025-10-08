@@ -7,6 +7,7 @@ import RichText from '@/components/RichText'
 import { AcademicProgramCard } from '@/components/AcademicProgramCard'
 import PageClient from './page.client'
 import type { Department, Staff, AcademicProgram } from '@/payload-types'
+import Link from 'next/link'
 
 interface Props {
   params: Promise<{
@@ -198,9 +199,12 @@ export default async function DepartmentPage({ params }: Props) {
                   {contactInfo.phone && (
                     <div className="flex items-center gap-2">
                       <span className="text-muted-foreground">📞</span>
-                      <a href={`tel:${contactInfo.phone}`} className="text-primary hover:underline">
+                      <Link
+                        href={`tel:${contactInfo.phone}`}
+                        className="text-primary hover:underline"
+                      >
                         {contactInfo.phone}
-                      </a>
+                      </Link>
                     </div>
                   )}
                   {contactInfo.office && (
