@@ -15,23 +15,23 @@ export const PostHero: React.FC<{
     populatedAuthors && populatedAuthors.length > 0 && formatAuthors(populatedAuthors) !== ''
 
   return (
-    <div className="relative -mt-[10.4rem] flex items-end">
-      <div className="container z-0 relative lg:grid lg:grid-cols-[1fr_48rem_1fr] text-white pb-8">
+    <div className="relative -mt-[12.9rem] flex items-end">
+      <div className="container z-10 relative lg:grid lg:grid-cols-[1fr_48rem_1fr] text-white pb-8">
         <div className="col-start-1 col-span-1 md:col-start-2 md:col-span-2">
-          <div className="uppercase text-sm mb-6">
+          <div className="uppercase text-sm mb-6 flex flex-wrap gap-2">
             {categories?.map((category, index) => {
               if (typeof category === 'object' && category !== null) {
                 const { title: categoryTitle } = category
 
                 const titleToUse = categoryTitle || 'Untitled category'
 
-                const isLast = index === categories.length - 1
-
                 return (
-                  <React.Fragment key={index}>
+                  <span
+                    className="border-green-400 border-2 px-2 rounded-full bg-black/30 backdrop-blur-sm shadow-[0_0_8px_theme(colors.green.400)]"
+                    key={index}
+                  >
                     {titleToUse}
-                    {!isLast && <React.Fragment>, &nbsp;</React.Fragment>}
-                  </React.Fragment>
+                  </span>
                 )
               }
               return null
@@ -66,7 +66,7 @@ export const PostHero: React.FC<{
         {heroImage && typeof heroImage !== 'string' && (
           <Media fill priority imgClassName="-z-10 object-cover" resource={heroImage} />
         )}
-        <div className="absolute pointer-events-none left-0 bottom-0 w-full h-1/2 bg-gradient-to-t from-black to-transparent" />
+        <div className="absolute pointer-events-none left-0 bottom-0 w-full h-1/2 bg-gradient-to-t from-black to-transparent z-0" />
       </div>
     </div>
   )
