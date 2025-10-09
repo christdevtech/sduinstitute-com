@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { Media } from '@/components/Media'
-import type { Department, Staff as _Staff, AcademicProgram as _AcademicProgram } from '@/payload-types'
+import type { Department, Staff, AcademicProgram } from '@/payload-types'
 
 interface DepartmentCardProps {
   department: Department
@@ -13,7 +13,7 @@ export const DepartmentCard: React.FC<DepartmentCardProps> = ({ department }) =>
     slug,
     description,
     featuredImage,
-    contactInfo: _contactInfo,
+    contactInfo,
     headOfDepartment,
     programs,
     staffMembers,

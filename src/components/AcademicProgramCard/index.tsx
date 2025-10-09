@@ -8,7 +8,7 @@ interface AcademicProgramCardProps {
     id: string
     title: string
     slug?: string | null
-    programType: "Basic" | "HND" | "Degree-TopUp" | "Degree-Direct" | "Masters" | "PhD"
+    programType: 'Basic' | 'HND' | 'Degree-TopUp' | 'Degree-Direct' | 'Masters' | 'PhD'
     department: string | Department
     duration: string
     featuredImage?: any
@@ -35,12 +35,12 @@ export const AcademicProgramCard: React.FC<AcademicProgramCardProps> = ({ progra
   } = program
 
   const programTypeLabels: Record<string, string> = {
-    'Basic': 'Basic Program',
-    'HND': 'Higher National Diploma (HND)',
+    Basic: 'Basic Program',
+    HND: 'Higher National Diploma (HND)',
     'Degree-TopUp': 'Degree - Top-up',
     'Degree-Direct': 'Degree - Direct Entry',
-    'Masters': 'Masters',
-    'PhD': 'PhD',
+    Masters: 'Masters',
+    PhD: 'PhD',
   }
 
   return (
@@ -71,50 +71,48 @@ export const AcademicProgramCard: React.FC<AcademicProgramCardProps> = ({ progra
 
           {/* Department */}
           {department && typeof department === 'object' && (
-            <p className="text-sm text-muted-foreground mb-2">
-              {department.title}
-            </p>
+            <p className="text-sm text-muted-foreground mb-2">{department.title}</p>
           )}
 
           {/* Duration */}
-          <p className="text-sm text-muted-foreground mb-4">
-            Duration: {duration}
-          </p>
+          <p className="text-sm text-muted-foreground mb-4">Duration: {duration}</p>
 
           {/* Specialties for Masters/PhD programs */}
-          {specialties && specialties.length > 0 && (programType === 'Masters' || programType === 'PhD') && (
-            <div className="mb-4">
-              <p className="text-sm font-medium mb-2">Specialties:</p>
-              <div className="flex flex-wrap gap-1">
-                {specialties.slice(0, 3).map((specialty, index) => (
-                  <span
-                    key={index}
-                    className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200"
-                  >
-                    {specialty.specialty}
-                  </span>
-                ))}
-                {specialties.length > 3 && (
-                  <span className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-50 text-gray-600 border border-gray-200">
-                    +{specialties.length - 3} more
-                  </span>
-                )}
+          {specialties &&
+            specialties.length > 0 &&
+            (programType === 'Masters' || programType === 'PhD') && (
+              <div className="mb-4">
+                <p className="text-sm font-medium mb-2">Specialties:</p>
+                <div className="flex flex-wrap gap-1">
+                  {specialties.slice(0, 3).map((specialty, index) => (
+                    <span
+                      key={index}
+                      className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200"
+                    >
+                      {specialty.specialty}
+                    </span>
+                  ))}
+                  {specialties.length > 3 && (
+                    <span className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-50 text-gray-600 border border-gray-200">
+                      +{specialties.length - 3} more
+                    </span>
+                  )}
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
           {/* Curriculum Overview (excerpt) */}
           {curriculumOverview && (
             <div className="text-sm text-muted-foreground mb-4 line-clamp-3">
               {/* Simple text extraction from rich text */}
-              {typeof curriculumOverview === 'object' && 
-               curriculumOverview.root?.children && 
-               Array.isArray(curriculumOverview.root.children) &&
-               curriculumOverview.root.children[0]?.children &&
-               Array.isArray(curriculumOverview.root.children[0].children) &&
-               curriculumOverview.root.children[0].children[0]?.text
+              {typeof curriculumOverview === 'object' &&
+              curriculumOverview.root?.children &&
+              Array.isArray(curriculumOverview.root.children) &&
+              curriculumOverview.root.children[0]?.children &&
+              Array.isArray(curriculumOverview.root.children[0].children) &&
+              curriculumOverview.root.children[0].children[0]?.text
                 ? curriculumOverview.root.children[0].children[0].text.substring(0, 150) + '...'
-                : 'Learn more about this program\'s curriculum and structure.'}
+                : "Learn more about this program's curriculum and structure."}
             </div>
           )}
 
@@ -123,9 +121,7 @@ export const AcademicProgramCard: React.FC<AcademicProgramCardProps> = ({ progra
             <div className="border-t border-border pt-4">
               <p className="text-sm font-medium mb-1">Tuition Fees:</p>
               {tuitionFees.local && (
-                <p className="text-sm text-muted-foreground">
-                  Local: {tuitionFees.local}
-                </p>
+                <p className="text-sm text-muted-foreground">Local: {tuitionFees.local}</p>
               )}
               {tuitionFees.international && (
                 <p className="text-sm text-muted-foreground">

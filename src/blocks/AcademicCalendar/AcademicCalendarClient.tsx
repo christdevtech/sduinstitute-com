@@ -4,7 +4,13 @@ import React, { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { Badge } from '@/components/ui/badge'
 import { Calendar, Clock, AlertCircle, Search, Filter, BookOpen, GraduationCap } from 'lucide-react'
 import type { SchoolCalendar } from '@/payload-types'
@@ -37,37 +43,54 @@ export const AcademicCalendarClient: React.FC<Props> = ({
   itemsToShow: _itemsToShow = 20,
 }) => {
   const [searchTerm, setSearchTerm] = useState('')
-  const [selectedCalendarType, setSelectedCalendarType] = useState<string>(filterByCalendarType || 'all')
+  const [selectedCalendarType, setSelectedCalendarType] = useState<string>(
+    filterByCalendarType || 'all',
+  )
   const [selectedSemester, setSelectedSemester] = useState<string>(filterBySemester || 'all')
 
   // Filter calendar items based on search and filters
-  const filteredItems = calendarItems.filter(item => {
+  const filteredItems = calendarItems.filter((item) => {
     const descriptionText = extractTextFromRichText(item.description)
-    const matchesSearch = !searchTerm || 
+    const matchesSearch =
+      !searchTerm ||
       item.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       descriptionText.toLowerCase().includes(searchTerm.toLowerCase())
-    
-    const matchesCalendarType = selectedCalendarType === 'all' || item.calendarType === selectedCalendarType
+
+    const matchesCalendarType =
+      selectedCalendarType === 'all' || item.calendarType === selectedCalendarType
     const matchesSemester = selectedSemester === 'all' || item.semester === selectedSemester
-    
+
     return matchesSearch && matchesCalendarType && matchesSemester
   })
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
     const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    const months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ]
     return `${weekdays[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
   }
 
   const formatDateRange = (startDate: string, endDate: string) => {
     const start = new Date(startDate)
     const end = new Date(endDate)
-    
+
     if (start.getTime() === end.getTime()) {
       return formatDate(startDate)
     }
-    
+
     return `${formatDate(startDate)} - ${formatDate(endDate)}`
   }
 
@@ -122,7 +145,8 @@ export const AcademicCalendarClient: React.FC<Props> = ({
             Academic Calendar {academicYear}
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Important academic dates, examination schedules, and administrative deadlines for the academic year.
+            Important academic dates, examination schedules, and administrative deadlines for the
+            academic year.
           </p>
         </div>
 
@@ -141,7 +165,7 @@ export const AcademicCalendarClient: React.FC<Props> = ({
                   />
                 </div>
               )}
-              
+
               {showFilters && (
                 <div className="flex gap-2">
                   <Select value={selectedCalendarType} onValueChange={setSelectedCalendarType}>
@@ -157,7 +181,7 @@ export const AcademicCalendarClient: React.FC<Props> = ({
                       <SelectItem value="Holiday">Holiday</SelectItem>
                     </SelectContent>
                   </Select>
-                  
+
                   <Select value={selectedSemester} onValueChange={setSelectedSemester}>
                     <SelectTrigger className="w-48">
                       <SelectValue placeholder="All Semesters" />
@@ -183,15 +207,17 @@ export const AcademicCalendarClient: React.FC<Props> = ({
             <p className="text-gray-500">There are no calendar items for the selected criteria.</p>
           </div>
         ) : (
-          <div className={`grid gap-6 ${
-            viewType === 'timeline' ? 'grid-cols-1' : 'md:grid-cols-2 lg:grid-cols-3'
-          }`}>
+          <div
+            className={`grid gap-6 ${
+              viewType === 'timeline' ? 'grid-cols-1' : 'md:grid-cols-2 lg:grid-cols-3'
+            }`}
+          >
             {filteredItems.map((item) => (
-              <Card 
-                key={item.id} 
+              <Card
+                key={item.id}
                 className={`hover:shadow-lg transition-shadow ${
-                  highlightUpcoming && isUpcoming(item.startDate) 
-                    ? 'ring-2 ring-blue-500 ring-opacity-50' 
+                  highlightUpcoming && isUpcoming(item.startDate)
+                    ? 'ring-2 ring-blue-500 ring-opacity-50'
                     : ''
                 }`}
               >
@@ -212,20 +238,20 @@ export const AcademicCalendarClient: React.FC<Props> = ({
                       )}
                     </div>
                   </div>
-                  
+
                   <div className="space-y-2 text-sm text-gray-600">
                     <div className="flex items-center gap-2">
                       <Calendar className="h-4 w-4" />
                       <span>{formatDateRange(item.startDate, item.endDate)}</span>
                     </div>
-                    
+
                     {item.semester && (
                       <div className="flex items-center gap-2">
                         <Clock className="h-4 w-4" />
                         <span>{item.semester}</span>
                       </div>
                     )}
-                    
+
                     {highlightUpcoming && isUpcoming(item.startDate) && (
                       <div className="flex items-center gap-2 text-blue-600">
                         <AlertCircle className="h-4 w-4" />
@@ -234,32 +260,36 @@ export const AcademicCalendarClient: React.FC<Props> = ({
                     )}
                   </div>
                 </CardHeader>
-                
+
                 <CardContent>
                   {item.description && (
                     <div className="text-gray-700 mb-4 line-clamp-3">
                       <RichText data={item.description} enableGutter={false} enableProse={false} />
                     </div>
                   )}
-                  
-                  {item.affectedPrograms && Array.isArray(item.affectedPrograms) && item.affectedPrograms.length > 0 && (
-                    <div className="mb-4">
-                      <div className="text-sm text-gray-600 mb-2">Affected Programs:</div>
-                      <div className="flex flex-wrap gap-1">
-                        {item.affectedPrograms.slice(0, 3).map((program, index) => (
-                          <Badge key={index} variant="outline" className="text-xs">
-                            {typeof program === 'object' && program.title ? program.title : 'Program'}
-                          </Badge>
-                        ))}
-                        {item.affectedPrograms.length > 3 && (
-                          <Badge variant="outline" className="text-xs">
-                            +{item.affectedPrograms.length - 3} more
-                          </Badge>
-                        )}
+
+                  {item.affectedPrograms &&
+                    Array.isArray(item.affectedPrograms) &&
+                    item.affectedPrograms.length > 0 && (
+                      <div className="mb-4">
+                        <div className="text-sm text-gray-600 mb-2">Affected Programs:</div>
+                        <div className="flex flex-wrap gap-1">
+                          {item.affectedPrograms.slice(0, 3).map((program, index) => (
+                            <Badge key={index} variant="outline" className="text-xs">
+                              {typeof program === 'object' && program.title
+                                ? program.title
+                                : 'Program'}
+                            </Badge>
+                          ))}
+                          {item.affectedPrograms.length > 3 && (
+                            <Badge variant="outline" className="text-xs">
+                              +{item.affectedPrograms.length - 3} more
+                            </Badge>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  )}
-                  
+                    )}
+
                   <div className="flex gap-2">
                     <Button variant="outline" size="sm" className="flex-1">
                       View Details

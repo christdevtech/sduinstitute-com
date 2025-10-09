@@ -36,7 +36,7 @@ export const EventsCalendarBlock: React.FC<
   const now = new Date()
   const startDate = new Date()
   const endDate = new Date()
-  
+
   switch (dateRange) {
     case 'week':
       endDate.setDate(now.getDate() + 7)
