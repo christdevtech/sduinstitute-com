@@ -599,6 +599,73 @@ export const about: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pages'>
           },
         ],
       },
+      {
+        blockName: 'Mission & Vision',
+        blockType: 'missionVision',
+        missionTitle: 'Our Mission',
+        missionContent: {
+          root: {
+            type: 'root',
+            children: [
+              {
+                type: 'paragraph',
+                children: [
+                  {
+                    type: 'text',
+                    detail: 0,
+                    format: 0,
+                    mode: 'normal',
+                    style: '',
+                    text: 'To provide world-class healthcare education that prepares competent, compassionate, and ethical healthcare professionals who will serve communities across Cameroon and beyond.',
+                    version: 1,
+                  },
+                ],
+                direction: 'ltr',
+                format: '',
+                indent: 0,
+                textFormat: 0,
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            version: 1,
+          },
+        },
+        visionTitle: 'Our Vision',
+        visionContent: {
+          root: {
+            type: 'root',
+            children: [
+              {
+                type: 'paragraph',
+                children: [
+                  {
+                    type: 'text',
+                    detail: 0,
+                    format: 0,
+                    mode: 'normal',
+                    style: '',
+                    text: 'To be the leading institution for nursing and biomedical sciences education in Central Africa, recognized for academic excellence, innovation, and graduate employability.',
+                    version: 1,
+                  },
+                ],
+                direction: 'ltr',
+                format: '',
+                indent: 0,
+                textFormat: 0,
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            version: 1,
+          },
+        },
+        layout: 'sideBySide',
+      },
     ],
     meta: {
       description:

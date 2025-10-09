@@ -14,6 +14,7 @@ import { FormBlock } from '../../blocks/Form/config'
 import { ImageText } from '../../blocks/ImageText/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { MentorUniversities } from '../../blocks/MentorUniversities/config'
+import { MissionVision } from '../../blocks/MissionVision/config'
 import { ProgramPathway } from '../../blocks/ProgramPathway/config'
 import { UniversityOrganigram } from '../../blocks/UniversityOrganigram/config'
 import { hero } from '@/heros/config'
@@ -95,6 +96,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 ImageText,
                 MediaBlock,
                 MentorUniversities,
+                MissionVision,
                 ProgramPathway,
                 UniversityOrganigram,
                 Archive,

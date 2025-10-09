@@ -14,6 +14,7 @@ import { FormBlock } from '@/blocks/Form/Component'
 import { ImageTextBlock } from '@/blocks/ImageText/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { MentorUniversitiesBlockComponent } from '@/blocks/MentorUniversities/Component'
+import { MissionVisionBlockComponent } from '@/blocks/MissionVision/Component'
 import ProgramPathwayBlock from '@/blocks/ProgramPathway/Component'
 import { UniversityOrganigramBlock } from '@/blocks/UniversityOrganigram/Component'
 
@@ -30,6 +31,7 @@ const blockComponents = {
   imageText: ImageTextBlock,
   mediaBlock: MediaBlock,
   mentorUniversities: MentorUniversitiesBlockComponent,
+  missionVision: MissionVisionBlockComponent,
   programPathway: ProgramPathwayBlock,
   universityOrganigram: UniversityOrganigramBlock,
 }

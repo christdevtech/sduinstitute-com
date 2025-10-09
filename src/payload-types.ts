@@ -297,6 +297,7 @@ export interface Page {
     | ImageTextBlock
     | MediaBlock
     | MentorUniversitiesBlock
+    | MissionVisionBlock
     | ProgramPathwayBlock
     | UniversityOrganigramBlock
     | ArchiveBlock
@@ -1753,6 +1754,71 @@ export interface MentorUniversitiesBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MissionVisionBlock".
+ */
+export interface MissionVisionBlock {
+  /**
+   * The title for the mission section
+   */
+  missionTitle: string;
+  /**
+   * Rich text content for the mission statement
+   */
+  missionContent: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * Optional image to display with the mission section
+   */
+  missionImage?: (string | null) | Media;
+  /**
+   * The title for the vision section
+   */
+  visionTitle: string;
+  /**
+   * Rich text content for the vision statement
+   */
+  visionContent: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * Optional image to display with the vision section
+   */
+  visionImage?: (string | null) | Media;
+  /**
+   * Choose how to display the mission and vision sections
+   */
+  layout: 'sideBySide' | 'stacked';
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'missionVision';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ProgramPathwayBlock".
  */
 export interface ProgramPathwayBlock {
@@ -2481,6 +2547,7 @@ export interface PagesSelect<T extends boolean = true> {
         imageText?: T | ImageTextBlockSelect<T>;
         mediaBlock?: T | MediaBlockSelect<T>;
         mentorUniversities?: T | MentorUniversitiesBlockSelect<T>;
+        missionVision?: T | MissionVisionBlockSelect<T>;
         programPathway?: T | ProgramPathwayBlockSelect<T>;
         universityOrganigram?: T | UniversityOrganigramBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
@@ -2682,6 +2749,21 @@ export interface MentorUniversitiesBlockSelect<T extends boolean = true> {
   showContactInfo?: T;
   layout?: T;
   itemsPerRow?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MissionVisionBlock_select".
+ */
+export interface MissionVisionBlockSelect<T extends boolean = true> {
+  missionTitle?: T;
+  missionContent?: T;
+  missionImage?: T;
+  visionTitle?: T;
+  visionContent?: T;
+  visionImage?: T;
+  layout?: T;
   id?: T;
   blockName?: T;
 }
