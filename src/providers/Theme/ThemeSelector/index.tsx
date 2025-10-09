@@ -40,7 +40,7 @@ const themeOptions: ThemeOptionConfig[] = [
 ]
 
 export const ThemeSelector: React.FC = () => {
-  const { setTheme } = useTheme()
+  const { setTheme, theme } = useTheme()
   const [value, setValue] = useState<ThemeOption>('auto')
 
   const cycleTheme = () => {
@@ -48,19 +48,31 @@ export const ThemeSelector: React.FC = () => {
     const nextIndex = (currentIndex + 1) % themeOptions.length
     const nextTheme = themeOptions[nextIndex].value
 
+    // Update local state immediately for responsive UI
+    setValue(nextTheme)
+
     if (nextTheme === 'auto') {
       setTheme(null)
-      setValue('auto')
     } else {
       setTheme(nextTheme)
-      setValue(nextTheme)
     }
   }
 
+  // Initialize and sync with localStorage and theme context
   useEffect(() => {
     const preference = window.localStorage.getItem(themeLocalStorageKey) as ThemeOption
-    setValue(preference ?? 'auto')
+    const currentValue = preference ?? 'auto'
+    setValue(currentValue)
   }, [])
+
+  // Sync with theme context changes - this is the key fix
+  useEffect(() => {
+    const preference = window.localStorage.getItem(themeLocalStorageKey) as ThemeOption
+    const currentValue = preference ?? 'auto'
+    
+    // Update local state to match the current theme preference
+    setValue(currentValue)
+  }, [theme]) // This will trigger whenever the theme context changes
 
   const currentOption = themeOptions.find(option => option.value === value) || themeOptions[2]
   const CurrentIcon = currentOption.icon
