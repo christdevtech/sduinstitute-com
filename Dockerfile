@@ -22,6 +22,7 @@ RUN \
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
+RUN corepack enable pnpm
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
@@ -38,12 +39,7 @@ ENV PAYLOAD_SECRET=${PAYLOAD_SECRET}
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN \
-  if [ -f yarn.lock ]; then yarn run build; \
-  elif [ -f package-lock.json ]; then npm run build; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
+RUN pnpm run build
 
 # Production image, copy all the files and run next
 FROM base AS runner
@@ -77,6 +73,9 @@ RUN chown nextjs:nodejs .next
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+# Copy native sharp modules from deps stage for Payload and Next image optimization
+COPY --from=deps --chown=nextjs:nodejs /app/node_modules/sharp ./node_modules/sharp
+COPY --from=deps --chown=nextjs:nodejs /app/node_modules/@img ./node_modules/@img
 
 USER nextjs
 
