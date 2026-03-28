@@ -9,14 +9,15 @@ const nextConfig = {
   output: 'standalone',
   images: {
     remotePatterns: [
-      ...[NEXT_PUBLIC_SERVER_URL /* 'https://example.com' */].map((item) => {
-        const url = new URL(item)
-
-        return {
-          hostname: url.hostname,
-          protocol: url.protocol.replace(':', ''),
-        }
-      }),
+      ...[NEXT_PUBLIC_SERVER_URL, 'https://www.sduinstitute.com', 'https://sduinstitute.com'].map(
+        (item) => {
+          const url = new URL(item)
+          return {
+            hostname: url.hostname,
+            protocol: url.protocol.replace(':', ''),
+          }
+        },
+      ),
     ],
   },
   webpack: (webpackConfig) => {

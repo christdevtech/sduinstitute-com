@@ -50,10 +50,10 @@ substitutions:
   _DEPLOY_REGION: europe-west1
   _AR_HOSTNAME: europe-west1-docker.pkg.dev
   _AR_REPOSITORY: cloud-run-source-deploy
-  _TRIGGER_ID: ""
+  _TRIGGER_ID: "41f8b82b-1157-4d0e-9273-3c03e010442b"
   _NEXT_PUBLIC_SERVER_URL: https://sduinstitute.com
-  _DATABASE_URI: mongodb+srv://YOUR_ACTUAL_MONGODB_URI
-  _PAYLOAD_SECRET: YOUR_PAYLOAD_SECRET
+  _DATABASE_URI: mongodb+srv://christdev:dUuukX89ZtTX84ja@christdevpayload.v7emthh.mongodb.net/sdu?appName=christdevpayload
+  _PAYLOAD_SECRET: 8a5374eb9d21be906cd3666f
 tags:
   - gcp-cloud-build-deploy-cloud-run
   - gcp-cloud-build-deploy-cloud-run-managed
